@@ -10,4 +10,19 @@ class Model_losstime_category extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function add()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $this->db->set('createUser', 'System');
+        $this->db->set('name', $text_name);
+        $this->db->insert('itx_m_losstime_category');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

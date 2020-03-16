@@ -67,11 +67,17 @@ class Setting extends CI_Controller {
 
 	public function losstime_add()
 	{
-        if($this->model_losstime_category->user_add()){
+        if($this->model_losstime_category->add()){
 
         $data = $this->model_losstime_category->get_all();
 
-			$i = 1; foreach ($data as $key) {
+		 	$i=1; foreach ($this->model_losstime_category->get_all() as $key) {
+		 	echo "
+				  <tr>
+					 <td class='text-center'>".$i++."</td>
+					 <td>".$key['name']."</td>
+				  </tr>";
+		 	}
 
         	// echo "true";
         }else{

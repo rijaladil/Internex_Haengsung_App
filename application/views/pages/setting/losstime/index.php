@@ -1,14 +1,4 @@
-<html>
-<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
 
-
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/datatable.js" ></script>
-<link rel="stylesheet" href="css/jquery-ui.css">
-<script src="js/jquery-ui.js"></script>
-<script src=js/datepicker.js></script>
 <div class="form">
 	<div class="left">Loss Time Setting</div>
 	<!-- <button class="green margin-btn">Save</button> -->
@@ -22,7 +12,7 @@
 			 <th width="">Loss Time item</th>
 		  </tr>
 		 </thead>
-		 <tbody>
+		 <tbody id="idContent">
 		 	<?php $i=1; foreach ($this->model_losstime_category->get_all() as $key) { ?>
 				  <tr>
 					 <td class="text-center"><?php echo $i++; ?></td>
@@ -51,11 +41,7 @@
 		        // dataType: 'json',
 		        type: 'POST',
 		        data: {
-		            'text_name': name,
-		            'text_nip': nip,
-		            'text_level': level,
-		            'text_dept': dept,
-		            'text_pass': pass,
+		            'text_name': name
 		        },
 		        cache: false,
 		        success: function(msg){
@@ -72,5 +58,6 @@
 		    });
 
 		}
+	}
 </script>
 </html>
