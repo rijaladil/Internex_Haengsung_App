@@ -72,7 +72,7 @@
 	    <button onclick="myFunction7()" class="subnavbtn">Setting</button>
 	    <div id="myDropdown7" class="subnav-content">
 	      <a href="setting_working.php">Working setting</a>
-	      <a href="setting_user.php">User setting</a>
+	      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
 	      <a href="setting_quality.php">Quality setting</a>
 	      <a href="setting_loss_time.php">Loss Time setting</a>
 	      <a href="setting_line_mc.php">Line/MC setting</a>

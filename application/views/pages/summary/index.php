@@ -17,6 +17,12 @@
 				<button class="btn-blue">Search</button>
 			<!-- 	<input type="text" id="datepicker2" value="<?php echo date('Y-m');?>" />
 				<div>To</div> -->
+				<select class="form-control" name="text_dept">
+					<option value="">All</option>
+					<?php foreach ($data_dept as $key) { ?>
+						<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+					<?php } ?>
+				</select>
 				<input type="text" name="text_date" id="datepickersum" value="<?php echo ($text_date == '') ? date('Y-m') : $text_date;?>" />
 			</div>
 		</div>

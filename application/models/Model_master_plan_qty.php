@@ -165,6 +165,7 @@ class Model_master_plan_qty extends CI_Model
 
     public function get_summary()
     {
+        $department = $this->security->xss_clean($this->input->post('text_dept'));
         $dateStart = $this->security->xss_clean($this->input->post('text_date'));
 
         if ($dateStart <> '') {
@@ -281,6 +282,9 @@ class Model_master_plan_qty extends CI_Model
         $this->db->from('itx_m_machine mc');
         $this->db->join('itx_m_department dept', 'dept.id = mc.department_id', 'left');
         $this->db->order_by('mc.mc_no', 'asc');
+        if( $department <> ''){
+            $this->db->where('dept.id', $department);
+        }
         // $this->db->join('itx_t_master_plan_qty qty', 'qty.mc_id = mc.id', 'left');
         // $this->db->join('itx_t_master_plan plan', 'plan.id = qty.masterplan_id', 'left');
         // $this->db->join('itx_t_result result', 'result.masterplan_qty_id = qty.id', 'left');

@@ -47,6 +47,7 @@ class Model_andon extends CI_Model
         if ($dateStart <> '') {
             $tanggal = "'".$dateStart."'";
         }else{
+            // $tanggal = 'NOW()';
             $tanggal = 'NOW()';
         }
 
@@ -68,7 +69,7 @@ class Model_andon extends CI_Model
 
                 ,   (
                         SELECT
-                        SUM(IF(andon_call_id = 1 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), 1, 0))
+                        SUM(IF(andon_call_id = 1 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), 1, 0))
                         FROM itx_t_andon
                         WHERE
                             machine_id = mc.id
@@ -77,7 +78,7 @@ class Model_andon extends CI_Model
 
                 ,   (
                         SELECT
-                        SUM(IF(andon_call_id = 2 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), 1, 0))
+                        SUM(IF(andon_call_id = 2 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), 1, 0))
                         FROM itx_t_andon
                         WHERE
                             machine_id = mc.id
@@ -86,7 +87,7 @@ class Model_andon extends CI_Model
 
                 ,   (
                         SELECT
-                        SUM(IF(andon_call_id = 3 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), 1, 0))
+                        SUM(IF(andon_call_id = 3 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), 1, 0))
                         FROM itx_t_andon
                         WHERE
                             machine_id = mc.id
@@ -95,7 +96,7 @@ class Model_andon extends CI_Model
 
                 ,   (
                         SELECT
-                        SUM(IF(andon_call_id = 4 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), 1, 0))
+                        SUM(IF(andon_call_id = 4 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), 1, 0))
                         FROM itx_t_andon
                         WHERE
                             machine_id = mc.id
@@ -103,10 +104,10 @@ class Model_andon extends CI_Model
                     ) countLastMonth4
 
 
-                , SUM(IF(andon.andon_call_id = 1 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast1
-                , SUM(IF(andon.andon_call_id = 2 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast2
-                , SUM(IF(andon.andon_call_id = 3 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast3
-                , SUM(IF(andon.andon_call_id = 4 and date_format(datetime, '%Y-%m') = date_format($tanggal, '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast4
+                , SUM(IF(andon.andon_call_id = 1 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast1
+                , SUM(IF(andon.andon_call_id = 2 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast2
+                , SUM(IF(andon.andon_call_id = 3 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast3
+                , SUM(IF(andon.andon_call_id = 4 and date_format(datetime, '%Y-%m') = date_format( STR_TO_DATE($tanggal, '%Y-%m-%d'), '%Y-%m'), TIMESTAMPDIFF(SECOND, datetime, time_finish), 0) ) as downtimeLast4
                 ");
         $this->db->from('itx_m_machine mc');
         $this->db->join('itx_m_department dep', 'dep.id = mc.department_id');

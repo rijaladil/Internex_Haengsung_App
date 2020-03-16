@@ -86,7 +86,7 @@
 					<td class="text-right"><?php echo rupiah2dec($key['capaHour']*1); ?></td>
 					<td class="text-right"><?php echo rupiah0dec($key['planQty']); ?></td>
 					<td class="text-right" id="idQtyTot<?php echo $key['idQty']; ?>"><?php echo rupiah0dec($key['actual']-$key['ng']); ?></td>
-					<td class="text-right"><?php echo rupiah2dec(($key['actual']-$key['ng'])-$key['planQty']); ?></td>
+					<td class="text-right"><?php echo rupiah0dec(($key['actual']-$key['ng'])-$key['planQty']); ?></td>
 					<!-- <td class="text-right"><?php echo number_format((float)(($key['actual']-$key['ng'])/$key['planQty'])*100, 2, '.', ''); ?></td> -->
 					<td class="text-right"><?php echo rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100); ?></td>
 					<td class="text-right"><?php echo ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']); ?></td>
