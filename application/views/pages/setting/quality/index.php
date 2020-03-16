@@ -4,14 +4,14 @@
 </div>
 <div class="body-data">
 
-	<?php foreach ($this->model_department->get_all() as $key) { ?>
+	<?php $x = 1; foreach ($this->model_department->get_all() as $key) { ?>
 		<div class="qs1">
 			<table  width="100%" border="1" class="tblth">
 				<tr>
 					<td><?php echo $key['name']; ?></td>
 				</tr>
 			</table>
-			<table id="" class="display"  width="100%" border="1">
+			<table id="setting-quality<?php echo $x++; ?>" class="display"  width="100%" border="1">
 				<thead>
 				  <tr>
 				    <th width="15%">No</th>
@@ -25,11 +25,13 @@
 					    <td><?php echo $key2['name']; ?></td>
 					  </tr>
 					<?php } ?>
+				</tbody>
+				<tfooter>
 					  <tr>
 					    <td class='text-center'></td>
 					    <td><a onclick="showModalAdd()" class="btn" href="#">Add Problem</a></td>
 					  </tr>
-				</tbody>
+				</tfooter>
 			</table>
 		</div>
 	<?php } ?>

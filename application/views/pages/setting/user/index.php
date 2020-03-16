@@ -5,8 +5,7 @@
 
 </div>
 <div class="body-data">
-	<table id="" class="display" width="50%" border="1">
-	<!-- <table id="setting-user" class="display" width="50%" border="1"> -->
+	<table id="setting-user" class="display" width="50%" border="1">
 	<thead>
 	  <tr>
 	    <th width="3%" height="50px">No</th>
@@ -16,7 +15,7 @@
 	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 		    <th width="5%"><?php echo $level['name']; ?></th>
 		<?php } ?>
-	    <th width="5%">Delete</th>
+	    <th width="5%">Option</th>
 	  </tr>
 	</thead>
 	<tbody id="idContent">
@@ -25,7 +24,7 @@
 		    	<td class="text-center"><?php echo $i++; ?></td>
 			    <td class="text-center"><?php echo $key['dept']; ?></td>
 			    <td class="text-center"><?php echo $key['nip']; ?></td>
-			    <td class="text-center"><?php echo $key['name']; ?></td>
+			    <td class="text-center" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
 			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 				    <td class="text-center">
 				    	<?php
@@ -35,7 +34,7 @@
 				    	?>
 				    </td>
 				<?php } ?>
-			    <td class="text-center">&nbsp;</td>
+			    <td class="text-center"><a onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
 			  </tr>
 			<?php } ?>
 	</tbody>
@@ -43,7 +42,7 @@
 
 </div>
 
-<div id="modal">
+<div id="modal" hidden="">
 	<input type="text" name="" id="textName">
 	<input type="text" name="" id="textNip">
 	<input type="text" name="" id="textPassword">
@@ -54,6 +53,24 @@
 	<?php } ?>
 	</select>
 	<select id="textDept">
+		<option value=''>select</option>
+    <?php foreach ($this->model_department->get_all() as $level) { ?>
+		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
+	<?php } ?>
+	</select>
+</div>
+
+<div id="modalUpdate" hidden="">
+	<input type="text" name="" id="textUpdateNip">
+	<input type="text" name="" id="textUpdateName">
+	<input type="text" name="" id="textUpdatePassword">
+	<select id="textUpdateLevel">
+		<option value=''>select</option>
+    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
+		<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
+	<?php } ?>
+	</select>
+	<select id="textUpdateDept">
 		<option value=''>select</option>
     <?php foreach ($this->model_department->get_all() as $level) { ?>
 		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
@@ -87,19 +104,17 @@
 		        },
 		        cache: false,
 		        success: function(msg){
-			            // console.log(msg);
-		        	// if (msg == 'true') {
-			            // $("#idContent").html('');
-			            $("#idContent").html(msg);
-			            // console.log('success');
-		        	// }else{
-			            // console.log('failed');
-		        	// }
-
+		        	location.reload();
 		        }
 		    });
 
 		}
+	}
+
+	function showModalEdit(id){
+		document.getElementById('textUpdateNip').value = id;
+		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+
 	}
 </script>
 </html>

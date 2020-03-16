@@ -25,4 +25,20 @@ class Model_losstime_category extends CI_Model
         }
     }
 
+    public function update()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $text_id = $this->security->xss_clean($this->input->post('text_id'));
+        $this->db->set('createUser', 'System');
+        $this->db->set('name', $text_name);
+        $this->db->where('id', $text_id);
+        $this->db->update('itx_m_losstime_category');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

@@ -10,13 +10,15 @@
 		  <tr>
 			 <th width="5%">No</th>
 			 <th width="">Loss Time item</th>
+			 <th width="">Option</th>
 		  </tr>
 		 </thead>
 		 <tbody id="idContent">
 		 	<?php $i=1; foreach ($this->model_losstime_category->get_all() as $key) { ?>
 				  <tr>
 					 <td class="text-center"><?php echo $i++; ?></td>
-					 <td><?php echo $key['name']; ?></td>
+					 <td id="idName<?php echo $key['id']; ?>"><?php echo $key['name']; ?></td>
+					 <td><a href="#" onclick="edit(<?php echo $key['id']; ?>)">Option</a></td>
 				  </tr>
 		 	<?php } ?>
 		</tbody>
@@ -26,6 +28,12 @@
 	<div id="modalAdd">
 		<input type="text" id="idName" name="">
 		<input type="submit" value="Save" onclick="save()">
+	</div>
+
+	<div id="modalEdit">
+		<input type="text" id="idIdEdit" name="" hidden="">
+		<input type="text" id="idNameEdit" name="">
+		<input type="submit" id="" value="Update" onclick="update()">
 	</div>
 </div>
 </body>
@@ -59,5 +67,40 @@
 
 		}
 	}
-</script>
+
+	function edit(i){
+		document.getElementById('idIdEdit').value = i;
+		document.getElementById('idNameEdit').value = document.getElementById('idName'+i).innerHTML;
+	}
+
+	function update(){
+		var id = document.getElementById('idIdEdit').value;
+		var name = document.getElementById('idNameEdit').value;
+		if (name == '') {
+		}else{
+		    $.ajax({
+		        url: "<?php echo base_url(); ?>setting/losstime_update/",
+		        // dataType: 'json',
+		        type: 'POST',
+		        data: {
+		            'text_name': name,
+		            'text_id': id
+		        },
+		        cache: false,
+		        success: function(msg){
+		        	location.reload();
+			            // console.log(msg);
+		        	// if (msg == 'true') {
+			            // $("#idContent").html('');
+			            $("#idContent").html(msg);
+			            // console.log('success');
+		        	// }else{
+			            // console.log('failed');
+		        	// }
+
+		        }
+		    });
+
+		}
+	}</script>
 </html>

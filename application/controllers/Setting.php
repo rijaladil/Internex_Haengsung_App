@@ -78,11 +78,26 @@ class Setting extends CI_Controller {
 					 <td>".$key['name']."</td>
 				  </tr>";
 		 	}
-
-        	// echo "true";
         }else{
         	echo 'false';
-        	// echo "false";
+        }
+	}
+
+	public function losstime_update()
+	{
+        if($this->model_losstime_category->update()){
+
+        $data = $this->model_losstime_category->get_all();
+
+		 	$i=1; foreach ($this->model_losstime_category->get_all() as $key) {
+		 	echo "
+				  <tr>
+					 <td class='text-center'>".$i++."</td>
+					 <td>".$key['name']."</td>
+				  </tr>";
+		 	}
+        }else{
+        	echo 'false';
         }
 	}
 
