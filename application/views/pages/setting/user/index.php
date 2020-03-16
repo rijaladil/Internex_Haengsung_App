@@ -21,9 +21,9 @@
 		<?php $i = 1; foreach ($data as $key) { ?>
 			<tr>
 		    	<td class="text-center"><?php echo $i++; ?></td>
-			    <td class="text-center"><?php echo $key['dept']; ?></td>
+			    <td class=""><?php echo $key['dept']; ?></td>
 			    <td class="text-center"><?php echo $key['nip']; ?></td>
-			    <td class="text-center" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
+			    <td class="" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
 			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 				    <td class="text-center">
 				    	<?php
@@ -41,9 +41,9 @@
 
 </div>
 
-<div id="modal" hidden="">
-	<input type="text" name="" id="textName">
+<div id="modal">
 	<input type="text" name="" id="textNip">
+	<input type="text" name="" id="textName">
 	<input type="text" name="" id="textPassword">
 	<select id="textLevel">
 		<option value=''>select</option>
@@ -60,10 +60,9 @@
 	<button class="green right" onclick='save()'>Save</button>
 </div>
 
-<div id="modalUpdate">
+<div id="modalUpdate"  hidden="">
 	<input type="text" name="" id="textUpdateNip">
 	<input type="text" name="" id="textUpdateName">
-	<input type="text" name="" id="textUpdatePassword">
 	<select id="textUpdateLevel">
 		<option value=''>select</option>
     <?php foreach ($this->model_user_level->get_all() as $level) { ?>
