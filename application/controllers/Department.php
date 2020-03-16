@@ -76,7 +76,7 @@ class Department extends CI_Controller {
 					<td class='ft'>
 						<div>".($key['planQtyTot']*1)."</div><br>
 						<div class='fgreen'>".($key['actualQtyTot']-$key['ngQtyTot'])."</div><br>
-						<div class='fred'>".($key['ngQtyTot']*1)."</div></td>
+						<div class='fred'>".($key['ngQtyTot']*1)."</div><br></td>
 					<td class='ft'>".(number_format((float)(($key['actualQtyTot']-$key['ngQtyTot'])/$key['planQtyTot'])*100, 2, '.', ''))."%</td>
 				</tr>
 	        ";
