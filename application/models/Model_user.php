@@ -34,4 +34,20 @@ class Model_user extends CI_Model
             return false;
         }
     }
+
+    public function user_update()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $text_nip = $this->security->xss_clean($this->input->post('text_nip'));
+        $this->db->set('editUser', 'System');
+        $this->db->set('name', $text_name);
+        $this->db->where('nip', $text_nip);
+        $this->db->update('itx_m_user');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

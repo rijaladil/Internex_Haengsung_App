@@ -41,7 +41,7 @@
 
 </div>
 
-<div id="modal">
+<div id="modal" hidden="">
 	<input type="text" name="" id="textName">
 	<input type="text" name="" id="textNip">
 	<input type="text" name="" id="textPassword">
@@ -60,7 +60,7 @@
 	<button class="green right" onclick='save()'>Save</button>
 </div>
 
-<div id="modalUpdate" hidden="">
+<div id="modalUpdate">
 	<input type="text" name="" id="textUpdateNip">
 	<input type="text" name="" id="textUpdateName">
 	<input type="text" name="" id="textUpdatePassword">
@@ -76,6 +76,7 @@
 		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 	<?php } ?>
 	</select>
+	<button class="green right" onclick='update()'>Update</button>
 </div>
 
 </body>
@@ -114,7 +115,37 @@
 	function showModalEdit(id){
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+	}
 
+	function update(id){
+		var nip = document.getElementById('textUpdateNip').value;
+		var name = document.getElementById('textUpdateName').value;
+		// var level = $('#textLevel').val()
+		// var dept = $('#textDept').val()
+		// var pass = $('#textPassword').val()
+		if (name == '' || nip == '') {
+			console.log('kosong');
+		}else{
+			// console.log(name + ' -- ' +nip);
+
+		    $.ajax({
+		        url: "<?php echo base_url(); ?>setting/user_update/",
+		        // dataType: 'json',
+		        type: 'POST',
+		        data: {
+		            'text_name': name,
+		            'text_nip': nip,
+		            // 'text_level': level,
+		            // 'text_dept': dept,
+		            // 'text_pass': pass,
+		        },
+		        cache: false,
+		        success: function(msg){
+		        	location.reload();
+		        }
+		    });
+
+		}
 	}
 </script>
 </html>

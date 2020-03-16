@@ -28,4 +28,20 @@ class Model_machine_problem extends CI_Model
         }
     }
 
+    public function update()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $id = $this->security->xss_clean($this->input->post('text_id'));
+        $this->db->set('editUser', 'System');
+        $this->db->set('name', $text_name);
+        $this->db->where('id', $id);
+        $this->db->update('itx_m_machine_problem');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

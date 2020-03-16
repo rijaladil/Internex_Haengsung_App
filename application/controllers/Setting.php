@@ -20,35 +20,12 @@ class Setting extends CI_Controller {
 
 	public function user_add()
 	{
-        if($this->model_user->user_add()){
+		$this->model_user->user_add();
+	}
 
-        $data = $this->model_user->get_all();
-
-			$i = 1; foreach ($data as $key) {
-
-				echo "
-				<tr>
-			    	<td class='text-center'>".$i++."</td>
-				    <td class='text-center'>".$key['dept']."</td>
-				    <td class='text-center'>".$key['nip']."</td>
-				    <td class='text-center'>".$key['name']."</td>
-				 ";
-				    foreach ($this->model_user_level->get_all() as $level) {
-				    	echo "
-					    <td class='text-center'>
-				    		".($level['id']==$key['levelId'] ? "Check":  "")."
-					    </td>";
-				    }
-				   echo "
-				    <td class='text-center'>&nbsp;</td>
-				  </tr>";
-			    };
-
-        	// echo "true";
-        }else{
-        	echo 'false';
-        	// echo "false";
-        }
+	public function user_update()
+	{
+		$this->model_user->user_update();
 	}
 
 	public function quality()
@@ -61,6 +38,11 @@ class Setting extends CI_Controller {
 	public function quality_add()
 	{
 		$this->model_machine_problem->add();
+	}
+
+	public function quality_update()
+	{
+		$this->model_machine_problem->update();
 	}
 
 	public function losstime()
