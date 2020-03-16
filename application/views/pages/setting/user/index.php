@@ -4,16 +4,6 @@
 	<button class="red right">+ Add</button>
 
 </div>
-<div id="modal">
-	<input type="text" name="" id="textName">
-	<input type="text" name="" id="textNip">
-	<select name="textLevel">
-			<option value=''>select</option>
-	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-			<option <?php echo $level['id']; ?>><?php echo $level['description']; ?></option>
-		<?php } ?>
-	</select>
-</div>
 <div class="body-data">
 	<table id="setting-user" class="display" width="50%" border="1">
 	<thead>
@@ -51,5 +41,17 @@
 	</table>
 
 </div>
+
+<div id="modal">
+	<input type="text" name="" id="textName">
+	<input type="text" name="" id="textNip">
+	<select name="textLevel">
+			<option value=''>select</option>
+	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
+			<option <?php echo $level['id']; ?>><?php echo $level['description']; ?></option>
+		<?php } ?>
+	</select>
+</div>
+
 </body>
 </html>
