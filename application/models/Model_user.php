@@ -12,4 +12,26 @@ class Model_user extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function user_add()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $text_nip = $this->security->xss_clean($this->input->post('text_nip'));
+        $text_level = $this->security->xss_clean($this->input->post('text_level'));
+        $text_dept = $this->security->xss_clean($this->input->post('text_dept'));
+        $text_pass = $this->security->xss_clean($this->input->post('text_pass'));
+        $this->db->set('createUser', 'System');
+        $this->db->set('name', $text_name);
+        $this->db->set('nip', $text_nip);
+        $this->db->set('user_level_id', $text_level);
+        $this->db->set('department_id', $text_dept);
+        $this->db->set('password', sha1($text_pass));
+        $this->db->insert('itx_m_user');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
