@@ -62,14 +62,15 @@
         $(this).datepicker('setDate', new Date(iYear, iMonth, 1));
      },
 
-     beforeShow: function() {
-       if ((selDate = $(this).val()).length > 0)
-       {
-          iYear = selDate.substring(selDate.length - 4, selDate.length);
-          iMonth = jQuery.inArray(selDate.substring(0, selDate.length - 5), $(this).datepicker('option', 'monthNames'));
-          $(this).datepicker('option', 'defaultDate', new Date(iYear, iMonth, 1));
-           $(this).datepicker('setDate', new Date(iYear, iMonth, 1));
-       }
-    }
+    //  beforeShow: function() {
+    //    if ((selDate = $(this).val()).length > 0)
+    //    {
+    //       iYear = selDate.substring(selDate.length - 4, selDate.length);
+    //       iMonth = jQuery.inArray(selDate.substring(0, selDate.length - 5), $(this).datepicker('option', 'monthNames'));
+    //       $(this).datepicker('option', 'defaultDate', new Date(iYear, iMonth, 1));
+    //        $(this).datepicker('setDate', new Date(iYear, iMonth, 1));
+    //    }
+    // }
   });
 });
+
