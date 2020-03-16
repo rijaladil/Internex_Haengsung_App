@@ -65,7 +65,7 @@ class Department extends CI_Controller {
 					";
 					for ($i=1; $i <= 31 ; $i++) {
 						echo "
-					<td class='fb' style='border-right: 1px solid #d2d2d2; padding:0px 10px 0px 10px !important'>
+					<td class='fb' style='border-right: 1px solid #d2d2d2; padding:0px 3px 0px 3px !important'>
 						<div>".$this->colBlack($key['planDay'.$i])."</div><br>
 						<div class=''>".$this->colGreen($key['actualDay'.$i]-$key['ngQty'.$i])."</div><br>
 						<div class='fred'>".$this->colRed($key['ngQty'.$i]*1)."</div><br>

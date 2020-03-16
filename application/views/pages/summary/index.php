@@ -23,7 +23,7 @@
 						<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
 					<?php } ?>
 				</select>
-				<input type="text" name="text_date" id="datepickersum" value="<?php echo ($text_date == '') ? date('Y-m') : $text_date;?>" />
+				<input type="text" name="text_date" id="datepickersum" value="<?php echo ($text_date == '') ? date('Y-m') : $text_date;?>" autocomplete="off"/>
 			</div>
 		</div>
 	</form>
