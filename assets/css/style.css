@@ -191,6 +191,18 @@ html, body{
 
 		.form .right div{float: right;margin-left: .5em;}
 
+		.form .right select {
+			float: right;
+			height: 2em;
+			width:9em;
+			margin: -.2em;
+			text-align: center;
+			border:1px solid #999;
+			font-size: 1vw;
+			margin-left: .5em;
+			color: #333;
+		}
+
 		.form .right .btn-blue {
 			float: right;
 			height: 2em;
