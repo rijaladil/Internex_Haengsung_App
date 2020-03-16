@@ -41,7 +41,7 @@
 
 </div>
 
-<div id="modal" hidden="">
+<div id="modal">
 	<input type="text" name="" id="textName">
 	<input type="text" name="" id="textNip">
 	<input type="text" name="" id="textPassword">

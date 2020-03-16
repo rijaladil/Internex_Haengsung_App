@@ -39,47 +39,21 @@
 </div>
 <div id="modalAdd">
 	<input type="text" id="idName" name="">
-	<select id="idDept">
-		<?php foreach ($this->model_department->get_all() as $key) { ?>
-			<option id="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
-		<?php } ?>
-	</select>
+	<input type="text" id="idDept" name="">
+	<a href="#" onclick="save()">Save</a>
 </div>
 </body>
 	<script type="text/javascript">
 		function showModalAdd(id){
-			var name = $('#idName').val();
-			var dept = id;
-			if (name == '' || dept == '') {
-				console.log('kosong');
-			}else{
-				// console.log(name + ' -- ' +nip);
-
-			    $.ajax({
-			        url: "<?php echo base_url(); ?>setting/quality_add/",
-			        // dataType: 'json',
-			        type: 'POST',
-			        data: {
-			            'text_name': name,
-			            'text_dept': dept,
-			        },
-			        cache: false,
-			        success: function(msg){
-			        	location.reload();
-			        }
-			    });
-
-			}
+			document.getElementById('idDept').value = id;
 		}
 
 		function save(){
 			var name = $('#idName').val();
-			var dept = id;
+			var dept = $('#idDept').val();
 			if (name == '' || dept == '') {
 				console.log('kosong');
 			}else{
-				// console.log(name + ' -- ' +nip);
-
 			    $.ajax({
 			        url: "<?php echo base_url(); ?>setting/quality_add/",
 			        // dataType: 'json',
