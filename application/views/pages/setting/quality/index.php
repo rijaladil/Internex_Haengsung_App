@@ -1,6 +1,6 @@
 <div class="form">
 	<div class="left">Quality Setting</div>
-	<button class="green right">Save</button>
+	<button class="green right">Add</button>
 </div>
 <div class="body-data">
 
@@ -29,7 +29,7 @@
 				<tfooter>
 					  <tr>
 					    <td class='text-center'></td>
-					    <td><a onclick="showModalAdd()" class="btn" href="#">Add Problem</a></td>
+					    <td><a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="btn" href="#">Add Problem</a></td>
 					  </tr>
 				</tfooter>
 			</table>
@@ -37,10 +37,64 @@
 	<?php } ?>
 
 </div>
+<div id="modalAdd">
+	<input type="text" id="idName" name="">
+	<select id="idDept">
+		<?php foreach ($this->model_department->get_all() as $key) { ?>
+			<option id="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+		<?php } ?>
+	</select>
+</div>
 </body>
 	<script type="text/javascript">
-		function showModalAdd(){
-			console.log('add');
+		function showModalAdd(id){
+			var name = $('#idName').val();
+			var dept = id;
+			if (name == '' || dept == '') {
+				console.log('kosong');
+			}else{
+				// console.log(name + ' -- ' +nip);
+
+			    $.ajax({
+			        url: "<?php echo base_url(); ?>setting/quality_add/",
+			        // dataType: 'json',
+			        type: 'POST',
+			        data: {
+			            'text_name': name,
+			            'text_dept': dept,
+			        },
+			        cache: false,
+			        success: function(msg){
+			        	location.reload();
+			        }
+			    });
+
+			}
+		}
+
+		function save(){
+			var name = $('#idName').val();
+			var dept = id;
+			if (name == '' || dept == '') {
+				console.log('kosong');
+			}else{
+				// console.log(name + ' -- ' +nip);
+
+			    $.ajax({
+			        url: "<?php echo base_url(); ?>setting/quality_add/",
+			        // dataType: 'json',
+			        type: 'POST',
+			        data: {
+			            'text_name': name,
+			            'text_dept': dept,
+			        },
+			        cache: false,
+			        success: function(msg){
+			        	location.reload();
+			        }
+			    });
+
+			}
 		}
 	</script>
 </html>

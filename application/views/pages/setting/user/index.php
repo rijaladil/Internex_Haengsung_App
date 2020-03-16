@@ -1,6 +1,5 @@
 <div class="form">
 	<div class="left">User Setting</div>
-	<button class="green right" onclick='save()'>Save</button>
 	<button class="red right">+ Add</button>
 
 </div>
@@ -58,6 +57,7 @@
 		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 	<?php } ?>
 	</select>
+	<button class="green right" onclick='save()'>Save</button>
 </div>
 
 <div id="modalUpdate" hidden="">

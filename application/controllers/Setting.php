@@ -58,6 +58,54 @@ class Setting extends CI_Controller {
 		$this->load->view('pages/setting/quality/index');
 	}
 
+	public function quality_add()
+	{
+        if($this->model_losstime_category->add()){
+
+        $data = $this->model_department->get_all();
+
+			$x = 1; foreach ($this->model_department->get_all() as $key) {
+				echo '
+						<div class="qs1">
+							<table  width="100%" border="1" class="tblth">
+								<tr>
+									<td><?php echo '.$key['name'].'</td>
+								</tr>
+							</table>
+							<table id="setting-quality<?php echo $x++; ?>" class="display"  width="100%" border="1">
+								<thead>
+								  <tr>
+								    <th width="15%">No</th>
+								    <th width="85%">Problem item</th>
+								  </tr>
+								</thead>
+								<tbody>';
+									$i = 1;
+									foreach ($this->model_machine_problem->get_all_by_dept_id($key['id']) as $key2) {
+										echo '
+										  <tr>
+										    <td class=\'text-center\'>'.$i++.'</td>
+										    <td>'.$key2['name'].'</td>
+										  </tr>';
+									}
+								echo '
+								</tbody>
+								<tfooter>
+									  <tr>
+									    <td class=\'text-center\'></td>
+									    <td><a onclick="showModalAdd()" class="btn" href="#">Add Problem</a></td>
+									  </tr>
+								</tfooter>
+							</table>
+						</div>
+				';
+			}
+
+        }else{
+        	echo 'false';
+        }
+	}
+
 	public function losstime()
 	{
 		$this->load->view('template/header/index');
