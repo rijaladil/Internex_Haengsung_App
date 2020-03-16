@@ -62,8 +62,8 @@
 		<tbody>
 			<?php $i = 1; foreach ($data as $key) { ?>
 				<tr id="dataRow<?php echo $key['idQty']; ?>" onclick="selectRow(<?php echo $key['idQty']; ?>)" class="<?php echo ($key['status_close'] == 0) ? 'waiting' : (($key['status_close'] == 1) ? 'process' : 'completed') ; ?>">
-					<td><?php echo $i++; ?></td>
-					<td>
+					<td class="text-center"><?php echo $i++; ?></td>
+					<td class="text-center">
 							<?php if ($key['status_close'] != 1 && $key['actual'] <= $key['planQty']  ) { ?>
 								<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
 								<select name="text_mc[]">
@@ -246,9 +246,9 @@
 
         $('.bg-selected').removeClass('bg-selected');
         $('#dataRow'+id).addClass('bg-selected');
-		document.getElementById("idValTot1").innerHTML = document.getElementById("idQtyTot"+id).innerHTML | '&nbsp;';
-
-
+        isi = document.getElementById("idQtyTot"+id).innerHTML;
+        isinya = isi.toString();
+		document.getElementById("idValTot1").innerHTML = isinya;
 
 	    $.ajax({
 	        url: "<?php echo base_url(); ?>json/getNgByIdQty/"+id,

@@ -60,27 +60,67 @@ class Department extends CI_Controller {
 					<td class='ft'>".$key['production_part_no']."</td>
 					<td class='ft'>".$key['model']."</td>
 					<td class='ft'>".$key['description']."</td>
-					<td class='ft'>".$key['capaDay']."</td>
+					<td class='ft'>".$this->numberFor2($key['capaDay'])."</td>
 					<td class='ft'><div>Plan</div><br><div class='fgreen'>Actual</div><br><div class='fred'>Ng</div></td>
 					";
 					for ($i=1; $i <= 31 ; $i++) {
 						echo "
-					<td class='fb'>
-						<div>".$key['planDay'.$i]."</div><br>
-						<div class='fgreen'>".($key['actualDay'.$i]-$key['ngQty'.$i])."</div><br>
-						<div class='fred'>".($key['ngQty'.$i]*1)."</div><br>
+					<td class='fb' style='border-right: 1px solid #d2d2d2; padding:0px 10px 0px 10px !important'>
+						<div>".$this->colBlack($key['planDay'.$i])."</div><br>
+						<div class=''>".$this->colGreen($key['actualDay'.$i]-$key['ngQty'.$i])."</div><br>
+						<div class='fred'>".$this->colRed($key['ngQty'.$i]*1)."</div><br>
 					</td>";
 					}
 
 					echo "
 					<td class='ft'>
-						<div>".($key['planQtyTot']*1)."</div><br>
-						<div class='fgreen'>".($key['actualQtyTot']-$key['ngQtyTot'])."</div><br>
-						<div class='fred'>".($key['ngQtyTot']*1)."</div><br></td>
-					<td class='ft'>".(number_format((float)(($key['actualQtyTot']-$key['ngQtyTot'])/$key['planQtyTot'])*100, 2, '.', ''))."%</td>
+						<div>".$this->numberFor($key['planQtyTot']*1)."</div><br>
+						<div class=''>".$this->colGreen($key['actualQtyTot']-$key['ngQtyTot'])."</div><br>
+						<div class='fred'>".$this->colRed($key['ngQtyTot']*1)."</div><br></td>
+					<td class='ft'>".$this->colBlackPer((($key['actualQtyTot']-$key['ngQtyTot'])/$key['planQtyTot'])*100)."</td>
 				</tr>
 	        ";
         }
+	}
+
+	function numberFor($num){
+		return number_format($num, 0,',','.');
+	}
+
+	function numberFor2($num){
+		return number_format($num, 2,',','.');
+	}
+
+	function colBlack($var) {
+		if ($var == 0) {
+			return "<font color='#bfbfbf'>-</font>";
+		}else{
+			return "<font color=''>".$this->numberFor($var)."</font>";
+		}
+	}
+
+	function colBlackPer($var) {
+		if ($var == 0) {
+			return "<font color='#bfbfbf'>0%</font>";
+		}else{
+			return "<font color=''>".$this->numberFor($var)."%</font>";
+		}
+	}
+
+	function colGreen($var) {
+		if ($var == 0) {
+			return "<font color='#bfbfbf'>-</font>";
+		}else{
+			return "<font color='#00cc00'>".$this->numberFor($var)."</font>";
+		}
+	}
+
+	function colRed($var) {
+		if ($var == 0) {
+			return "<font color='#bfbfbf'>-</font>";
+		}else{
+			return "<font color='red'>".$this->numberFor($var)."</font>";
+		}
 	}
 
 
