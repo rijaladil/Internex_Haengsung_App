@@ -35,6 +35,8 @@
 	</thead>
 	<tbody id="idContent">
 		<?php $i = 1; foreach ($data as $key) { ?>
+		<input hidden="" id="textUpdateLevel<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['levelId']; ?>">
+		<input hidden="" id="textUpdateDept<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['deptId']; ?>">
 			<tr>
 		    	<td class="text-center"><?php echo $i++; ?></td>
 			    <td class=""><?php echo $key['dept']; ?></td>
@@ -67,13 +69,13 @@
 		NIP : 		<input type="text" name="" id="textNip">
 		Password :	<input type="text" name="" id="textPassword">
 		Level :		<select id="textLevel">
-						<option value=''>select</option>
+						<option value=''>Select</option>
 				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
 					<?php } ?>
 					</select>
 		Dept:		<select id="textDept">
-						<option value=''>select</option>
+						<option value=''>Select</option>
 					    <?php foreach ($this->model_department->get_all() as $level) { ?>
 							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?>
 
@@ -92,15 +94,13 @@
 		<br>
 		NIP : 		<input type="text" name="" id="textUpdateNip">
 		Name : 		<input type="text" name="" id="textUpdateName">
-		Password :	<input type="text" name="" id="textUpdatePassword">
+		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password">
 		Level :		<select id="textUpdateLevel">
-						<option value=''>select</option>
 				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
 					<?php } ?>
 					</select>
 		Dept:		<select id="textUpdateDept">
-						<option value=''>select</option>
 				    <?php foreach ($this->model_department->get_all() as $level) { ?>
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 					<?php } ?>
@@ -143,18 +143,31 @@
 		}
 	}
 
+	function selectElement(id, valueToSelect) {
+	    let element = document.getElementById(id);
+	    element.value = valueToSelect;
+	}
+
 	function showModalEdit(id){
-	  document.getElementById("myForm1").style.display = "block";
+		var idLevel = document.getElementById('textUpdateLevel'+id).value;
+		var idDept = document.getElementById('textUpdateDept'+id).value;
+
+	  	document.getElementById("myForm1").style.display = "block";
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+		document.getElementById('textUpdateLevel').value = document.getElementById('idValName'+id).innerHTML;
+		document.getElementById('textUpdateDept').value = document.getElementById('idValName'+id).innerHTML;
+
+		selectElement('textUpdateLevel', idLevel);
+		selectElement('textUpdateDept', idDept);
 	}
 
 	function update(id){
 		var nip = document.getElementById('textUpdateNip').value;
 		var name = document.getElementById('textUpdateName').value;
-		// var level = $('#textLevel').val()
-		// var dept = $('#textDept').val()
-		// var pass = $('#textPassword').val()
+		var level = $('#textUpdateLevel').val()
+		var dept = $('#textUpdateDept').val()
+		var pass = $('#textUpdatePassword').val()
 		if (name == '' || nip == '') {
 			console.log('kosong');
 		}else{
@@ -167,9 +180,9 @@
 		        data: {
 		            'text_name': name,
 		            'text_nip': nip,
-		            // 'text_level': level,
-		            // 'text_dept': dept,
-		            // 'text_pass': pass,
+		            'text_level': level,
+		            'text_dept': dept,
+		            'text_pass': pass,
 		        },
 		        cache: false,
 		        success: function(msg){
