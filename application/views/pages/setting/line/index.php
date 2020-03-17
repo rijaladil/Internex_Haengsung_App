@@ -1,9 +1,26 @@
+<script>
+	function openFormInput() {
+	  document.getElementById("myForm").style.display = "block";
+	}
+	function showModalEdit(id) {
+	  document.getElementById("myForm1").style.display = "block";
+	}
+
+	function closeFormInput() {
+	  document.getElementById("myForm").style.display = "none";
+	}
+	function closeModalEdit(id) {
+	  document.getElementById("myForm1").style.display = "none";
+	}
+</script>
+
+
 <div class="form">
 	<div class="left">Setting Line MC</div>
-	<button class="btn-slt-crd">Save</button>
+	<!-- <button class="btn-slt-crd">Save</button> -->
 	<!-- <button class="btn-slt-crd">Delete</button> -->
-	<button class="btn-slt-crd">+ Add</button>
-	<button class="btn-slt-ref">Check Again</button>
+	<button  class="red right" onclick="openFormInput()">+ Add</button>
+	<!-- <button class="btn-slt-ref">Check Again</button> -->
 </div>
 <div class="body-data">
 	<table id="setting-line-mc" class="display" width="100%" border="1">
@@ -41,81 +58,131 @@
 					 <td class="text-center" id="idValIp<?php echo $key['id']; ?>"><?php echo $key['ip_address']; ?></td>
 					 <td class="text-center"></td>
 					 <td class="text-center" id="idValRemark<?php echo $key['id']; ?>"><?php echo $key['remark']; ?></td>
-					 <td class="text-center"><a href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Edit</a></td>
+					 <td class="text-center"><a class="click-btn" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Edit</a></td>
 				  </tr>
 			<?php } ?>
 		</tbody>
 	</table>
-
-	<div id="modalEdit">
-		<input type="" id="hid" name="">
-		<input type="" id="idInputEditMcNo" name="">
-		<input type="" id="idInputEditName" name="">
-		<input type="" id="idInputEditIp" name="">
-		<input type="" id="idInputEditRemark" name="">
-		<select id="idInputEditDept">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_department->get_all() as $key) { ?>
-				<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputEditWorker1">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputEditWorker2">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputEditWorker3">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<a href="#/" onclick="update()">Update</a>
-	</div>
-
-	<div id="modalAdd">
-		<input type="" id="idInputAddMcNo" name="">
-		<input type="" id="idInputAddName" name="">
-		<input type="" id="idInputAddIp" name="">
-		<select id="idInputAddDept">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_department->get_all() as $key) { ?>
-				<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputAddWorker1">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputAddWorker2">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<select id="idInputAddWorker3">
-			<option value="0">Pilih</option>
-			<?php foreach ($this->model_user->get_op() as $key) { ?>
-				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
-			<?php } ?>
-		</select>
-		<a href="#/" onclick="save()">Save</a>
-	</div>
-
-
 </div>
+<!-- UPDATE -->
+	<div class="form-popup" id="myForm1">
+		<div id="modalEdit" class="form-container">
+			<div class="title">Update</div>
+			<br>
+			Id :<input type="text" id="hid" name="" hidden="">
+			No.M/C :<input type="text" id="idInputEditMcNo" name="">
+			Machine Name : <input type="text" id="idInputEditName" name="">
+			Terminal IP No :<input type="text" id="idInputEditIp" name="">
+			Remarks :<input type="text" id="idInputEditRemark" name="">
+			<table width="100%" border="0">
+			  <tr>
+			    <td>
+			    Process: 
+			    <select id="idInputEditDept">
+			       <!--  <option value="0">Pilih</option> -->
+			        <?php foreach ($this->model_department->get_all() as $key) { ?>
+			            <option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+			        <?php } ?>
+			    </select>
+			    </td>
+			    <td>
+			    1 Shift Worker :
+			    <select id="idInputEditWorker1">
+			        <option value="0">Pilih</option>
+			        <?php foreach ($this->model_user->get_op() as $key) { ?>
+			            <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+			        <?php } ?>
+			    </select>
+			   </td>
+			  </tr>
+			  <tr>
+			    <td>
+			    2 Shift Worker :
+			    <select id="idInputEditWorker2">
+					<option value="0">Pilih</option>
+					<?php foreach ($this->model_user->get_op() as $key) { ?>
+						<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+					<?php } ?>
+				</select>
+				</td>
+			    <td>
+			    3 Shift Worker : 
+			    <select id="idInputEditWorker3">
+					<option value="0">Pilih</option>
+					<?php foreach ($this->model_user->get_op() as $key) { ?>
+						<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+					<?php } ?>
+				</select>
+				</td>
+			  </tr>
+			</table>
+
+			<button class="btn"  href="#/" onclick="update()">UPDATE</button>
+			<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
+		</div>
+	</div>
+<!-- +ADD -->
+	<div class="form-popup" id="myForm">
+		<div id="modalAdd" class="form-container">
+			<div class="title">+Add</div>
+			<br>
+			No.M/C : <input type="text" id="idInputAddMcNo" name="">
+			Machine Name : <input type="text" id="idInputAddName" name="">
+			Terminal IP No :<input type="text" id="idInputAddIp" name="">
+			<table width="100%" border="0">
+			  <tr>
+			    <td>
+			Process: <select id="idInputAddDept">
+							<option value="0">Pilih</option>
+							<?php foreach ($this->model_department->get_all() as $key) { ?>
+								<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+							<?php } ?>
+						</select>
+			    </td>
+			    <td>
+			1 Shift Worker : <select id="idInputAddWorker1">
+							<option value="0">Pilih</option>
+							<?php foreach ($this->model_user->get_op() as $key) { ?>
+								<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+							<?php } ?>
+						</select>
+			   </td>
+			  </tr>
+			  <tr>
+			    <td>
+			  2 Shift Worker : <select id="idInputAddWorker2">
+							<option value="0">Pilih</option>
+							<?php foreach ($this->model_user->get_op() as $key) { ?>
+								<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+							<?php } ?>
+						</select>  
+			    </td>
+			    <td>
+			 3 Shift Worker : <select id="idInputAddWorker3">
+							<option value="0">Pilih</option>
+							<?php foreach ($this->model_user->get_op() as $key) { ?>
+								<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+							<?php } ?>
+						</select>   
+			    </td>
+			  </tr>
+			</table>
+
+			<button class="btn" href="#/" onclick="save()">Save</button>
+			<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
+		</div>
+	</div>
+
+
 
 <script type="text/javascript">
+	function showModalAdd(id){
+			document.getElementById("myForm").style.display = "block";
+			document.getElementById('idDept').value = id;
+	}
+
 	function showModalEdit(id) {
+		document.getElementById("myForm1").style.display = "block";
 		document.getElementById('hid').value = id;
 		document.getElementById('idInputEditMcNo').value = document.getElementById('idValMcNo'+id).innerHTML;
 		document.getElementById('idInputEditName').value = document.getElementById('idValName'+id).innerHTML;
@@ -173,6 +240,7 @@
 	}
 
 	function save(){
+		document.getElementById("myForm").style.display = "none";
 		var mcNo = document.getElementById('idInputAddMcNo').value;
 		var name = document.getElementById('idInputAddName').value;
 		var ip = document.getElementById('idInputAddIp').value;

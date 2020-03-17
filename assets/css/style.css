@@ -522,7 +522,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   /*border: 3px solid #f1f1f1;*/
   z-index: 9;
   color: #333;
-  padding: 8em;
+  padding-top: 4em;
 
 }
 
