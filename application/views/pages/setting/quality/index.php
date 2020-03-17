@@ -38,7 +38,7 @@
 					  </tr>
 					<?php } ?>
 				</tbody>
-				<tfooter>
+				<table>
 					  <tr>
 					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;"> 
 					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="add-btn" href="#">
@@ -46,7 +46,7 @@
 					  		</a>
 					  	</td>
 					  </tr>
-				</tfooter>
+				</table>
 			</table>
 		</div>
 	<?php } ?>
