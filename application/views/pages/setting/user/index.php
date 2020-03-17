@@ -102,7 +102,7 @@
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 					<?php } ?>
 					</select>
-					<button class="btn" onclick='update()'>SAVE</button>
+					<button class="btn" onclick='update()'>UPDATE</button>
 					<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 	</div>
 </div>
