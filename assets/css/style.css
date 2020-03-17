@@ -589,6 +589,22 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   font-weight: bold;
 }
 
+.add-btn{
+  float: right;
+  background-color:red;
+  color: white;
+  padding: 10px 23px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.add-btn:hover{
+  background: #ff6666;
+  color: #333;
+  font-weight: bold;
+}
+
 .form-container .cancel {
   background-color: red;
   color: white;
@@ -599,8 +615,6 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   margin-bottom:10px;
   opacity: 0.8;
 }
-
-
 
 /* Add a red background color to the cancel button */
 .form-container .title {

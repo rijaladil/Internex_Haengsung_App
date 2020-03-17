@@ -1,6 +1,16 @@
+<script>
+	function closeModalAdd() {
+	  document.getElementById("myForm").style.display = "none";
+	}
+
+	function closeModalEdit() {
+	  document.getElementById("myForm1").style.display = "none";
+	}
+</script>
+
 <div class="form">
 	<div class="left">Quality Setting</div>
-	<button class="green right">Add</button>
+	<!-- <button class="green right">Add</button> -->
 </div>
 <div class="body-data">
 
@@ -24,15 +34,17 @@
 					  <tr>
 					    <td class='text-center'><?php echo $i++; ?></td>
 					    <td id="idValName<?php echo $key2['id']; ?>"><?php echo $key2['name']; ?></td>
-					    <td class='text-center'><a href="#" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Edit</a></td>
+					    <td class='text-center'><a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Edit</a></td>
 					  </tr>
 					<?php } ?>
 				</tbody>
 				<tfooter>
 					  <tr>
-					    <td class='text-center'></td>
-					    <td><a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="btn" href="#">Add Problem</a></td>
-					    <td class='text-center'></td>
+					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;"> 
+					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="add-btn" href="#">
+					  			+Add
+					  		</a>
+					  	</td>
 					  </tr>
 				</tfooter>
 			</table>
@@ -40,19 +52,36 @@
 	<?php } ?>
 
 </div>
-<div id="modalAdd">
-	<input type="text" id="idName" name="">
-	<input type="text" id="idDept" name="">
-	<a href="#" onclick="save()">Save</a>
+
+<!-- +ADD -->
+<div class="form-popup" id="myForm">
+	<div id="modalAdd" class="form-container">
+		<div class="title">+Add</div>
+		<br>
+		Problem item : 	<input type="text" id="idName" name="">
+		<input type="text" id="idDept" name="" hidden="">
+		<button class="btn" onclick="save()">SAVE</button>
+		<button class="cancel" onclick='closeModalAdd()'>CLOSE</button>
+	</div>
 </div>
-<div id="modalUpdate">
-	<input type="text" id="idUpdateName" name="">
-	<input type="text" id="idId" name="" hidden="">
-	<a href="#" onclick="update()">Update</a>
+
+<!-- UPDATE -->
+<div class="form-popup" id="myForm1">
+	<div id="modalUpdate" class="form-container">
+		<div class="title">Update</div>
+		<br>
+		Problem item : <input type="text" id="idUpdateName" name="">
+		<input type="text" id="idId" name="" hidden="">
+		<button class="btn"  href="#" onclick="update()">UPDATE</button>
+		<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
+	</div>
 </div>
 </body>
+
+
 	<script type="text/javascript">
 		function showModalAdd(id){
+			document.getElementById("myForm").style.display = "block";
 			document.getElementById('idDept').value = id;
 		}
 
@@ -80,6 +109,7 @@
 		}
 
 		function showModalEdit(id){
+			document.getElementById("myForm1").style.display = "block";
 			document.getElementById('idId').value = id;
 			document.getElementById('idUpdateName').value = document.getElementById('idValName'+id).innerHTML;
 		}
@@ -113,4 +143,5 @@
 		}
 
 	</script>
+
 </html>
