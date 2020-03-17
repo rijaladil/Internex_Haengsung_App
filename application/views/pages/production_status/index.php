@@ -18,7 +18,7 @@
 		<input type="text" id="datepickersum" name="text_date" value="<?php echo date('Y-m');?>"  autocomplete="off"/>
 	</div>
 </div>
-<div class="body-data" id="contents">
+<div class="body-data">
 	<table id="product-status" class="display" width="100%" border="0">
 	<thead>
 	  <tr>

@@ -1,6 +1,22 @@
+<script>
+	function openFormInput() {
+	  document.getElementById("myForm").style.display = "block";
+	// }
+	// function showModalEdit(id) {
+	//   document.getElementById("myForm1").style.display = "block";
+	// }
+
+	function closeFormInput() {
+	  document.getElementById("myForm").style.display = "none";
+	}
+	// function showModalEdit(id) {
+	//   document.getElementById("myForm1").style.display = "none";
+	// }
+</script>
+
 <div class="form">
 	<div class="left">User Setting</div>
-	<button class="red right">+ Add</button>
+	<button class="red right"  onclick="openFormInput()">+ Add</button>
 
 </div>
 <div class="body-data">
@@ -41,42 +57,55 @@
 
 </div>
 
-<div id="modal" hidden="">
-	<input type="text" name="" id="textName">
-	<input type="text" name="" id="textNip">
-	<input type="text" name="" id="textPassword">
-	<select id="textLevel">
-		<option value=''>select</option>
-    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-		<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
-	<?php } ?>
-	</select>
-	<select id="textDept">
-		<option value=''>select</option>
-    <?php foreach ($this->model_department->get_all() as $level) { ?>
-		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
-	<?php } ?>
-	</select>
-	<button class="green right" onclick='save()'>Save</button>
+<!-- <div id="modal" hidden=""> -->
+<div class="form-popup" id="myForm">
+	<div id="modal" class="form-container">
+		<div class="cancel">+Add User </div>
+		<br>
+
+		Name : 		<input type="text" name="" id="textName">
+		NIP : 		<input type="text" name="" id="textNip">
+		Password :	<input type="text" name="" id="textPassword">
+		Level :		<select id="textLevel">
+						<option value=''>select</option>
+				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
+						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
+					<?php } ?>
+					</select>
+		Dept:		<select id="textDept">
+						<option value=''>select</option>
+					    <?php foreach ($this->model_department->get_all() as $level) { ?>
+							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?>
+							
+						</option>
+					<?php } ?>
+					</select>
+		<button class="btn" onclick='save()'>SAVE</button>
+	</div>
 </div>
 
-<div id="modalUpdate" hidden="">
-	<input type="text" name="" id="textUpdateNip">
-	<input type="text" name="" id="textUpdateName">
-	<input type="text" name="" id="textUpdatePassword">
-	<select id="textUpdateLevel">
-		<option value=''>select</option>
-    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-		<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
-	<?php } ?>
-	</select>
-	<select id="textUpdateDept">
-		<option value=''>select</option>
-    <?php foreach ($this->model_department->get_all() as $level) { ?>
-		<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
-	<?php } ?>
-	</select>
-</div>
+<!-- <div class="form-popup" id="myForm1"> -->
+	<div id="modalUpdate" class="form-container">
+		<div class="cancel">Update User </div>
+		<br>
+		NIP : 		<input type="text" name="" id="textUpdateNip">
+		Name : 		<input type="text" name="" id="textUpdateName">
+		Password :	<input type="text" name="" id="textUpdatePassword">
+		Level :		<select id="textUpdateLevel">
+						<option value=''>select</option>
+				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
+						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
+					<?php } ?>
+					</select>
+		Dept:		<select id="textUpdateDept">
+						<option value=''>select</option>
+				    <?php foreach ($this->model_department->get_all() as $level) { ?>
+						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
+					<?php } ?>
+					</select>
+					<button class="btn" onclick='save()'>SAVE</button>
+	</div>
+<!-- </div> -->
 
 </body>
 <script type="text/javascript">
