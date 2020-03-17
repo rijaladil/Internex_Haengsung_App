@@ -9,14 +9,14 @@
 	function closeFormInput() {
 	  document.getElementById("myForm").style.display = "none";
 	}
-	function showModalEdit(id) {
+	function closeModalEdit(id) {
 	  document.getElementById("myForm1").style.display = "none";
 	}
 </script>
 
 <div class="form">
 	<div class="left">User Setting</div>
-	<button class="red right"  onclick="openFormInput()">+ Add</button>
+	<button class="red right"  onclick="openFormInput()">+ Add </button>
 
 </div>
 <div class="body-data">
@@ -49,7 +49,7 @@
 				    	?>
 				    </td>
 				<?php } ?>
-			    <td class="text-center"><a onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
+			    <td class="text-center"><a class="click-btn" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
 			  </tr>
 			<?php } ?>
 	</tbody>
@@ -60,7 +60,7 @@
 <!-- <div id="modal" hidden=""> -->
 <div class="form-popup" id="myForm">
 	<div id="modal" class="form-container">
-		<div class="cancel">+Add User </div>
+		<div class="title">+Add User </div>
 		<br>
 
 		Name : 		<input type="text" name="" id="textName">
@@ -80,14 +80,15 @@
 						</option>
 					<?php } ?>
 					</select>
-		<button class="btn" onclick='save()'>SAVE</button>
+					<button class="btn" onclick='save()'>SAVE</button>
+					<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
 	</div>
 
 </div>
 
-<!-- <div class="form-popup" id="myForm1"> -->
+<div class="form-popup" id="myForm1">
 	<div id="modalUpdate" class="form-container">
-		<div class="cancel">Update User </div>
+		<div class="title">Update User</div>
 		<br>
 		NIP : 		<input type="text" name="" id="textUpdateNip">
 		Name : 		<input type="text" name="" id="textUpdateName">
@@ -104,9 +105,10 @@
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 					<?php } ?>
 					</select>
-					<button class="btn" onclick='save()'>SAVE</button>
+					<button class="btn" onclick='update()'>SAVE</button>
+					<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 	</div>
-<!-- </div> -->
+</div>
 
 </body>
 <script type="text/javascript">
@@ -142,6 +144,7 @@
 	}
 
 	function showModalEdit(id){
+	  document.getElementById("myForm1").style.display = "block";
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
 	}
