@@ -18,7 +18,7 @@
 				  <tr>
 					 <td class="text-center"><?php echo $i++; ?></td>
 					 <td id="idName<?php echo $key['id']; ?>"><?php echo $key['name']; ?></td>
-					 <td><a href="#" onclick="edit(<?php echo $key['id']; ?>)">Option</a></td>
+					 <td class="text-center"><a href="#" onclick="edit(<?php echo $key['id']; ?>)">Option</a></td>
 				  </tr>
 		 	<?php } ?>
 		</tbody>
