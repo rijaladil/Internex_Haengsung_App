@@ -13,6 +13,17 @@ class Model_user extends CI_Model
         return $query->result_array();
     }
 
+    public function get_op()
+    {
+        $this->db->select('user.nip, user.name, dept.name dept, level.name level, level.id levelId');
+        $this->db->from('itx_m_user user');
+        $this->db->join('itx_m_user_level level', 'level.id = user.user_level_id');
+        $this->db->join('itx_m_department dept', 'dept.id = user.department_id');
+        $this->db->where('level.id', '1');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function user_add()
     {
         $text_name = $this->security->xss_clean($this->input->post('text_name'));

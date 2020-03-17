@@ -1,17 +1,17 @@
 <script>
 	function openFormInput() {
 	  document.getElementById("myForm").style.display = "block";
-	// }
-	// function showModalEdit(id) {
-	//   document.getElementById("myForm1").style.display = "block";
-	// }
+	}
+	function showModalEdit(id) {
+	  document.getElementById("myForm1").style.display = "block";
+	}
 
 	function closeFormInput() {
 	  document.getElementById("myForm").style.display = "none";
 	}
-	// function showModalEdit(id) {
-	//   document.getElementById("myForm1").style.display = "none";
-	// }
+	function showModalEdit(id) {
+	  document.getElementById("myForm1").style.display = "none";
+	}
 </script>
 
 <div class="form">
@@ -76,7 +76,7 @@
 						<option value=''>select</option>
 					    <?php foreach ($this->model_department->get_all() as $level) { ?>
 							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?>
-							
+
 						</option>
 					<?php } ?>
 					</select>
