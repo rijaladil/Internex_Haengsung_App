@@ -4,7 +4,7 @@
 	}
 
 	function closeModalEdit() {
-	  document.getElementById("myForm").style.display = "none";
+	  document.getElementById("myForm1").style.display = "none";
 	}
 </script>
 
@@ -68,7 +68,9 @@
 <!-- UPDATE -->
 <div class="form-popup" id="myForm1">
 	<div id="modalUpdate" class="form-container">
-		<input type="text" id="idUpdateName" name="">
+		<div class="title">Update</div>
+		<br>
+		Problem item : <input type="text" id="idUpdateName" name="">
 		<input type="text" id="idId" name="" hidden="">
 		<button class="btn"  href="#" onclick="update()">UPDATE</button>
 		<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
