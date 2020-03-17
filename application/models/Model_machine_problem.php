@@ -16,10 +16,20 @@ class Model_machine_problem extends CI_Model
     {
         $text_name = $this->security->xss_clean($this->input->post('text_name'));
         $text_dept = $this->security->xss_clean($this->input->post('text_dept'));
-        $this->db->set('createUser', 'System');
-        $this->db->set('name', $text_name);
-        $this->db->set('department_id', $text_dept);
-        $this->db->insert('itx_m_machine_problem');
+
+        $this->db->select('count(*) jum');
+        $this->db->from('itx_m_machine_problem');
+        $this->db->where('name', $text_name);
+        $this->db->where('department_id', $text_dept);
+        $query = $this->db->get();
+        $jum = $query->row()->jum;
+
+        if ($jum == 0) {
+            $this->db->set('createUser', 'System');
+            $this->db->set('name', $text_name);
+            $this->db->set('department_id', $text_dept);
+            $this->db->insert('itx_m_machine_problem');
+        }
 
         if ($this->db->affected_rows() > 0) {
             return true;

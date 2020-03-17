@@ -77,7 +77,7 @@
 			<table width="100%" border="0">
 			  <tr>
 			    <td>
-			    Process: 
+			    Process:
 			    <select id="idInputEditDept">
 			       <!--  <option value="0">Pilih</option> -->
 			        <?php foreach ($this->model_department->get_all() as $key) { ?>
@@ -106,7 +106,7 @@
 				</select>
 				</td>
 			    <td>
-			    3 Shift Worker : 
+			    3 Shift Worker :
 			    <select id="idInputEditWorker3">
 					<option value="0">Pilih</option>
 					<?php foreach ($this->model_user->get_op() as $key) { ?>
@@ -155,7 +155,7 @@
 							<?php foreach ($this->model_user->get_op() as $key) { ?>
 								<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
 							<?php } ?>
-						</select>  
+						</select>
 			    </td>
 			    <td>
 			 3 Shift Worker : <select id="idInputAddWorker3">
@@ -163,7 +163,7 @@
 							<?php foreach ($this->model_user->get_op() as $key) { ?>
 								<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
 							<?php } ?>
-						</select>   
+						</select>
 			    </td>
 			  </tr>
 			</table>
@@ -240,7 +240,6 @@
 	}
 
 	function save(){
-		document.getElementById("myForm").style.display = "none";
 		var mcNo = document.getElementById('idInputAddMcNo').value;
 		var name = document.getElementById('idInputAddName').value;
 		var ip = document.getElementById('idInputAddIp').value;

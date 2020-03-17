@@ -107,7 +107,7 @@
 					<td>
 						<?php
 							if ($key['workingTime'] > 0) {
-								echo number_format((float)(($key['workingTime']/($key['workingTime']+$key['lossTime']))*100), 1, '.', '');
+								echo convertToPercentages(($key['workingTime']+$key['lossTime']), $key['workingTime']);
 							 }
 						?>
 					</td>
