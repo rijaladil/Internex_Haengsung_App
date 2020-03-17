@@ -52,6 +52,10 @@ class Model_user extends CI_Model
         $text_nip = $this->security->xss_clean($this->input->post('text_nip'));
         $text_level = $this->security->xss_clean($this->input->post('text_level'));
         $text_dept = $this->security->xss_clean($this->input->post('text_dept'));
+        $text_pass = $this->security->xss_clean($this->input->post('text_pass'));
+        if ($text_pass <> '') {
+            $this->db->set('password', sha1($text_pass));
+        }
         $this->db->set('editUser', 'System');
         $this->db->set('name', $text_name);
         $this->db->set('user_level_id', $text_level);

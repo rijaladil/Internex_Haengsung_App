@@ -19,6 +19,7 @@ class Model_machine extends CI_Model
         	mc.worker_2,
         	mc.worker_3,
         	mc.name as name,
+        	mc.remark,
         	mc.mc_no,
         	mc.ip_address,
         	dept.name as dept,
@@ -44,6 +45,7 @@ class Model_machine extends CI_Model
         $text_mcno = $this->security->xss_clean($this->input->post('text_mcno'));
         $text_name = $this->security->xss_clean($this->input->post('text_name'));
         $text_ip = $this->security->xss_clean($this->input->post('text_ip'));
+        $text_remark = $this->security->xss_clean($this->input->post('text_remark'));
         $text_dept = $this->security->xss_clean($this->input->post('text_dept'));
         $text_work1 = $this->security->xss_clean($this->input->post('text_work1'));
         $text_work2 = $this->security->xss_clean($this->input->post('text_work2'));
@@ -52,6 +54,7 @@ class Model_machine extends CI_Model
         $this->db->set('mc_no', $text_mcno);
         $this->db->set('name', $text_name);
         $this->db->set('ip_address', $text_ip);
+        $this->db->set('remark', $text_remark);
         $this->db->set('department_id', $text_dept);
         $this->db->set('worker_1', $text_work1);
         $this->db->set('worker_2', $text_work2);

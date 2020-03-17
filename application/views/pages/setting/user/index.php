@@ -94,7 +94,7 @@
 		<br>
 		NIP : 		<input type="text" name="" id="textUpdateNip">
 		Name : 		<input type="text" name="" id="textUpdateName">
-		Password :	<input type="text" name="" id="textUpdatePassword">
+		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password">
 		Level :		<select id="textUpdateLevel">
 				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
@@ -167,7 +167,7 @@
 		var name = document.getElementById('textUpdateName').value;
 		var level = $('#textUpdateLevel').val()
 		var dept = $('#textUpdateDept').val()
-		// var pass = $('#textPassword').val()
+		var pass = $('#textUpdatePassword').val()
 		if (name == '' || nip == '') {
 			console.log('kosong');
 		}else{
@@ -182,7 +182,7 @@
 		            'text_nip': nip,
 		            'text_level': level,
 		            'text_dept': dept,
-		            // 'text_pass': pass,
+		            'text_pass': pass,
 		        },
 		        cache: false,
 		        success: function(msg){
