@@ -37,9 +37,9 @@
 		<?php $i = 1; foreach ($data as $key) { ?>
 			<tr>
 		    	<td class="text-center"><?php echo $i++; ?></td>
-			    <td class="text-center"><?php echo $key['dept']; ?></td>
+			    <td class=""><?php echo $key['dept']; ?></td>
 			    <td class="text-center"><?php echo $key['nip']; ?></td>
-			    <td class="text-center" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
+			    <td class="" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
 			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 				    <td class="text-center">
 				    	<?php
@@ -82,6 +82,7 @@
 					</select>
 		<button class="btn" onclick='save()'>SAVE</button>
 	</div>
+
 </div>
 
 <!-- <div class="form-popup" id="myForm1"> -->
@@ -143,7 +144,37 @@
 	function showModalEdit(id){
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+	}
 
+	function update(id){
+		var nip = document.getElementById('textUpdateNip').value;
+		var name = document.getElementById('textUpdateName').value;
+		// var level = $('#textLevel').val()
+		// var dept = $('#textDept').val()
+		// var pass = $('#textPassword').val()
+		if (name == '' || nip == '') {
+			console.log('kosong');
+		}else{
+			// console.log(name + ' -- ' +nip);
+
+		    $.ajax({
+		        url: "<?php echo base_url(); ?>setting/user_update/",
+		        // dataType: 'json',
+		        type: 'POST',
+		        data: {
+		            'text_name': name,
+		            'text_nip': nip,
+		            // 'text_level': level,
+		            // 'text_dept': dept,
+		            // 'text_pass': pass,
+		        },
+		        cache: false,
+		        success: function(msg){
+		        	location.reload();
+		        }
+		    });
+
+		}
 	}
 </script>
 </html>

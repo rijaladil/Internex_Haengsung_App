@@ -15,14 +15,16 @@
 				<thead>
 				  <tr>
 				    <th width="15%">No</th>
-				    <th width="85%">Problem item</th>
+				    <th width="65%">Problem item</th>
+				    <th width="%">Option</th>
 				  </tr>
 				</thead>
 				<tbody>
 					<?php $i = 1; foreach ($this->model_machine_problem->get_all_by_dept_id($key['id']) as $key2) { ?>
 					  <tr>
 					    <td class='text-center'><?php echo $i++; ?></td>
-					    <td><?php echo $key2['name']; ?></td>
+					    <td id="idValName<?php echo $key2['id']; ?>"><?php echo $key2['name']; ?></td>
+					    <td class='text-center'><a href="#" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Edit</a></td>
 					  </tr>
 					<?php } ?>
 				</tbody>
@@ -30,6 +32,7 @@
 					  <tr>
 					    <td class='text-center'></td>
 					    <td><a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="btn" href="#">Add Problem</a></td>
+					    <td class='text-center'></td>
 					  </tr>
 				</tfooter>
 			</table>
@@ -39,47 +42,26 @@
 </div>
 <div id="modalAdd">
 	<input type="text" id="idName" name="">
-	<select id="idDept">
-		<?php foreach ($this->model_department->get_all() as $key) { ?>
-			<option id="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
-		<?php } ?>
-	</select>
+	<input type="text" id="idDept" name="">
+	<a href="#" onclick="save()">Save</a>
+</div>
+<div id="modalUpdate">
+	<input type="text" id="idUpdateName" name="">
+	<input type="text" id="idId" name="" hidden="">
+	<a href="#" onclick="update()">Update</a>
 </div>
 </body>
 	<script type="text/javascript">
 		function showModalAdd(id){
-			var name = $('#idName').val();
-			var dept = id;
-			if (name == '' || dept == '') {
-				console.log('kosong');
-			}else{
-				// console.log(name + ' -- ' +nip);
-
-			    $.ajax({
-			        url: "<?php echo base_url(); ?>setting/quality_add/",
-			        // dataType: 'json',
-			        type: 'POST',
-			        data: {
-			            'text_name': name,
-			            'text_dept': dept,
-			        },
-			        cache: false,
-			        success: function(msg){
-			        	location.reload();
-			        }
-			    });
-
-			}
+			document.getElementById('idDept').value = id;
 		}
 
 		function save(){
 			var name = $('#idName').val();
-			var dept = id;
+			var dept = $('#idDept').val();
 			if (name == '' || dept == '') {
 				console.log('kosong');
 			}else{
-				// console.log(name + ' -- ' +nip);
-
 			    $.ajax({
 			        url: "<?php echo base_url(); ?>setting/quality_add/",
 			        // dataType: 'json',
@@ -96,5 +78,39 @@
 
 			}
 		}
+
+		function showModalEdit(id){
+			document.getElementById('idId').value = id;
+			document.getElementById('idUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+		}
+
+		function update(id){
+			var id = document.getElementById('idId').value;
+			var name = document.getElementById('idUpdateName').value;
+			if (name == '' || id == '') {
+				console.log('kosong');
+			}else{
+				// console.log(name + ' -- ' +nip);
+
+			    $.ajax({
+			        url: "<?php echo base_url(); ?>setting/quality_update/",
+			        // dataType: 'json',
+			        type: 'POST',
+			        data: {
+			            'text_name': name,
+			            'text_id': id,
+			            // 'text_level': level,
+			            // 'text_dept': dept,
+			            // 'text_pass': pass,
+			        },
+			        cache: false,
+			        success: function(msg){
+			        	location.reload();
+			        }
+			    });
+
+			}
+		}
+
 	</script>
 </html>
