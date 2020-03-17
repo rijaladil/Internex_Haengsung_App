@@ -453,6 +453,7 @@
 	</table>
 
 	<div id="modalEdit">
+		<input type="" id="hid" name="">
 		<input type="" id="idInputEditMcNo" name="">
 		<input type="" id="idInputEditName" name="">
 		<input type="" id="idInputEditIp" name="">
@@ -483,11 +484,43 @@
 		<a href="#/" onclick="update()">Update</a>
 	</div>
 
+	<div id="modalAdd">
+		<input type="" id="idInputAddMcNo" name="">
+		<input type="" id="idInputAddName" name="">
+		<input type="" id="idInputAddIp" name="">
+		<select id="idInputAddDept">
+			<option value="0">Pilih</option>
+			<?php foreach ($this->model_department->get_all() as $key) { ?>
+				<option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+			<?php } ?>
+		</select>
+		<select id="idInputAddWorker1">
+			<option value="0">Pilih</option>
+			<?php foreach ($this->model_user->get_op() as $key) { ?>
+				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+			<?php } ?>
+		</select>
+		<select id="idInputAddWorker2">
+			<option value="0">Pilih</option>
+			<?php foreach ($this->model_user->get_op() as $key) { ?>
+				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+			<?php } ?>
+		</select>
+		<select id="idInputAddWorker3">
+			<option value="0">Pilih</option>
+			<?php foreach ($this->model_user->get_op() as $key) { ?>
+				<option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option>
+			<?php } ?>
+		</select>
+		<a href="#/" onclick="save()">Save</a>
+	</div>
+
 
 </div>
 
 <script type="text/javascript">
 	function showModalEdit(id) {
+		document.getElementById('hid').value = id;
 		document.getElementById('idInputEditMcNo').value = document.getElementById('idValMcNo'+id).innerHTML;
 		document.getElementById('idInputEditName').value = document.getElementById('idValName'+id).innerHTML;
 		document.getElementById('idInputEditIp').value = document.getElementById('idValIp'+id).innerHTML;
@@ -506,7 +539,8 @@
 	    element.value = valueToSelect;
 	}
 
-	function update(id){
+	function update(){
+		var id = document.getElementById('hid').value;
 		var mcNo = document.getElementById('idInputEditMcNo').value;
 		var name = document.getElementById('idInputEditName').value;
 		var ip = document.getElementById('idInputEditIp').value;
@@ -527,9 +561,6 @@
 	            'text_work2': work2,
 	            'text_work3': work3,
 	            'hid': id,
-	            // 'text_level': level,
-	            // 'text_dept': dept,
-	            // 'text_pass': pass,
 	        },
 	        cache: false,
 	        success: function(msg){
@@ -541,6 +572,39 @@
 	        }
 	    });
 	}
+
+	function save(){
+		var mcNo = document.getElementById('idInputAddMcNo').value;
+		var name = document.getElementById('idInputAddName').value;
+		var ip = document.getElementById('idInputAddIp').value;
+		var idDept = document.getElementById('idInputAddDept').value;
+		var work1 = document.getElementById('idInputAddWorker1').value;
+		var work2 = document.getElementById('idInputAddWorker2').value;
+		var work3 = document.getElementById('idInputAddWorker3').value;
+	    $.ajax({
+	        url: "<?php echo base_url(); ?>setting/line_add/",
+	        dataType: 'json',
+	        type: 'POST',
+	        data: {
+	            'text_mcno': mcNo,
+	            'text_name': name,
+	            'text_dept': idDept,
+	            'text_ip': ip,
+	            'text_work1': work1,
+	            'text_work2': work2,
+	            'text_work3': work3,
+	        },
+	        cache: false,
+	        success: function(msg){
+	        	if (msg == 'ok') {
+	        		location.reload();
+	        	}else{
+	        		console.log(msg);
+	        	}
+	        }
+	    });
+	}
+
 </script>
 
 </body>

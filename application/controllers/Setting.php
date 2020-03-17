@@ -112,4 +112,13 @@ class Setting extends CI_Controller {
 		}
 	}
 
+	public function line_add()
+	{
+		if($this->model_machine->add()) {
+			echo json_encode('ok');
+		}else{
+			echo json_encode('failed');
+		}
+	}
+
 }

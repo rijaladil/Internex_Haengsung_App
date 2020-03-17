@@ -56,8 +56,34 @@ class Model_machine extends CI_Model
         $this->db->set('worker_1', $text_work1);
         $this->db->set('worker_2', $text_work2);
         $this->db->set('worker_3', $text_work3);
-        $this->db->where('mc_no', $text_mcno);
+        $this->db->where('id', $hid);
         $this->db->update('itx_m_machine');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public function add()
+    {
+        $text_mcno = $this->security->xss_clean($this->input->post('text_mcno'));
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $text_ip = $this->security->xss_clean($this->input->post('text_ip'));
+        $text_dept = $this->security->xss_clean($this->input->post('text_dept'));
+        $text_work1 = $this->security->xss_clean($this->input->post('text_work1'));
+        $text_work2 = $this->security->xss_clean($this->input->post('text_work2'));
+        $text_work3 = $this->security->xss_clean($this->input->post('text_work3'));
+
+        $this->db->set('mc_no', $text_mcno);
+        $this->db->set('name', $text_name);
+        $this->db->set('ip_address', $text_ip);
+        $this->db->set('department_id', $text_dept);
+        $this->db->set('worker_1', $text_work1);
+        $this->db->set('worker_2', $text_work2);
+        $this->db->set('worker_3', $text_work3);
+        $this->db->insert('itx_m_machine');
 
         if ($this->db->affected_rows() > 0) {
             return true;
