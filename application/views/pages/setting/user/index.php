@@ -46,7 +46,7 @@
 				    	?>
 				    </td>
 				<?php } ?>
-			    <td class="text-center"><a onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
+			    <td class="text-center"><a class="click-btn" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
 			  </tr>
 			<?php } ?>
 	</tbody>

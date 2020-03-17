@@ -563,7 +563,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 }
 
 /* Set a style for the submit/login button */
-.form-container .btn {
+.form-container .btn  {
   background-color: #4CAF50;
   color: white;
   padding: 16px 20px;
@@ -572,6 +572,21 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   width: 49.8%;
   margin-bottom:10px;
   opacity: 0.8;
+}
+
+ .click-btn  {
+  background-color:#3399ff;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.click-btn:hover{
+  background: #b3d9ff;
+  color: #333;
+  font-weight: bold;
 }
 
 .form-container .cancel {
@@ -584,6 +599,8 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   margin-bottom:10px;
   opacity: 0.8;
 }
+
+
 
 /* Add a red background color to the cancel button */
 .form-container .title {
