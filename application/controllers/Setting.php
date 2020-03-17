@@ -103,4 +103,22 @@ class Setting extends CI_Controller {
 		$this->load->view('pages/setting/line/index');
 	}
 
+	public function line_update()
+	{
+		if($this->model_machine->update()) {
+			echo json_encode('ok');
+		}else{
+			echo json_encode('failed');
+		}
+	}
+
+	public function line_add()
+	{
+		if($this->model_machine->add()) {
+			echo json_encode('ok');
+		}else{
+			echo json_encode('failed');
+		}
+	}
+
 }
