@@ -79,7 +79,7 @@
 	      <a href="<?php echo base_url(); ?>setting/upload_spk">Upload SPK</a>
 	      </div>
 	  </div>
-	  <a href="login.php">Logout</a>
+	  <a href="<?php echo base_url(); ?>login/logout">Logout</a>
 	</div>
 <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

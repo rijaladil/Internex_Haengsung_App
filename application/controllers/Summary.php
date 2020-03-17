@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Summary extends CI_Controller {
 
+    function __construct()
+    {
+        parent::__construct();
+        $this->check_isvalidated();
+    }
+
 	public function index()
 	{
         $data['text_date'] = $this->security->xss_clean($this->input->post('text_date'));
@@ -12,4 +18,13 @@ class Summary extends CI_Controller {
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/summary/index');
 	}
+
+    private function check_isvalidated()
+    {
+        if(! $this->session->userdata('loggin'))
+        {
+            redirect('login');
+        }
+    }
+
 }
