@@ -133,7 +133,7 @@ $(document).ready(function() {
 // setting-loss-time
 $(document).ready(function() {
     $('#setting-loss-time').DataTable({
-        "scrollY"       : "650px",
+        "scrollY"       : "550px",
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,

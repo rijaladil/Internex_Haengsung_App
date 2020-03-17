@@ -44,7 +44,7 @@
 				    <td class="text-center">
 				    	<?php
 				    		if ($level['id']==$key['levelId']) {
-				    			echo "Check";
+				    			echo "&#10004";
 				    		}
 				    	?>
 				    </td>
