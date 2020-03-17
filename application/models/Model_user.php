@@ -69,4 +69,28 @@ class Model_user extends CI_Model
             return false;
         }
     }
+
+    public function validate(){
+        $nip = $this->security->xss_clean($this->input->post('nip'));
+        $password = sha1($this->security->xss_clean($this->input->post('password')));
+
+        $this->db->from('itx_m_user');
+        $this->db->where('itx_m_user.nip', $nip);
+        $query=$this->db->get();
+        $row = $query->row();
+
+        if($query->num_rows() == 1 && ($password == $row->password))
+        {
+            $data = array(
+                'id_user'   => $row->nip,
+                'loggin'    => TRUE
+            );
+            $this->session->set_userdata($data);
+            redirect('summary', 'refresh');
+        }else{
+            redirect("login?msg=<strong>Oh snap!</strong> <br>Password yang anda masukan tidak benar.", 'refresh');
+        }
+
+    }
+
 }

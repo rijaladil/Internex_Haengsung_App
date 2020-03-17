@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Setting extends CI_Controller {
 
+    function __construct()
+    {
+        parent::__construct();
+        $this->check_isvalidated();
+    }
+
+    private function check_isvalidated()
+    {
+        if(! $this->session->userdata('loggin'))
+        {
+            redirect('login');
+        }
+    }
+
 	public function upload_spk()
 	{
 		$this->load->view('template/header/index');
