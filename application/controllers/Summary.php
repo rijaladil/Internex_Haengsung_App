@@ -11,12 +11,6 @@ class Summary extends CI_Controller {
 
 	public function index()
 	{
-        var_dump($this->session->userdata('level'));
-        if (in_array($this->session->userdata('level'), array(1,2,3))) {
-            var_dump('ada');
-        }else{
-            var_dump('gada');
-        }
         $data['text_date'] = $this->security->xss_clean($this->input->post('text_date'));
         $data['data'] = $this->model_master_plan_qty->get_summary();
         $data['data_dept'] = $this->model_department->get_all();
@@ -31,7 +25,7 @@ class Summary extends CI_Controller {
             (
                 (!$this->session->userdata('loggin'))
                 ||
-                (in_array($this->session->userdata('level'), array(1,2,3)))
+                (!in_array($this->session->userdata('level'), array(1,2)))
             )
         {
             redirect('login');

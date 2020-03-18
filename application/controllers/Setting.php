@@ -14,7 +14,8 @@ class Setting extends CI_Controller {
         if
             (
                 (!$this->session->userdata('loggin'))
-                && $this->session->userdata('level') != 5
+                ||
+                (!in_array($this->session->userdata('level'), array(1)))
             )
         {
             redirect('login');

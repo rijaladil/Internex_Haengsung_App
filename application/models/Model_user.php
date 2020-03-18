@@ -9,6 +9,7 @@ class Model_user extends CI_Model
         $this->db->from('itx_m_user user');
         $this->db->join('itx_m_user_level level', 'level.id = user.user_level_id');
         $this->db->join('itx_m_department dept', 'dept.id = user.department_id');
+        $this->db->where_not_in('user.user_level_id', '1');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -19,7 +20,7 @@ class Model_user extends CI_Model
         $this->db->from('itx_m_user user');
         $this->db->join('itx_m_user_level level', 'level.id = user.user_level_id');
         $this->db->join('itx_m_department dept', 'dept.id = user.department_id');
-        $this->db->where('level.id', '1');
+        $this->db->where('level.id', '5');
         $query = $this->db->get();
         return $query->result_array();
     }

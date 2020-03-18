@@ -14,7 +14,8 @@ class Andon extends CI_Controller {
         if
             (
                 (!$this->session->userdata('loggin'))
-                && $this->session->userdata('level') != 5 || $this->session->userdata('level') != 4
+                ||
+                (!in_array($this->session->userdata('level'), array(1,2)))
             )
         {
             redirect('login');
