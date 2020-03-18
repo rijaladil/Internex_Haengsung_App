@@ -14,7 +14,7 @@
 	}
 </script>
 
-
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">Setting Line MC</div>
 	<!-- <button class="btn-slt-crd">Save</button> -->
@@ -58,7 +58,7 @@
 					 <td class="text-center" id="idValIp<?php echo $key['id']; ?>"><?php echo $key['ip_address']; ?></td>
 					 <td class="text-center"></td>
 					 <td class="text-center" id="idValRemark<?php echo $key['id']; ?>"><?php echo $key['remark']; ?></td>
-					 <td class="text-center"><a class="click-btn" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Edit</a></td>
+					 <td class="text-center"><a class="click-btn" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Update</a></td>
 				  </tr>
 			<?php } ?>
 		</tbody>
@@ -67,7 +67,7 @@
 <!-- UPDATE -->
 	<div class="form-popup" id="myForm1">
 		<div id="modalEdit" class="form-container">
-			<div class="title">Update</div>
+			<div class="title">Update Line MC</div>
 			<br>
 			Id :<input type="text" id="hid" name="" hidden="">
 			No.M/C :<input type="text" id="idInputEditMcNo" name="">
@@ -124,7 +124,7 @@
 <!-- +ADD -->
 	<div class="form-popup" id="myForm">
 		<div id="modalAdd" class="form-container">
-			<div class="title">+Add</div>
+			<div class="title">+Add Line MC</div>
 			<br>
 			No.M/C : <input type="text" id="idInputAddMcNo" name="">
 			Machine Name : <input type="text" id="idInputAddName" name="">
@@ -168,7 +168,7 @@
 			  </tr>
 			</table>
 
-			<button class="btn" href="#/" onclick="save()">Save</button>
+			<button class="btn" href="#/" onclick="save()">SAVE</button>
 			<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
 		</div>
 	</div>

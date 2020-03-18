@@ -7,8 +7,8 @@ $(document).ready(function() {
         "paging"        : true,
         "info"          : false,
         "pageLength"    : 25,
-        "lengthChange"  : false
-
+        "lengthChange"  : false,
+        "ordering"      : false
     });
 } );
 
@@ -19,7 +19,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"		: false,
         "paging"		: false,
-        "info"			: false
+        "info"			: false,
+        "ordering"      : false
     });
 } );
 
@@ -30,7 +31,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"		: false,
         "paging"		: false,
-        "info"			: false
+        "info"			: false,
+        "ordering"      : false
     });
 } );
 
@@ -53,7 +55,8 @@ $(document).ready(function() {
     $('#setting-working1').DataTable({
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 } );
 
@@ -62,7 +65,8 @@ $(document).ready(function() {
     $('#setting-working2').DataTable({
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 } );
 
@@ -74,7 +78,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -87,7 +92,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -96,35 +102,39 @@ $(document).ready(function() {
 // setting-quality
 $(document).ready(function() {
     $('#setting-quality1').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality2').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality3').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality4').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -137,7 +147,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );

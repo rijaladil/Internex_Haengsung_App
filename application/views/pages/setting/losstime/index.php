@@ -8,7 +8,7 @@
 	}
 </script>
 
-
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">Loss Time Setting</div>
 
@@ -41,7 +41,7 @@
 <!-- +ADD -->
 <div class="form-popup" id="myForm">
 	<div id="modalAdd"  class="form-container">
-		<div class="title">+Add</div>
+		<div class="title">+Add Loss Time</div>
 		<br>
 		Name : <input type="text" id="idName" name="">
 		<button class="btn" value="Save" onclick="save()">SAVE</button>
@@ -51,7 +51,7 @@
 <!-- UPDATE -->
 <div class="form-popup" id="myForm1">
 	<div id="modalEdit" class="form-container">
-		<div class="title">Update</div>
+		<div class="title">Update Loss Time</div>
 		<br>
 		<input type="text" id="idIdEdit" name="" hidden="">
 		Name : <input type="text" id="idNameEdit" name="">

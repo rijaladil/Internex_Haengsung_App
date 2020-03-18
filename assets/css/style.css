@@ -449,10 +449,11 @@ html, body{
 
 		.tblth{
 			background:#00b0f0 !important;
-			height: 5em;
+			height: 2em;
 			text-align:
 			center; color: white;
 			font-weight: bold;
+			font-size: 1.5em !important;
 		}
 
 		select {height:100%; width: 100%; border:0; background: transparent;}
@@ -516,14 +517,15 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 /*POPUP*/
 /* The popup form - hidden by default */ 
 .form-popup {
-  display: none;
-  bottom: 0;
-  right: 15px;
-  /*border: 3px solid #f1f1f1;*/
-  z-index: 9;
-  color: #333;
-  padding-top: 4em;
-
+	position: absolute;
+	background-color: rgba(153, 153, 153, 0.65);
+	display: none;
+	top: 0;
+	z-index: 9999;
+	color: #333;
+	height:100%;
+	width: 100%;
+	font-size: 16px;
 }
 
 /* Add styles to the form container */
@@ -532,9 +534,9 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   padding: 10px;
   background-color: white;
   border:3px solid #f1f1f1;
-  position: relative;
-  margin-top:10em;
-  margin: 0 auto;
+  position: absolute;
+  margin: auto;
+	top: 170; left: 0;right: 0;
 }
 
 /* Full-width input fields */
@@ -569,7 +571,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 49.8%;
+  width: 49.7%;
   margin-bottom:10px;
   opacity: 0.8;
 }
@@ -644,7 +646,3 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 	/*border-radius: 50%;*/
 	z-index: 999;
 }
-
-
-
-

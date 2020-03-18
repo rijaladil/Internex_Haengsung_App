@@ -23,7 +23,7 @@
 
 	  <?php foreach ($this->model_department->get_all() as $key) { ?>
 		  <div class="subnav">
-		    <button onclick="myFunction3()" class="subnavbtn"><?php echo $key['name']; ?></button>
+		    <button onclick="myFunction2()" class="subnavbtn"><?php echo $key['name']; ?></button>
 		    <div id="myDropdown3" class="subnav-content">
 		      <a href="<?php echo base_url(); ?>department/production_status/<?php echo $key['id']; ?>">Production Status</a>
 		      <a href="<?php echo base_url(); ?>department/actual_production/<?php echo $key['id']; ?>">Actual Production</a>
@@ -81,7 +81,7 @@
 	  </div>
 	  <a href="<?php echo base_url(); ?>login/logout">Logout</a>
 	</div>
-<script>
+<!-- <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("subnavbtn");
 var i;
@@ -162,6 +162,6 @@ for (i = 0; i < dropdown.length; i++) {
 	  document.getElementById("myDropdown6").style.display="none";
 	}
 </script>
-
+ -->
 </body>
 </html>

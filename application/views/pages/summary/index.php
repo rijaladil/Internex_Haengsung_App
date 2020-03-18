@@ -9,6 +9,7 @@
 		}
 	</style>
 
+	<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 	<form id="normal" method="post" action="<?php echo base_url(); ?>">
 		<div class="form">
 			<div class="left">Summary Actual Status</div>
@@ -28,7 +29,7 @@
 		</div>
 	</form>
 
-	<div class="body-data">
+	<div class="body-data" id="contents">
 		<table id="summary" class="display" width="100%" border="1">
 		<thead>
 		  <tr>

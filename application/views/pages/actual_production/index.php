@@ -1,3 +1,4 @@
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">Actual Production</div>
 	<label><div class="all" id="all">
@@ -34,11 +35,11 @@
 		<thead>
 		  <tr>
 		    <th rowspan="2" width="3%">No</th>
-		    <th rowspan="2" width="4%">MC No</th>
-		    <th rowspan="2" width="5%">MC Name</th>
+		    <th rowspan="2" width="3.9%">MC No</th>
+		    <th rowspan="2" width="4.8%">MC Name</th>
 		    <th rowspan="2" width="5%">Date</th>
-		    <th colspan="4" width="27%">Model Information</th>
-		    <th colspan="12" width="61%">Actual Production</th>
+		    <th colspan="4" width="27%" style="border-bottom: 1px solid white">Model Information</th>
+		    <th colspan="12" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
 		  </tr>
 		  <tr>
 		    <th>Part Number</th>
