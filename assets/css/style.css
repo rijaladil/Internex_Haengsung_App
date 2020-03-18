@@ -524,6 +524,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 	color: #333;
 	height:100%;
 	width: 100%;
+	font-size: 16px;
 }
 
 /* Add styles to the form container */
@@ -569,7 +570,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 49.8%;
+  width: 49.7%;
   margin-bottom:10px;
   opacity: 0.8;
 }
