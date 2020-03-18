@@ -449,10 +449,11 @@ html, body{
 
 		.tblth{
 			background:#00b0f0 !important;
-			height: 5em;
+			height: 2em;
 			text-align:
 			center; color: white;
 			font-weight: bold;
+			font-size: 1.5em !important;
 		}
 
 		select {height:100%; width: 100%; border:0; background: transparent;}

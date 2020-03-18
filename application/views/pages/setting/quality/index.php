@@ -58,7 +58,7 @@
 <!-- +ADD -->
 <div class="form-popup" id="myForm">
 	<div id="modalAdd" class="form-container">
-		<div class="title">+Add</div>
+		<div class="title">+Add Quality</div>
 		<br>
 		Problem item : 	<input type="text" id="idName" name="">
 		<input type="text" id="idDept" name="" hidden="">
@@ -70,7 +70,7 @@
 <!-- UPDATE -->
 <div class="form-popup" id="myForm1">
 	<div id="modalUpdate" class="form-container">
-		<div class="title">Update</div>
+		<div class="title">Update Quality</div>
 		<br>
 		Problem item : <input type="text" id="idUpdateName" name="">
 		<input type="text" id="idId" name="" hidden="">
