@@ -40,7 +40,7 @@
 	</thead>
 	<tbody id="idTableData">
 		<tr>
-			<td colspan="39">No Data</td>
+			<td colspan="39" >No Data</td>
 		</tr>
 	</tbody>
 	</table>

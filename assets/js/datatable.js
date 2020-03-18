@@ -102,8 +102,8 @@ $(document).ready(function() {
 // setting-quality
 $(document).ready(function() {
     $('#setting-quality1').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
         "info"          : false,
@@ -111,8 +111,8 @@ $(document).ready(function() {
     });
 
     $('#setting-quality2').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
         "info"          : false,
@@ -120,8 +120,8 @@ $(document).ready(function() {
     });
 
     $('#setting-quality3').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
         "info"          : false,
@@ -129,8 +129,8 @@ $(document).ready(function() {
     });
 
     $('#setting-quality4').DataTable({
-        "scrollY"       : "520px",
-        "scrollCollapse": true,
+        // "scrollY"       : "520px",
+        // "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
         "info"          : false,

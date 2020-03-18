@@ -68,7 +68,7 @@ class Department extends CI_Controller {
         foreach ($data as $key) {
         	# code...
 	        echo "
-
+	        
 				<tr>
 					<td class='ft'>".$no++."</td>
 					<td class='ft'>".$key['production_part_no']."</td>
