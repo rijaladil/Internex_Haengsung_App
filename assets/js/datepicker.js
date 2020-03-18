@@ -51,7 +51,7 @@
 
 
  $(document).ready(function() {
-   $('#datepickersum').datepicker({
+   $('#datepickersumxxx').datepicker({
      changeMonth: true,
      changeYear: true,
      dateFormat: 'yy-mm',
@@ -74,3 +74,15 @@
   });
 });
 
+
+        $(function() {
+            $('#datepickersum').datepicker( {
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy-mm',
+            onClose: function(dateText, inst) { 
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+            });
+        });

@@ -13,7 +13,7 @@
 	<div class="left">Production Status</div>
 	<div class="right">
 		<button class="btn-green">Excel</button>
-		<button class="btn-green2">Save</button>
+		<!-- <button class="btn-green2">Save</button> -->
 		<button class="btn-blue" onclick="getData()">Search</button>
 		<input type="text" id="datepickersum" name="text_date" value="<?php echo date('Y-m');?>"  autocomplete="off"/>
 	</div>

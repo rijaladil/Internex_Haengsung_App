@@ -7,8 +7,8 @@ $(document).ready(function() {
         "paging"        : true,
         "info"          : false,
         "pageLength"    : 25,
-        "lengthChange"  : false
-
+        "lengthChange"  : false,
+        "ordering"      : false
     });
 } );
 
@@ -19,7 +19,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"		: false,
         "paging"		: false,
-        "info"			: false
+        "info"			: false,
+        "ordering"      : false
     });
 } );
 
@@ -30,7 +31,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"		: false,
         "paging"		: false,
-        "info"			: false
+        "info"			: false,
+        "ordering"      : false
     });
 } );
 
@@ -53,7 +55,8 @@ $(document).ready(function() {
     $('#setting-working1').DataTable({
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 } );
 
@@ -62,7 +65,8 @@ $(document).ready(function() {
     $('#setting-working2').DataTable({
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 } );
 
@@ -74,7 +78,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -87,7 +92,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -100,7 +106,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality2').DataTable({
@@ -108,7 +115,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality3').DataTable({
@@ -116,7 +124,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
     $('#setting-quality4').DataTable({
@@ -124,7 +133,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
@@ -137,7 +147,8 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "searching"     : false,
         "paging"        : false,
-        "info"          : false
+        "info"          : false,
+        "ordering"      : false
     });
 
 } );
