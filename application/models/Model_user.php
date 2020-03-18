@@ -85,6 +85,7 @@ class Model_user extends CI_Model
         {
             $data = array(
                 'id_user'   => $row->nip,
+                'level'   => $row->user_level_id,
                 'loggin'    => TRUE
             );
             $this->session->set_userdata($data);

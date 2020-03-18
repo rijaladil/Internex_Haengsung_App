@@ -11,7 +11,11 @@ class Setting extends CI_Controller {
 
     private function check_isvalidated()
     {
-        if(! $this->session->userdata('loggin'))
+        if
+            (
+                (!$this->session->userdata('loggin'))
+                && $this->session->userdata('level') != 5
+            )
         {
             redirect('login');
         }

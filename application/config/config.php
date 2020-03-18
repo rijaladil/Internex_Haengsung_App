@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://localhost/internex_daebaek_app/';
-$config['base_url'] = 'http://192.168.3.116/internex_daebaek_app/';
+$config['base_url'] = 'http://192.168.3.8/internex_daebaek_app/';
 
 /*
 |--------------------------------------------------------------------------
