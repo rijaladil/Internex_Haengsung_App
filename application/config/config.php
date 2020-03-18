@@ -23,8 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/Internex_Daebaek_App/';
+=======
+>>>>>>> 9790f9d920af8dfd180ececf708a613444727a39
 // $config['base_url'] = 'http://localhost/internex_daebaek_app/';
+$config['base_url'] = 'http://192.168.3.116/internex_daebaek_app/';
 
 /*
 |--------------------------------------------------------------------------

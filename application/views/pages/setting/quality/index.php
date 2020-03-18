@@ -34,13 +34,15 @@
 					  <tr>
 					    <td class='text-center'><?php echo $i++; ?></td>
 					    <td id="idValName<?php echo $key2['id']; ?>"><?php echo $key2['name']; ?></td>
-					    <td class='text-center'><a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Update</a></td>
+					    <td class='text-center'>
+					    	<a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Update</a>
+					    </td>
 					  </tr>
 					<?php } ?>
 				</tbody>
 				<table>
 					  <tr>
-					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;"> 
+					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;">
 					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="add-btn" href="#">
 					  			+Add
 					  		</a>

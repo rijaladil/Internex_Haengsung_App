@@ -48,6 +48,7 @@ class Model_user extends CI_Model
 
     public function user_update()
     {
+        $hid = $this->security->xss_clean($this->input->post('hid'));
         $text_name = $this->security->xss_clean($this->input->post('text_name'));
         $text_nip = $this->security->xss_clean($this->input->post('text_nip'));
         $text_level = $this->security->xss_clean($this->input->post('text_level'));
@@ -57,10 +58,11 @@ class Model_user extends CI_Model
             $this->db->set('password', sha1($text_pass));
         }
         $this->db->set('editUser', 'System');
+        $this->db->set('nip', $text_nip);
         $this->db->set('name', $text_name);
         $this->db->set('user_level_id', $text_level);
         $this->db->set('department_id', $text_dept);
-        $this->db->where('nip', $text_nip);
+        $this->db->where('nip', $hid);
         $this->db->update('itx_m_user');
 
         if ($this->db->affected_rows() > 0) {

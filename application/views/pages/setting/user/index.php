@@ -92,6 +92,7 @@
 	<div id="modalUpdate" class="form-container">
 		<div class="title">Update User</div>
 		<br>
+		<input type="text" name="" id="textUpdateHid" hidden="">
 		NIP : 		<input type="text" name="" id="textUpdateNip">
 		Name : 		<input type="text" name="" id="textUpdateName">
 		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password">
@@ -153,6 +154,7 @@
 		var idDept = document.getElementById('textUpdateDept'+id).value;
 
 	  	document.getElementById("myForm1").style.display = "block";
+		document.getElementById('textUpdateHid').value = id;
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
 		document.getElementById('textUpdateLevel').value = document.getElementById('idValName'+id).innerHTML;
@@ -164,6 +166,7 @@
 
 	function update(id){
 		var nip = document.getElementById('textUpdateNip').value;
+		var hid = document.getElementById('textUpdateHid').value;
 		var name = document.getElementById('textUpdateName').value;
 		var level = $('#textUpdateLevel').val()
 		var dept = $('#textUpdateDept').val()
@@ -178,6 +181,7 @@
 		        // dataType: 'json',
 		        type: 'POST',
 		        data: {
+		            'hid': hid,
 		            'text_name': name,
 		            'text_nip': nip,
 		            'text_level': level,
