@@ -35,7 +35,7 @@
 					    <td class='text-center'><?php echo $i++; ?></td>
 					    <td id="idValName<?php echo $key2['id']; ?>"><?php echo $key2['name']; ?></td>
 					    <td class='text-center'>
-					    	<a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>);">Update</a>
+					    	<a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>, '<?php echo $key['name']; ?>');">Update</a>
 					    </td>
 					  </tr>
 					<?php } ?>
@@ -43,7 +43,7 @@
 				<table>
 					  <tr>
 					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;">
-					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>)" class="add-btn" href="#">
+					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>, '<?php echo $key['name']; ?>')" class="add-btn" href="#">
 					  			+Add
 					  		</a>
 					  	</td>
@@ -58,7 +58,7 @@
 <!-- +ADD -->
 <div class="form-popup" id="myForm">
 	<div id="modalAdd" class="form-container">
-		<div class="title">+Add Quality</div>
+		<div class="title">+Add Quality <font id="idTitleAdd"></font></div>
 		<br>
 		Problem item : 	<input type="text" id="idName" name="">
 		<input type="text" id="idDept" name="" hidden="">
@@ -70,7 +70,7 @@
 <!-- UPDATE -->
 <div class="form-popup" id="myForm1">
 	<div id="modalUpdate" class="form-container">
-		<div class="title">Update Quality</div>
+		<div class="title">Update Quality <font id="idTitleEdit"></font></div>
 		<br>
 		Problem item : <input type="text" id="idUpdateName" name="">
 		<input type="text" id="idId" name="" hidden="">
@@ -82,9 +82,10 @@
 
 
 	<script type="text/javascript">
-		function showModalAdd(id){
+		function showModalAdd(id, name){
 			document.getElementById("myForm").style.display = "block";
 			document.getElementById('idDept').value = id;
+			document.getElementById('idTitleAdd').innerHTML = name;
 		}
 
 		function save(){
@@ -110,10 +111,11 @@
 			}
 		}
 
-		function showModalEdit(id){
+		function showModalEdit(id, name){
 			document.getElementById("myForm1").style.display = "block";
 			document.getElementById('idId').value = id;
 			document.getElementById('idUpdateName').value = document.getElementById('idValName'+id).innerHTML;
+			document.getElementById('idTitleEdit').innerHTML = name;
 		}
 
 		function update(id){
