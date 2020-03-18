@@ -14,7 +14,7 @@
 	}
 </script>
 
-
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">Setting Line MC</div>
 	<!-- <button class="btn-slt-crd">Save</button> -->

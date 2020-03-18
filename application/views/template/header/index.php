@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/datepicker.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/loading.js"></script>
+
 
 <head>
 	<title>PT. DAE BAEK</title>

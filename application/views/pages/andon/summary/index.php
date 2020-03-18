@@ -82,7 +82,8 @@
 
 	<script src="<?php echo base_url(); ?>assets/others/Highcharts-7.2.1/code/highcharts.js"></script>
 	<script src="<?php echo base_url(); ?>assets/others/Highcharts-7.2.1/code/modules/series-label.js"></script>
-
+	
+	<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 	<form id="normal" method="post" action="<?php echo base_url(); ?>andon">
 		<div class="form">
 			<div class="left">Summary Actual Status</div>

@@ -7,7 +7,7 @@
 	  document.getElementById("myForm1").style.display = "none";
 	}
 </script>
-
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">Quality Setting</div>
 	<!-- <button class="green right">Add</button> -->

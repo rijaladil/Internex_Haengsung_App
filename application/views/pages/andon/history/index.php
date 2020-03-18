@@ -42,7 +42,7 @@
 
 
 	</style>
-
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 	<form id="normal" method="post" action="<?php echo base_url(); ?>andon/history">
 		<div class="form">
 			<div class="left">Andon History</div>

@@ -14,6 +14,7 @@
 	}
 </script>
 
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
 	<div class="left">User Setting</div>
 	<button class="red right"  onclick="openFormInput()">+ Add </button>

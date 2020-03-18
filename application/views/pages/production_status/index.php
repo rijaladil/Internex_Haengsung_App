@@ -8,7 +8,17 @@
 		    font-size: 15px;
 		}
 	</style>
+	<script type="text/javascript">
+		 $(document).ready(function(){
+		   $(".active2").css("background-color","red");
+		   $(".ac-border2").css("background-color","#4d4d4d");
+		   $(".ac-border2").css("color","#fff");
+		   $(".sc2").css("display", "block");
+		 });
+	</script>
 
+<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
+<!-- <div id="load"><img src="images/save.gif"></div> -->
 <div class="form">
 	<div class="left">Production Status</div>
 	<div class="right">
@@ -18,7 +28,7 @@
 		<input type="text" id="datepickersum" name="text_date" value="<?php echo date('Y-m');?>"  autocomplete="off"/>
 	</div>
 </div>
-<div class="body-data">
+<div class="body-data"  id="contents">
 	<table id="product-status" class="display" width="100%" border="0">
 	<thead>
 	  <tr>
@@ -47,6 +57,7 @@
 </div>
 
 <script type="text/javascript">
+
 	function getData() {
 		tgl = document.getElementById("datepickersum").value;
 		department = <?php echo $department; ?>;
