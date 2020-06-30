@@ -78,8 +78,8 @@ $db['default'] = array(
 
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '1234',
-	'database' => 'internex_daebaek_200311',
+	'password' => '',
+	'database' => 'internex_daebaek',
 
 	// 'hostname' => '192.168.88.200',
 	// 'username' => 'root',
