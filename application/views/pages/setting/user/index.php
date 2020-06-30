@@ -128,18 +128,18 @@
 		<br>
 		<input type="text" name="" id="textDeleteHid" hidden="">
 		NIP : 		<input type="text" name="" id="textDeleteNip" readonly>
-		Name : 		<input type="text" name="" id="textUpdateName" readonly>
-		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password" readonly>
+		Name : 		<input type="text" name="" id="textDeleteName" readonly>
+		Password :	<input type="text" name="" id="textDeletePassword" placeholder="Type here if you want to change the password" readonly>
 		Level :		<input type="text" id="textDeleteLevel" readonly>
 				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option> -->
 					<?php } ?>
-					
+
 		Dept:		<input type="text" id="textDeleteDept" readonly>
 				    <?php foreach ($this->model_department->get_all() as $level) { ?>
 						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option> -->
 					<?php } ?>
-					
+
 					<button class="cancel" onclick='Delete()'>DELETE</button>
 					<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
@@ -199,8 +199,8 @@
 	}
 
 	function showModalDelete(id){
-		// var idLevel = document.getElementById('textDeleteLevel'+id).value;
-		// var idDept = document.getElementById('textDeleteDept'+id).value;
+		var idLevel = document.getElementById('textDeleteLevel'+id).value;
+		var idDept = document.getElementById('textDeleteDept'+id).value;
 
 	  	document.getElementById("myFormDel").style.display = "block";
 		document.getElementById('textDeleteHid').value = id;
