@@ -576,7 +576,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   opacity: 0.8;
 }
 
- .click-btn  {
+ .click-btn-u{
   background-color:#3399ff;
   color: white;
   padding: 5px 15px;
@@ -585,8 +585,24 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   display: inline-block;
 }
 
-.click-btn:hover{
+.click-btn-u:hover{
   background: #b3d9ff;
+  color: #333;
+  font-weight: bold;
+}
+
+
+ .click-btn-d  {
+  background-color:red;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.click-btn-d:hover{
+  background: #ff6666;
   color: #333;
   font-weight: bold;
 }
@@ -607,6 +623,17 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   font-weight: bold;
 }
 
+.form-container .cancel-del {
+  background-color: #333;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 49%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
 .form-container .cancel {
   background-color: red;
   color: white;
@@ -617,6 +644,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
   margin-bottom:10px;
   opacity: 0.8;
 }
+
 
 /* Add a red background color to the cancel button */
 .form-container .title {

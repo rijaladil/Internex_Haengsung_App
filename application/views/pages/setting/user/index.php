@@ -6,11 +6,18 @@
 	  document.getElementById("myForm1").style.display = "block";
 	}
 
+	function showModalDelete(id) {
+	  document.getElementById("myFormDel").style.display = "block";
+	}
+
 	function closeFormInput() {
 	  document.getElementById("myForm").style.display = "none";
 	}
 	function closeModalEdit(id) {
 	  document.getElementById("myForm1").style.display = "none";
+	}
+	function closeModalDelete(id) {
+	  document.getElementById("myFormDel").style.display = "none";
 	}
 </script>
 
@@ -31,7 +38,7 @@
 	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 		    <th width="5%"><?php echo $level['name']; ?></th>
 		<?php } ?>
-	    <th width="5%">Option</th>
+	    <th width="9%">Option</th>
 	  </tr>
 	</thead>
 	<tbody id="idContent">
@@ -52,7 +59,10 @@
 				    	?>
 				    </td>
 				<?php } ?>
-			    <td class="text-center"><a class="click-btn" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a></td>
+			    <td class="text-center">
+			    	<a class="click-btn-u" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a>
+			    	<a class="click-btn-d" onclick="showModalDelete(<?php echo $key['nip']; ?>)" href="#">Delete</a>
+			    </td>
 			  </tr>
 			<?php } ?>
 	</tbody>
@@ -112,6 +122,29 @@
 	</div>
 </div>
 
+<div class="form-popup" id="myFormDel">
+	<div id="modalDelete" class="form-container">
+		<div class="title">Delete User</div>
+		<br>
+		<input type="text" name="" id="textdeleteHid" hidden="">
+		NIP : 		<input type="text" name="" id="textDeleteNip" readonly>
+		Name : 		<input type="text" name="" id="textUpdateName" readonly>
+		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password" readonly>
+		Level :		<input type="text" id="textUpdateLevel" readonly>
+				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
+						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option> -->
+					<?php } ?>
+					</input>
+		Dept:		<input type="text" id="textUpdateDept" readonly>
+				    <?php foreach ($this->model_department->get_all() as $level) { ?>
+						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option> -->
+					<?php } ?>
+					</input>
+					<button class="cancel" onclick='Delete()'>DELETE</button>
+					<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
+	</div>
+</div>
+
 </body>
 <script type="text/javascript">
 	function save(){
@@ -165,6 +198,21 @@
 		selectElement('textUpdateDept', idDept);
 	}
 
+	function showModalDelete(id){
+		var idLevel = document.getElementById('textDeleteLevel'+id).value;
+		var idDept = document.getElementById('textDeleteDept'+id).value;
+
+	  	document.getElementById("myFormDel").style.display = "block";
+		document.getElementById('textDeleteHid').value = id;
+		document.getElementById('textDeleteNip').value = id;
+		document.getElementById('textDeleteName').value = document.getElementById('idValName'+id).innerHTML;
+		document.getElementById('textDeleteLevel').value = document.getElementById('idValName'+id).innerHTML;
+		document.getElementById('textDeleteDept').value = document.getElementById('idValName'+id).innerHTML;
+
+		selectElement('textDeleteLevel', idLevel);
+		selectElement('textDeleteDept', idDept);
+	}
+
 	function update(id){
 		var nip = document.getElementById('textUpdateNip').value;
 		var hid = document.getElementById('textUpdateHid').value;
@@ -197,5 +245,6 @@
 
 		}
 	}
+
 </script>
 </html>

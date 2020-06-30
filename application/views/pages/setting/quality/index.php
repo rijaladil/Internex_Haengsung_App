@@ -6,6 +6,10 @@
 	function closeModalEdit() {
 	  document.getElementById("myForm1").style.display = "none";
 	}
+
+	function closeModalDelete() {
+	  document.getElementById("myFormDelete").style.display = "none";
+	}
 </script>
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
@@ -25,7 +29,7 @@
 				<thead>
 				  <tr>
 				    <th width="15%">No</th>
-				    <th width="65%">Problem item</th>
+				    <th width="50%">Problem item</th>
 				    <th width="%">Option</th>
 				  </tr>
 				</thead>
@@ -35,7 +39,8 @@
 					    <td class='text-center'><?php echo $i++; ?></td>
 					    <td id="idValName<?php echo $key2['id']; ?>"><?php echo $key2['name']; ?></td>
 					    <td class='text-center'>
-					    	<a href="#" class="click-btn" onclick="showModalEdit(<?php echo $key2['id']; ?>, '<?php echo $key['name']; ?>');">Update</a>
+					    	<a href="#" class="click-btn-u" onclick="showModalEdit(<?php echo $key2['id']; ?>, '<?php echo $key['name']; ?>');">Update</a>
+					    	<a href="#" class="click-btn-d" onclick="showModalDelete(<?php echo $key2['id']; ?>, '<?php echo $key['name']; ?>');">Delete</a>
 					    </td>
 					  </tr>
 					<?php } ?>
@@ -78,6 +83,19 @@
 		<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 	</div>
 </div>
+
+<!-- DELETE -->
+<div class="form-popup" id="myFormDelete">
+	<div id="modalDelete" class="form-container">
+		<div class="title">Delete Quality <font id="idTitleEdit"></font></div>
+		<br>
+		Problem item : <input type="text" id="idUpdateName" name="">
+		<input type="text" id="idId" name="" hidden="" readonly>
+		<button class="cancel"  href="#" onclick="Delete()">DELETE</button>
+		<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
+	</div>
+</div>
+
 </body>
 
 
@@ -145,6 +163,15 @@
 
 			}
 		}
+
+
+			function showModalDelete(id, name){
+			document.getElementById("myFormDelete").style.display = "block";
+			document.getElementById('idId').value = id;
+			document.getElementById('idDeleteName').value = document.getElementById('idValName'+id).innerHTML;
+			document.getElementById('idTitleDelete').innerHTML = name;
+		}
+
 
 	</script>
 

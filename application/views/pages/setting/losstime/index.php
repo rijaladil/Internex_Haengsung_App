@@ -6,6 +6,11 @@
 	function closeModalEdit() {
 	  document.getElementById("myForm1").style.display = "none";
 	}
+
+	function closeModalDelete() {
+	  document.getElementById("myFormDelete").style.display = "none";
+	}
+
 </script>
 
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
@@ -22,7 +27,7 @@
 			  <tr>
 				 <th width="5%">No</th>
 				 <th width="">Loss Time item</th>
-				 <th width="10%">Option</th>
+				 <th width="20%">Option</th>
 			  </tr>
 			 </thead>
 			 <tbody id="idContent">
@@ -30,7 +35,10 @@
 					  <tr>
 						 <td class="text-center"><?php echo $i++; ?></td>
 						 <td id="idName<?php echo $key['id']; ?>"><?php echo $key['name']; ?></td>
-						 <td class="text-center"><a class="click-btn"  href="#" onclick="edit(<?php echo $key['id']; ?>)">Update</a></td>
+						 <td class="text-center">
+						 	<a class="click-btn-u"  href="#" onclick="edit(<?php echo $key['id']; ?>)">Update</a>
+						 	<a class="click-btn-d"  href="#" onclick="Delete(<?php echo $key['id']; ?>)">Delete</a>
+						 </td>
 					  </tr>
 			 	<?php } ?>
 			</tbody>
@@ -48,6 +56,7 @@
 		<button class="cancel" onclick='closeModalAdd()'>CLOSE</button>
 	</div>
 </div>
+
 <!-- UPDATE -->
 <div class="form-popup" id="myForm1">
 	<div id="modalEdit" class="form-container">
@@ -57,6 +66,18 @@
 		Name : <input type="text" id="idNameEdit" name="">
 		<button class="btn" type="submit" id="" value="Update" onclick="update()">UPDATE</button>
 		<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
+	</div>
+</div>
+
+<!-- DELETE -->
+<div class="form-popup" id="myFormDelete">
+	<div id="modalDelete" class="form-container">
+		<div class="title">Delete Loss Time</div>
+		<br>
+		<input type="text" id="idIdDelete" name="" hidden="" readonly>
+		Name : <input type="text" id="idNameDelete" name="" readonly>
+		<button class="cancel" type="submit" id="" value="Update" onclick="update()">DELETE</button>
+		<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
 </div>
 </body>
@@ -104,6 +125,11 @@
 		document.getElementById('idNameEdit').value = document.getElementById('idName'+i).innerHTML;
 	}
 
+	function Delete(i){
+		document.getElementById("myFormDelete").style.display = "block";
+		document.getElementById('idIdDelete').value = i;
+		document.getElementById('idNameDelete').value = document.getElementById('idName'+i).innerHTML;
+	}
 	function update(){
 		var id = document.getElementById('idIdEdit').value;
 		var name = document.getElementById('idNameEdit').value;
