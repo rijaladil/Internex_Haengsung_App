@@ -12,6 +12,9 @@
 	function closeModalEdit(id) {
 	  document.getElementById("myForm1").style.display = "none";
 	}
+	function closeModalDelete(id) {
+	  document.getElementById("myFormDelete").style.display = "none";
+	}
 </script>
 
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
@@ -30,14 +33,14 @@
 			 <th width="10%">Process</th>
 			 <th width="4%">No.M/C  </th>
 			 <th width="13%">Machine  Name </th>
-			 <th width="10%">1 Shift Worker</th>
-			 <th width="10%">2 Shift Worker</th>
-			 <th width="10%">3 Shift Worker</th>
+			 <th width="8%">1 Shift Worker</th>
+			 <th width="8%">2 Shift Worker</th>
+			 <th width="8%">3 Shift Worker</th>
 			 <th width="10%">Operation of terminal</th>
 			 <th width="10%">Terminal  IP No</th>
 			 <th width="10%">Terminal S/W Update</th>
 			 <th width="10%">Remarks</th>
-			 <th width="5%">Option</th>
+			 <th width="11%">Option</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -58,7 +61,10 @@
 					 <td class="text-center" id="idValIp<?php echo $key['id']; ?>"><?php echo $key['ip_address']; ?></td>
 					 <td class="text-center"></td>
 					 <td class="text-center" id="idValRemark<?php echo $key['id']; ?>"><?php echo $key['remark']; ?></td>
-					 <td class="text-center"><a class="click-btn" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Update</a></td>
+					 <td class="text-center">
+					 	<a class="click-btn-u" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Update</a>
+					 	<a class="click-btn-d" href="#/" onclick="showModalDelete(<?php echo $key['id']; ?>)">Delete</a>
+					 </td>
 				  </tr>
 			<?php } ?>
 		</tbody>
@@ -121,6 +127,7 @@
 			<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 		</div>
 	</div>
+
 <!-- +ADD -->
 	<div class="form-popup" id="myForm">
 		<div id="modalAdd" class="form-container">
@@ -173,6 +180,63 @@
 		</div>
 	</div>
 
+<!-- DELETE -->
+	<div class="form-popup" id="myFormDelete">
+		<div id="modalDelete" class="form-container">
+			<div class="title">Delete Line MC</div>
+			<br>
+			Id :<input type="text" id="hid" name="" hidden="" readonly>
+			No.M/C :<input type="text" id="idInputDeleteMcNo" name="" readonly>
+			Machine Name : <input type="text" id="idInputDeleteName" name="" readonly>
+			Terminal IP No :<input type="text" id="idInputDeleteIp" name="" readonly>
+			Remarks :<input type="text" id="idInputDeleteRemark" name="" readonly>
+			<table width="100%" border="0">
+			  <tr>
+			    <td>
+			    Process:
+			    <select id="idInputDeleteDept" readonly>
+			       <!--  <option value="0">Pilih</option> -->
+			        <?php foreach ($this->model_department->get_all() as $key) { ?>
+			            <option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+			        <?php } ?>
+			    </select>
+			    </td>
+			    <td>
+			    1 Shift Worker :
+			    <input type="text"  id="idInputDeleteWorker1" readonly>
+			        <!-- <option value="0">Pilih</option> -->
+			        <?php foreach ($this->model_user->get_op() as $key) { ?>
+			            <!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
+			        <?php } ?>
+			
+			   </td>
+			  </tr>
+			  <tr>
+			    <td>
+			    2 Shift Worker :
+			    <input type="text"  id="idInputDeleteWorker2" readonly>
+					<!-- <option value="0">Pilih</option> -->
+					<?php foreach ($this->model_user->get_op() as $key) { ?>
+						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
+					<?php } ?>
+				
+				</td>
+			    <td>
+			    3 Shift Worker :
+			    <input type="text"  id="idInputDeleteWorker3" readonly>
+					<!-- <option value="0">Pilih</option> -->
+					<?php foreach ($this->model_user->get_op() as $key) { ?>
+						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
+					<?php } ?>
+				
+				</td>
+			  </tr>
+			</table>
+
+			<button class="cancel"  href="#/" onclick="Delete()">DELETE</button>
+			<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
+		</div>
+	</div>
 
 
 <script type="text/javascript">
@@ -196,6 +260,23 @@
 		selectElement('idInputEditWorker1', idWork1);
 		selectElement('idInputEditWorker2', idWork2);
 		selectElement('idInputEditWorker3', idWork3);
+	}
+
+	function showModalDelete(id) {
+		document.getElementById("myFormDelete").style.display = "block";
+		document.getElementById('hid').value = id;
+		document.getElementById('idInputDeleteMcNo').value = document.getElementById('idValMcNo'+id).innerHTML;
+		document.getElementById('idInputDeleteName').value = document.getElementById('idValName'+id).innerHTML;
+		document.getElementById('idInputDeleteIp').value = document.getElementById('idValIp'+id).innerHTML;
+		document.getElementById('idInputDeleteRemark').value = document.getElementById('idValRemark'+id).innerHTML;
+		var idDept = document.getElementById('idInputDeleteDept'+id).value;
+		var idWork1 = document.getElementById('idValWorker1'+id).value;
+		var idWork2 = document.getElementById('idValWorker2'+id).value;
+		var idWork3 = document.getElementById('idValWorker3'+id).value;
+		selectElement('idInputDeleteDept', idDept);
+		selectElement('idInputDeleteWorker1', idWork1);
+		selectElement('idInputDeleteWorker2', idWork2);
+		selectElement('idInputDeleteWorker3', idWork3);
 	}
 
 	function selectElement(id, valueToSelect) {
