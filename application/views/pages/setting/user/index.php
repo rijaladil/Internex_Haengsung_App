@@ -199,8 +199,8 @@
 	}
 
 	function showModalDelete(id){
-		var idLevel = document.getElementById('textDeleteLevel'+id).value;
-		var idDept = document.getElementById('textDeleteDept'+id).value;
+		// var idLevel = document.getElementById('textDeleteLevel'+id).value;
+		// var idDept = document.getElementById('textDeleteDept'+id).value;
 
 	  	document.getElementById("myFormDel").style.display = "block";
 		document.getElementById('textDeleteHid').value = id;
