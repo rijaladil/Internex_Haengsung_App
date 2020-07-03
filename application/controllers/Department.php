@@ -151,4 +151,9 @@ class Department extends CI_Controller {
 		$this->actual_production($department);
 		// redirect('department/actual_production/'.$department);
 	}
+
+	function actual_download() {
+		$this->load->view('pages/actual_production/download');
+	}
+
 }

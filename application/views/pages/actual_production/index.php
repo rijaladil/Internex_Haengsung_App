@@ -18,7 +18,7 @@
 	</div></label>
 	<div class="right">
 		<form id="normal" method="post" action="<?php echo base_url(); ?>department/actual_production/<?php echo $dept; ?>">
-			<button class="btn-green">Excel</button>
+			<a href="<?php echo base_url(); ?>department/actual_download/<?php echo $dept; ?>" target="_blank" class="btn-green">Excel</a>
 			<button class="btn-green2" onclick="saveMc()" form="cek">Save</button>
 			<button class="btn-blue" type="submit" form="normal">Search</button>
 			<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
