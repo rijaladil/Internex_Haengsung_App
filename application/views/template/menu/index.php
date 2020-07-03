@@ -73,6 +73,7 @@
 	    <div id="myDropdown7" class="subnav-content">
 	      <a href="<?php echo base_url(); ?>setting/working">Working setting</a>
 	      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
+	      <a href="<?php echo base_url(); ?>setting/operator">Operator setting</a>
 	      <a href="<?php echo base_url(); ?>setting/quality">Quality setting</a>
 	      <a href="<?php echo base_url(); ?>setting/losstime">Loss Time setting</a>
 	      <a href="<?php echo base_url(); ?>setting/line">Line/MC setting</a>
