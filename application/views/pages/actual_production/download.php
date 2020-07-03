@@ -22,13 +22,13 @@
 
         // title
             // Company Name
-            $this->excel->getActiveSheet()->setCellValue('A1', 'Daebaek');
+            $this->excel->getActiveSheet()->setCellValue('A1', 'PT Daebaek');
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
 
-        $filename= 'Smart Andon - JJS - History - '.date('Ymdhis').'.xls'; //save our workbook as this file name
+        $filename= 'Smart Andon - '.date('Ymdhis').'.xls'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
