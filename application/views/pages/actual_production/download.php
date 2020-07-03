@@ -2,15 +2,15 @@
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
-        $this->excel->getActiveSheet()->setTitle('Realtime');
+        $this->excel->getActiveSheet()->setTitle('Actual Production');
 
         // design
-        $this->excel->getActiveSheet()->getStyle("A1:Z1000")->applyFromArray(
+        $this->excel->getActiveSheet()->getStyle("A6:AS500")->applyFromArray(
             array(
                 'borders' => array(
                     'allborders' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN,
-                        'color' => array('rgb' => 'ffffff')
+                        'style' => PHPExcel_Style_Border::BORDER_THIN, PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                       
                     )
                 )
             )
@@ -22,13 +22,126 @@
 
         // title
             // Company Name
-            $this->excel->getActiveSheet()->setCellValue('A1', 'PT Daebaek');
-            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
-            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->setCellValue('A1', 'PT DAE BAEK');
+            $this->excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(26);
+            $this->excel->getActiveSheet()->getStyle('A1:AS6')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
+             // Judul
+            $this->excel->getActiveSheet()->setCellValue('A2','ACTUAL PRODUCTION');
+            $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(20);
+            $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
-        $filename= 'Smart Andon - '.date('Ymdhis').'.xls'; //save our workbook as this file name
+            // Date
+            $this->excel->getActiveSheet()->setCellValue('A3', date('Y-m-d')." to ". date('Y-m-d'));
+            $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(16);
+            $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+        // header
+            $this->excel->getActiveSheet()->setCellValue('A6', 'No');
+            $this->excel->getActiveSheet()->mergeCells('A6:A7');
+             $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+            $this->excel->getActiveSheet()->setCellValue('B6', 'MC No');
+            $this->excel->getActiveSheet()->mergeCells('B6:B7');
+            $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(13);
+            $this->excel->getActiveSheet()->setCellValue('C6', 'MC Name');
+            $this->excel->getActiveSheet()->mergeCells('C6:C7');
+            $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(13);
+            $this->excel->getActiveSheet()->setCellValue('D6', 'Date');
+            $this->excel->getActiveSheet()->mergeCells('D6:D7');
+            $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(13);
+              
+            // Model Information'
+            $this->excel->getActiveSheet()->setCellValue('E6', 'Model Information');
+            $this->excel->getActiveSheet()->mergeCells('E6:H6');
+            $this->excel->getActiveSheet()->setCellValue('E7', 'Part Number');
+            $this->excel->getActiveSheet()->setCellValue('F7', 'Model');
+            $this->excel->getActiveSheet()->setCellValue('G7', 'Description');
+            $this->excel->getActiveSheet()->setCellValue('H7', 'Capa/hour');
+
+            // Actual Production
+            $this->excel->getActiveSheet()->setCellValue('I6', 'Actual Production');
+            $this->excel->getActiveSheet()->mergeCells('I6:T6');
+            $this->excel->getActiveSheet()->setCellValue('I7','Plan Qty');
+            $this->excel->getActiveSheet()->setCellValue('J7','Actual Qty');
+            $this->excel->getActiveSheet()->setCellValue('K7','Balance');
+            $this->excel->getActiveSheet()->setCellValue('L7','Prod. %');
+            $this->excel->getActiveSheet()->setCellValue('M7','NG Qty');
+            $this->excel->getActiveSheet()->setCellValue('N7','Start');
+            $this->excel->getActiveSheet()->setCellValue('O7','End');
+            $this->excel->getActiveSheet()->setCellValue('P7','Work Time');
+            $this->excel->getActiveSheet()->setCellValue('Q7','Loss Time');
+            $this->excel->getActiveSheet()->setCellValue('R7','Operation %');
+            $this->excel->getActiveSheet()->setCellValue('S7','Shift');
+            $this->excel->getActiveSheet()->setCellValue('T7','Worker');
+
+            // Prod Qty 
+            $this->excel->getActiveSheet()->setCellValue('U6', 'Prod Qty');
+            $this->excel->getActiveSheet()->mergeCells('U6:U7');
+
+            // Result NG
+            $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
+            $this->excel->getActiveSheet()->mergeCells('V6:AK6');
+            $this->excel->getActiveSheet()->setCellValue('V7','1');
+            $this->excel->getActiveSheet()->setCellValue('W7','2');
+            $this->excel->getActiveSheet()->setCellValue('X7','3');
+            $this->excel->getActiveSheet()->setCellValue('Y7','4');
+            $this->excel->getActiveSheet()->setCellValue('Z7','5');
+            $this->excel->getActiveSheet()->setCellValue('AA7','6');
+            $this->excel->getActiveSheet()->setCellValue('AB7','7');
+            $this->excel->getActiveSheet()->setCellValue('AC7','8');
+            $this->excel->getActiveSheet()->setCellValue('AD7','9');
+            $this->excel->getActiveSheet()->setCellValue('AE7','10');
+            $this->excel->getActiveSheet()->setCellValue('AF7','11');
+            $this->excel->getActiveSheet()->setCellValue('AG7','12');
+            $this->excel->getActiveSheet()->setCellValue('AH7','13');
+            $this->excel->getActiveSheet()->setCellValue('AI7','14');
+            $this->excel->getActiveSheet()->setCellValue('AJ7','15');
+            $this->excel->getActiveSheet()->setCellValue('AK7','16');
+
+
+            // Lost Time
+            $this->excel->getActiveSheet()->setCellValue('AL6', 'Lost Time');
+            $this->excel->getActiveSheet()->mergeCells('AL6:AS6');
+            $this->excel->getActiveSheet()->setCellValue('AL7','1');
+            $this->excel->getActiveSheet()->setCellValue('AM7','2');
+            $this->excel->getActiveSheet()->setCellValue('AN7','3');
+            $this->excel->getActiveSheet()->setCellValue('AO7','4');
+            $this->excel->getActiveSheet()->setCellValue('AP7','5');
+            $this->excel->getActiveSheet()->setCellValue('AQ7','6');
+            $this->excel->getActiveSheet()->setCellValue('AR7','7');
+            $this->excel->getActiveSheet()->setCellValue('AS7','8');
+
+            // DATA 
+
+            // $i = 1;
+            // $rowStart = 8;
+            // // if ($line == 0) {
+
+            //     for ($xx=1; $xx < 5; $xx++) 
+            //     {
+
+            //         $data = $this->Model_department->get_department_by_id($tanggal, $xx);
+            //             foreach ($data as $key) 
+            //             {
+            //                 $id = "'".$key['id']."'";
+
+            //                 $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $key['line_id']);
+
+            //             $rowStart = $rowStart + 5;
+            //             }
+            //     }
+            // // }
+
+
+            $this->excel->getActiveSheet()->getStyle("A6:AS500")->applyFromArray(
+                array(
+                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                )
+            );
+
+        $filename= 'Smart Andon Daebaek - '.date('Ymdhis').'.xls'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
