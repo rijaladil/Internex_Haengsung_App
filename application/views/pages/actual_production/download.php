@@ -22,7 +22,7 @@
 
         // title
             // Company Name
-            $this->excel->getActiveSheet()->setCellValue('A1', 'PT. Chang Shin Indonesia');
+            $this->excel->getActiveSheet()->setCellValue('A1', 'Daebaek');
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
