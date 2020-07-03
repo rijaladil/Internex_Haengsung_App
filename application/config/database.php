@@ -78,7 +78,7 @@ $db['default'] = array(
 
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => '123asd456',
 	'database' => 'internex_daebaek',
 
 	// 'hostname' => '192.168.88.200',

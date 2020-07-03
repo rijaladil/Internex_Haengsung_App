@@ -231,6 +231,23 @@ html, body{
 
 			.form .right .btn-green:hover{background:#4dff9d}
 
+		.form .right a.btn-green {
+			float: right;
+			height:1.5em;
+			width:6em;
+			margin: -.2em;
+			background: #00b050;
+			border:1px solid #00b050;
+			margin-left: 1em;
+			color: white;
+			font-size: 1vw;
+			text-decoration: none;
+			text-align: center;
+			padding-top: .5em;
+			}
+
+			.form .right a.btn-green:hover{background:#4dff9d}
+
 		.form .right .btn-green2 {
 			float: right;
 			height:2em;
