@@ -42,25 +42,17 @@
 	</thead>
 	<tbody id="idContent">
 		<?php $i = 1; foreach ($data as $key) { ?>
-		<!-- <input hidden="" id="textUpdateLevel<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['levelId']; ?>">
-		<input hidden="" id="textUpdateDept<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['deptId']; ?>"> -->
+
 			<tr>
-		    	<td class="text-center"><?php echo $i++; ?></td>
-			    <td class=""><?php echo $key['dept']; ?></td>
-			    <td class="text-center"><?php echo $key['nip']; ?></td>
-			    <td class="" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
-			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-				    <td class="text-center">
-				    	<?php
-				    		if ($level['id']==$key['levelId']) {
-				    			echo "&#10004";
-				    		}
-				    	?>
-				    </td>
-				<?php } ?>
+		    	<td class="text-center"></td>
+			    <td class=""></td>
+			    <td class="text-center"></td>
+			    <td class=""></td>
+				<td class="text-center"></td>
+				<td class="text-center"></td>
 			    <td class="text-center">
-			    	<a class="click-btn-u" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a>
-			    	<a class="click-btn-d" onclick="showModalDelete(<?php echo $key['nip']; ?>)" href="#">Delete</a>
+			    	<a class="click-btn-u" onclick="" href="#">Update</a>
+			    	<a class="click-btn-d" onclick="" href="#">Delete</a>
 			    </td>
 			  </tr>
 			<?php } ?>
@@ -72,7 +64,7 @@
 <!-- <div id="modal" hidden=""> -->
 <div class="form-popup" id="myForm">
 	<div id="modal" class="form-container">
-		<div class="title">+Add User </div>
+		<div class="title">+Add Opeartor </div>
 		<br>
 
 		Name : 		<input type="text" name="" id="textName">
