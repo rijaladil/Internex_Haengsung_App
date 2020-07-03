@@ -64,7 +64,7 @@
 <!-- <div id="modal" hidden=""> -->
 <div class="form-popup" id="myForm">
 	<div id="modal" class="form-container">
-		<div class="title">+Add User </div>
+		<div class="title">+Add Opeartor </div>
 		<br>
 
 		Name : 		<input type="text" name="" id="textName">
