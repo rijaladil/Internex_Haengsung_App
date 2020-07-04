@@ -3,6 +3,7 @@
 class Model_losstime extends CI_Model
 {
 
+    // ambil losstime
     public function get_loss_by_qtyId($id)
     {
         $this->db->select('losstime_cat_id, SUM(TIMESTAMPDIFF(SECOND, start_time, finish_time)) as losstime');

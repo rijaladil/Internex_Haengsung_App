@@ -141,6 +141,7 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
+    // ini buat ambil NG
     public function get_ng_by_qtyId($id)
     {
         $this->db->select('machine_problem_id, qty_ng');
