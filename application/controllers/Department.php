@@ -154,6 +154,8 @@ class Department extends CI_Controller {
 
 	function actual_download($department, $start, $end) {
         $data['data'] = $this->model_master_plan->get_by_dept_id($department, $start, $end);
+        $data['start_date'] = $start;
+        $data['end_date'] = $end;
 		$this->load->view('pages/actual_production/download', $data);
 	}
 

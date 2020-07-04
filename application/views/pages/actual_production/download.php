@@ -36,7 +36,7 @@
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
             // Date
-            $this->excel->getActiveSheet()->setCellValue('A3', date('Y-m-d')." to ". date('Y-m-d'));
+            $this->excel->getActiveSheet()->setCellValue('A3', $start_date." to ". $end_date);
             $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(16);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
