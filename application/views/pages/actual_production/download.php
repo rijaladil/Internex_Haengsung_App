@@ -127,6 +127,45 @@
             $this->excel->getActiveSheet()->setCellValue('D'.$rowStart, $key['date']);
             $this->excel->getActiveSheet()->setCellValue('E'.$rowStart, $key['production_part_no']);
             $this->excel->getActiveSheet()->setCellValue('F'.$rowStart, $key['model']);
+            $this->excel->getActiveSheet()->setCellValue('G'.$rowStart, $key['description']);
+            $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, $key['capaHour']);
+            $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, $key['planQty']);
+            $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, (rupiah0dec($key['actual']-$key['ng'])));
+            $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, (rupiah0dec($key['actual']-$key['ng']-$key['planQty'])));
+            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100)));
+            $this->excel->getActiveSheet()->setCellValue('M'.$rowStart, ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']));
+            $this->excel->getActiveSheet()->setCellValue('N'.$rowStart, $key['start']);
+            $this->excel->getActiveSheet()->setCellValue('O'.$rowStart, ($key['finish'] == '00/00/00 00:00') ? '-' : $key['finish']);
+            $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)));
+            $this->excel->getActiveSheet()->setCellValue('Q'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('R'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['-']);
+            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $key['-']);
+            $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('V'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('W'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('X'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('Y'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('Z'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AA'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AB'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AC'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AD'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AE'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AF'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AG'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AH'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AI'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AJ'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AK'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AM'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AN'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AO'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AP'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AQ'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AR'.$rowStart, $key['']);
+            $this->excel->getActiveSheet()->setCellValue('AS'.$rowStart, $key['']);
             $rowStart++;
             $i++;
         }
@@ -150,19 +189,19 @@
         $objWriter->save('php://output');
 
 
-        // if ($dateStart <> '') {
-        //     $this->db->where('qty.date >= ', $dateStart);
-        // }else{
-        //     $this->db->where('qty.date = ', date('Y-m-d'));
-        // }
+    function rupiah2dec($total) {
+        if ($total == 0) {
+            return "0";
+        }else{
+            return number_format($total,2,',','.');
+        }
+    }
 
-        // if ($dateEnd <> '') {
-        //     $this->db->where('qty.date <= ', $dateEnd);
-        // }else{
-        //     $this->db->where('qty.date = ', date('Y-m-d'));
-        // }
-
-        // $query = $this->db->get();
-        // return $query->result_array();
-
+    function rupiah0dec($total) {
+        if ($total == 0) {
+            return "0";
+        }else{
+            return number_format($total,0,',','.');
+        }
+    } 
 ?>
