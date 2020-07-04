@@ -1,4 +1,6 @@
+
 <?php
+
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -114,25 +116,24 @@
             $this->excel->getActiveSheet()->setCellValue('AS7','8');
 
             // DATA 
+        $i = 1;
+        $rowStart = 6;
+       
 
-            // $i = 1;
-            // $rowStart = 8;
-            // // if ($line == 0) {
+            for ($xx=1; $xx < 5; $xx++) {
 
-            //     for ($xx=1; $xx < 5; $xx++) 
-            //     {
+               
+                $data = $this->model_department->get_all($id, $xx);
+                    foreach ($data as $key) {
+                        $id = "'".$key['id']."'";
 
-            //         $data = $this->Model_department->get_department_by_id($tanggal, $xx);
-            //             foreach ($data as $key) 
-            //             {
-            //                 $id = "'".$key['id']."'";
 
-            //                 $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $key['line_id']);
+                         $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $key['mcName']);
 
-            //             $rowStart = $rowStart + 5;
-            //             }
-            //     }
-            // // }
+                        $rowStart = $rowStart + 5;
+                    }
+            }
+        
 
 
             $this->excel->getActiveSheet()->getStyle("A6:AS500")->applyFromArray(
@@ -151,5 +152,21 @@
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
+
+        
+        // if ($dateStart <> '') {
+        //     $this->db->where('qty.date >= ', $dateStart);
+        // }else{
+        //     $this->db->where('qty.date = ', date('Y-m-d'));
+        // }
+
+        // if ($dateEnd <> '') {
+        //     $this->db->where('qty.date <= ', $dateEnd);
+        // }else{
+        //     $this->db->where('qty.date = ', date('Y-m-d'));
+        // }
+
+        // $query = $this->db->get();
+        // return $query->result_array();
 
 ?>
