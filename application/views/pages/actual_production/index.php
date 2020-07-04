@@ -18,7 +18,8 @@
 	</div></label>
 	<div class="right">
 		<form id="normal" method="post" action="<?php echo base_url(); ?>department/actual_production/<?php echo $dept; ?>">
-			<a href="<?php echo base_url(); ?>department/actual_download/<?php echo $dept; ?>" target="_blank" class="btn-green">Excel</a>
+			<!-- <a href="#" class="btn-green">Excel</a> -->
+			<button class="btn-green2" onclick="downloadExcel()" form="cek">Excel</button>
 			<button class="btn-green2" onclick="saveMc()" form="cek">Save</button>
 			<button class="btn-blue" type="submit" form="normal">Search</button>
 			<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
@@ -413,6 +414,14 @@
 			});
 		}
 
+    }
+
+    function downloadExcel(){
+    	console.log('data');
+		dep   = <?php echo $dept; ?>;
+		start = document.getElementById('datepicker1').value;
+		end   = document.getElementById('datepicker2').value;
+    	window.open("<?php echo base_url(); ?>department/actual_download/"+dep+'/'+start+'/'+end);
     }
 
 

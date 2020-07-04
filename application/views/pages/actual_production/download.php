@@ -12,7 +12,7 @@
                 'borders' => array(
                     'allborders' => array(
                         'style' => PHPExcel_Style_Border::BORDER_THIN, PHPExcel_Style_Alignment::VERTICAL_CENTER,
-                       
+
                     )
                 )
             )
@@ -53,7 +53,7 @@
             $this->excel->getActiveSheet()->setCellValue('D6', 'Date');
             $this->excel->getActiveSheet()->mergeCells('D6:D7');
             $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(13);
-              
+
             // Model Information'
             $this->excel->getActiveSheet()->setCellValue('E6', 'Model Information');
             $this->excel->getActiveSheet()->mergeCells('E6:H6');
@@ -78,7 +78,7 @@
             $this->excel->getActiveSheet()->setCellValue('S7','Shift');
             $this->excel->getActiveSheet()->setCellValue('T7','Worker');
 
-            // Prod Qty 
+            // Prod Qty
             $this->excel->getActiveSheet()->setCellValue('U6', 'Prod Qty');
             $this->excel->getActiveSheet()->mergeCells('U6:U7');
 
@@ -115,32 +115,27 @@
             $this->excel->getActiveSheet()->setCellValue('AR7','7');
             $this->excel->getActiveSheet()->setCellValue('AS7','8');
 
-            // DATA 
+            // DATA
         $i = 1;
-        $rowStart = 6;
-       
+        $rowStart = 8;
 
-            for ($xx=1; $xx < 5; $xx++) {
+        foreach ($data as $key) {
+            $id = "'".$key['id']."'";
+            $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $i);
+            $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $key['mcNo']);
+            $this->excel->getActiveSheet()->setCellValue('C'.$rowStart, $key['mcName']);
+            $this->excel->getActiveSheet()->setCellValue('D'.$rowStart, $key['date']);
+            $this->excel->getActiveSheet()->setCellValue('E'.$rowStart, $key['production_part_no']);
+            $this->excel->getActiveSheet()->setCellValue('F'.$rowStart, $key['model']);
+            $rowStart++;
+            $i++;
+        }
 
-               
-                $data = $this->model_department->get_all($id, $xx);
-                    foreach ($data as $key) {
-                        $id = "'".$key['id']."'";
-
-
-                         $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $key['mcName']);
-
-                        $rowStart = $rowStart + 5;
-                    }
-            }
-        
-
-
-            $this->excel->getActiveSheet()->getStyle("A6:AS500")->applyFromArray(
-                array(
-                    'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
-                )
-            );
+        $this->excel->getActiveSheet()->getStyle("A6:AS500")->applyFromArray(
+            array(
+                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+            )
+        );
 
         $filename= 'Smart Andon Daebaek - '.date('Ymdhis').'.xls'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -151,9 +146,10 @@
         //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         //force user to download the Excel file without writing it to server's HD
+        ob_end_clean();
         $objWriter->save('php://output');
 
-        
+
         // if ($dateStart <> '') {
         //     $this->db->where('qty.date >= ', $dateStart);
         // }else{

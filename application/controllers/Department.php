@@ -152,8 +152,9 @@ class Department extends CI_Controller {
 		// redirect('department/actual_production/'.$department);
 	}
 
-	function actual_download() {
-		$this->load->view('pages/actual_production/download');
+	function actual_download($department, $start, $end) {
+        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $start, $end);
+		$this->load->view('pages/actual_production/download', $data);
 	}
 
 }
