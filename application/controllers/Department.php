@@ -159,4 +159,11 @@ class Department extends CI_Controller {
 		$this->load->view('pages/actual_production/download', $data);
 	}
 
+
+    function resultNg($id)
+    {	
+    	 $data['data'] = $this->model_master_plan_qty->get_ng_by_qtyId($id);
+    	 $this->load->view('pages/actual_production/download', $data);
+    }
+
 }
