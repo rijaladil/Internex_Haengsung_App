@@ -156,14 +156,11 @@ class Department extends CI_Controller {
         $data['data'] = $this->model_master_plan->get_by_dept_id($department, $start, $end);
         $data['start_date'] = $start;
         $data['end_date'] = $end;
+        // $data['dataNg'] = $this->model_master_plan_qty->get_ng_by_qtyId($id);
+        // $data['dataLoss'] = $this->model_losstime->get_loss_by_qtyId($id);
 		$this->load->view('pages/actual_production/download', $data);
 	}
 
 
-    function resultNg($id)
-    {	
-    	 $data['data'] = $this->model_master_plan_qty->get_ng_by_qtyId($id);
-    	 $this->load->view('pages/actual_production/download', $data);
-    }
 
 }

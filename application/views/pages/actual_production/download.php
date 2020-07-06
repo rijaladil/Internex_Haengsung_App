@@ -176,7 +176,7 @@
             $this->excel->getActiveSheet()->setCellValue('AJ'.$rowStart, $key['']);//Rng
             $this->excel->getActiveSheet()->setCellValue('AK'.$rowStart, $key['']);//Rng
 
-            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, $key['']);//losstime
+            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, $key['lostime']);//losstime
             $this->excel->getActiveSheet()->setCellValue('AM'.$rowStart, $key['']);//losstime
             $this->excel->getActiveSheet()->setCellValue('AN'.$rowStart, $key['']);//losstime
             $this->excel->getActiveSheet()->setCellValue('AO'.$rowStart, $key['']);//losstime
