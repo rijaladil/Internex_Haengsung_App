@@ -58,7 +58,7 @@
             $this->excel->getActiveSheet()->setCellValue('E6', 'Model Information');
             $this->excel->getActiveSheet()->mergeCells('E6:H6');
             $this->excel->getActiveSheet()->setCellValue('E7', 'Part Number');
-            $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(30);            
+            $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
             $this->excel->getActiveSheet()->setCellValue('F7', 'Model');
             $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
             $this->excel->getActiveSheet()->setCellValue('G7', 'Description');
@@ -97,44 +97,59 @@
             $this->excel->getActiveSheet()->mergeCells('U6:U7');
 
             // Result NG
-            $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
-            $this->excel->getActiveSheet()->mergeCells('V6:AK6');
-            $this->excel->getActiveSheet()->setCellValue('V7','1');
-            $this->excel->getActiveSheet()->setCellValue('W7','2');
-            $this->excel->getActiveSheet()->setCellValue('X7','3');
-            $this->excel->getActiveSheet()->setCellValue('Y7','4');
-            $this->excel->getActiveSheet()->setCellValue('Z7','5');
-            $this->excel->getActiveSheet()->setCellValue('AA7','6');
-            $this->excel->getActiveSheet()->setCellValue('AB7','7');
-            $this->excel->getActiveSheet()->setCellValue('AC7','8');
-            $this->excel->getActiveSheet()->setCellValue('AD7','9');
-            $this->excel->getActiveSheet()->setCellValue('AE7','10');
-            $this->excel->getActiveSheet()->setCellValue('AF7','11');
-            $this->excel->getActiveSheet()->setCellValue('AG7','12');
-            $this->excel->getActiveSheet()->setCellValue('AH7','13');
-            $this->excel->getActiveSheet()->setCellValue('AI7','14');
-            $this->excel->getActiveSheet()->setCellValue('AJ7','15');
-            $this->excel->getActiveSheet()->setCellValue('AK7','16');
+            // $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
+            // $this->excel->getActiveSheet()->mergeCells('V6:AK6');
+            // $this->excel->getActiveSheet()->setCellValue('V7','1');
+            // $this->excel->getActiveSheet()->setCellValue('W7','2');
+            // $this->excel->getActiveSheet()->setCellValue('X7','3');
+            // $this->excel->getActiveSheet()->setCellValue('Y7','4');
+            // $this->excel->getActiveSheet()->setCellValue('Z7','5');
+            // $this->excel->getActiveSheet()->setCellValue('AA7','6');
+            // $this->excel->getActiveSheet()->setCellValue('AB7','7');
+            // $this->excel->getActiveSheet()->setCellValue('AC7','8');
+            // $this->excel->getActiveSheet()->setCellValue('AD7','9');
+            // $this->excel->getActiveSheet()->setCellValue('AE7','10');
+            // $this->excel->getActiveSheet()->setCellValue('AF7','11');
+            // $this->excel->getActiveSheet()->setCellValue('AG7','12');
+            // $this->excel->getActiveSheet()->setCellValue('AH7','13');
+            // $this->excel->getActiveSheet()->setCellValue('AI7','14');
+            // $this->excel->getActiveSheet()->setCellValue('AJ7','15');
+            // $this->excel->getActiveSheet()->setCellValue('AK7','16');
+
+            $noColProb = 21;
+            $noRowProb = 7;
+            foreach ($data_problem as $prob) {
+                $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb, $prob['name']);
+
+                // foreach ($this->model_master_plan_qty->get_data_ng($key['id']) as $ng) {
+                //     $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb+1, $key['name']);
+                //     // $noColProb++;
+                // }
+
+                $noColProb++;
+                // $noRowProb++;
+
+            }
 
 
             // Lost Time
-            $this->excel->getActiveSheet()->setCellValue('AL6', 'Lost Time');
-            $this->excel->getActiveSheet()->mergeCells('AL6:AS6');
-            $this->excel->getActiveSheet()->setCellValue('AL7','1');
-            $this->excel->getActiveSheet()->setCellValue('AM7','2');
-            $this->excel->getActiveSheet()->setCellValue('AN7','3');
-            $this->excel->getActiveSheet()->setCellValue('AO7','4');
-            $this->excel->getActiveSheet()->setCellValue('AP7','5');
-            $this->excel->getActiveSheet()->setCellValue('AQ7','6');
-            $this->excel->getActiveSheet()->setCellValue('AR7','7');
-            $this->excel->getActiveSheet()->setCellValue('AS7','8');
+            // $this->excel->getActiveSheet()->setCellValue('AL6', 'Lost Time');
+            // $this->excel->getActiveSheet()->mergeCells('AL6:AS6');
+            // $this->excel->getActiveSheet()->setCellValue('AL7','1');
+            // $this->excel->getActiveSheet()->setCellValue('AM7','2');
+            // $this->excel->getActiveSheet()->setCellValue('AN7','3');
+            // $this->excel->getActiveSheet()->setCellValue('AO7','4');
+            // $this->excel->getActiveSheet()->setCellValue('AP7','5');
+            // $this->excel->getActiveSheet()->setCellValue('AQ7','6');
+            // $this->excel->getActiveSheet()->setCellValue('AR7','7');
+            // $this->excel->getActiveSheet()->setCellValue('AS7','8');
 
             // DATA
         $i = 1;
         $rowStart = 8;
 
         foreach ($data as $key) {
-            $id = "'".$key['id']."'";
+            // $id = "'".$key['id']."'";
             $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $i);
             $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $key['mcNo']);
             $this->excel->getActiveSheet()->setCellValue('C'.$rowStart, $key['mcName']);
@@ -153,37 +168,58 @@
             $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('Q'.$rowStart, ($key['losstime'] == 0) ? '' : sprintf("%02d",floor($key['losstime'] / 3600)) . ':' . sprintf("%02d",floor($key['losstime'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['losstime'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('R'.$rowStart, ($key['status_close'] == 1 && $key['working_time'] > 0 || $key['status_close'] == 2 && $key['working_time'] > 0) ? (number_format((float)(($key['working_time']/($key['working_time']+$key['losstime']))*100), 2, '.', ''))  : '0' );//Opeation %
-            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['-']);//Sift
-            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $key['-']);//Worker
+            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, '');//Sift
+            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, '');//Worker
 
-            
+
             $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, (rupiah0dec($key['actual']-$key['ng']))); //Prod Qty (diambil dari data aktual)
 
-            $this->excel->getActiveSheet()->setCellValue('V'.$rowStart, $key['idNg1']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('W'.$rowStart, $key['idNg2']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('X'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('Y'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('Z'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AA'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AB'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AC'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AD'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AE'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AF'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AG'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AH'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AI'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AJ'.$rowStart, $key['']);//Rng
-            $this->excel->getActiveSheet()->setCellValue('AK'.$rowStart, $key['']);//Rng
+            $this->excel->getActiveSheet()->setCellValue('V'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('W'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('X'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('Y'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('Z'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AA'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AB'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AC'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AD'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AE'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AF'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AG'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AH'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AI'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AJ'.$rowStart, '');//Rng
+            $this->excel->getActiveSheet()->setCellValue('AK'.$rowStart, '');//Rng
 
-            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, $key['lostime']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AM'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AN'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AO'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AP'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AQ'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AR'.$rowStart, $key['']);//losstime
-            $this->excel->getActiveSheet()->setCellValue('AS'.$rowStart, $key['']);//losstime
+            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AM'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AN'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AO'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AP'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AQ'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AR'.$rowStart, '');//losstime
+            $this->excel->getActiveSheet()->setCellValue('AS'.$rowStart, '');//losstime
+
+            $noColProb2 = 21;
+            $noRowProb2 = 8;
+            $added = 1;
+            foreach ($data_problem as $prob) {
+                // $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb, $key['name']);
+
+                // idQty = masterplan_qty_id
+                // mc_id
+                $ng = $this->model_result_ng->get_data_ng($prob['id'], $key['idQty'], $key['mc_id']);
+                foreach ($ng as $dtNg) {
+                    # code...
+                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb2,$noRowProb2, $dtNg['qty_ng']);
+                }
+
+                $noColProb2++;
+                $added++;
+
+            }
+
+
             $rowStart++;
             $i++;
         }
@@ -221,5 +257,5 @@
         }else{
             return number_format($total,0,',',',');
         }
-    } 
+    }
 ?>
