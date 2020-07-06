@@ -157,8 +157,7 @@ class Department extends CI_Controller {
 		$data['start_date'] = $start;
 		$data['end_date']   = $end;
 		$data['data_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
-        // $data['dataNg'] = $this->model_master_plan_qty->get_ng_by_qtyId($id);
-        // $data['dataLoss'] = $this->model_losstime->get_loss_by_qtyId($id);
+		$data['data_losstime'] = $this->model_losstime_category->get_all();
 		$this->load->view('pages/actual_production/download', $data);
 	}
 

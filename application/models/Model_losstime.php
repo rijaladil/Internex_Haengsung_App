@@ -12,5 +12,6 @@ class Model_losstime extends CI_Model
         $this->db->group_by('losstime_cat_id');
         $query = $this->db->get();
         return $query->result_array();
+        // return $query->row();
     }
 }

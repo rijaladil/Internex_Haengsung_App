@@ -97,52 +97,34 @@
             $this->excel->getActiveSheet()->mergeCells('U6:U7');
 
             // Result NG
-            // $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
-            // $this->excel->getActiveSheet()->mergeCells('V6:AK6');
-            // $this->excel->getActiveSheet()->setCellValue('V7','1');
-            // $this->excel->getActiveSheet()->setCellValue('W7','2');
-            // $this->excel->getActiveSheet()->setCellValue('X7','3');
-            // $this->excel->getActiveSheet()->setCellValue('Y7','4');
-            // $this->excel->getActiveSheet()->setCellValue('Z7','5');
-            // $this->excel->getActiveSheet()->setCellValue('AA7','6');
-            // $this->excel->getActiveSheet()->setCellValue('AB7','7');
-            // $this->excel->getActiveSheet()->setCellValue('AC7','8');
-            // $this->excel->getActiveSheet()->setCellValue('AD7','9');
-            // $this->excel->getActiveSheet()->setCellValue('AE7','10');
-            // $this->excel->getActiveSheet()->setCellValue('AF7','11');
-            // $this->excel->getActiveSheet()->setCellValue('AG7','12');
-            // $this->excel->getActiveSheet()->setCellValue('AH7','13');
-            // $this->excel->getActiveSheet()->setCellValue('AI7','14');
-            // $this->excel->getActiveSheet()->setCellValue('AJ7','15');
-            // $this->excel->getActiveSheet()->setCellValue('AK7','16');
+            $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
+            $this->excel->getActiveSheet()->mergeCells('V6:AK6');
+
 
             $noColProb = 21;
             $noRowProb = 7;
             foreach ($data_problem as $prob) {
                 $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb, $prob['name']);
 
-                // foreach ($this->model_master_plan_qty->get_data_ng($key['id']) as $ng) {
-                //     $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb+1, $key['name']);
-                //     // $noColProb++;
-                // }
 
                 $noColProb++;
-                // $noRowProb++;
-
             }
 
 
             // Lost Time
-            // $this->excel->getActiveSheet()->setCellValue('AL6', 'Lost Time');
-            // $this->excel->getActiveSheet()->mergeCells('AL6:AS6');
-            // $this->excel->getActiveSheet()->setCellValue('AL7','1');
-            // $this->excel->getActiveSheet()->setCellValue('AM7','2');
-            // $this->excel->getActiveSheet()->setCellValue('AN7','3');
-            // $this->excel->getActiveSheet()->setCellValue('AO7','4');
-            // $this->excel->getActiveSheet()->setCellValue('AP7','5');
-            // $this->excel->getActiveSheet()->setCellValue('AQ7','6');
-            // $this->excel->getActiveSheet()->setCellValue('AR7','7');
-            // $this->excel->getActiveSheet()->setCellValue('AS7','8');
+            $this->excel->getActiveSheet()->setCellValue('AL6', 'Lost Time');
+            $this->excel->getActiveSheet()->mergeCells('AL6:AS6');
+
+
+
+            $noColLoss =37;
+            $noRowLoss = 7;
+            foreach ($data_losstime as $loss) {
+                $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss,$noRowLoss, $loss['name']);
+
+                $noColLoss++;
+
+            }
 
             // DATA
         $i = 1;
@@ -174,48 +156,28 @@
 
             $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, (rupiah0dec($key['actual']-$key['ng']))); //Prod Qty (diambil dari data aktual)
 
-            $this->excel->getActiveSheet()->setCellValue('V'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('W'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('X'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('Y'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('Z'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AA'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AB'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AC'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AD'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AE'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AF'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AG'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AH'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AI'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AJ'.$rowStart, '');//Rng
-            $this->excel->getActiveSheet()->setCellValue('AK'.$rowStart, '');//Rng
 
-            $this->excel->getActiveSheet()->setCellValue('AL'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AM'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AN'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AO'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AP'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AQ'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AR'.$rowStart, '');//losstime
-            $this->excel->getActiveSheet()->setCellValue('AS'.$rowStart, '');//losstime
 
             $noColProb2 = 21;
-            $added = 0;
             foreach ($data_problem as $prob) {
                 $ng = $this->model_result_ng->get_data_ng($prob['id'], $key['idQty'], $key['mc_id']);
-                // foreach ($ng as $dtNg) {
                     $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb2++,$rowStart, $ng->qty_ng);
-                // }
+                   
+            }
 
-                $added++;
-
+             $noColLoss2 = 37;
+            foreach ($data_losstime as $loss) {
+                $losst = $this->model_losstime->get_loss_by_qtyId($loss['id']);
+                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss2++,$rowStart, $losst->losstime);        
             }
 
 
             $rowStart++;
             $i++;
             $noColProb2++;
+            $noColLoss2++;
+             
+            
         }
 
         $this->excel->getActiveSheet()->getStyle("A6:AS1000")->applyFromArray(
