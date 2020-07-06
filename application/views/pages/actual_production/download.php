@@ -201,20 +201,13 @@
             $this->excel->getActiveSheet()->setCellValue('AS'.$rowStart, '');//losstime
 
             $noColProb2 = 21;
-            $noRowProb2 = 8;
-            $added = 1;
+            $added = 0;
             foreach ($data_problem as $prob) {
-                // $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb, $key['name']);
-
-                // idQty = masterplan_qty_id
-                // mc_id
                 $ng = $this->model_result_ng->get_data_ng($prob['id'], $key['idQty'], $key['mc_id']);
-                foreach ($ng as $dtNg) {
-                    # code...
-                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb2,$noRowProb2, $dtNg['qty_ng']);
-                }
+                // foreach ($ng as $dtNg) {
+                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb2++,$rowStart, $ng->qty_ng);
+                // }
 
-                $noColProb2++;
                 $added++;
 
             }
@@ -222,6 +215,7 @@
 
             $rowStart++;
             $i++;
+            $noColProb2++;
         }
 
         $this->excel->getActiveSheet()->getStyle("A6:AS1000")->applyFromArray(
