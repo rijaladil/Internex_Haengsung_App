@@ -46,7 +46,7 @@
         // header
             $this->excel->getActiveSheet()->setCellValue('A6', 'No');
             $this->excel->getActiveSheet()->mergeCells('A6:A7');
-            
+
             $this->excel->getActiveSheet()->setCellValue('B6', 'Part No');
             $this->excel->getActiveSheet()->mergeCells('B6:B7');
             $this->excel->getActiveSheet()->setCellValue('C6', 'Model');
@@ -65,7 +65,7 @@
             $this->excel->getActiveSheet()->mergeCells('AM6:AM7');
 
             // Model Information'
-  
+
         $this->excel->getActiveSheet()->getStyle("A6:AM1000")->applyFromArray(
             array(
                 'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
@@ -85,5 +85,5 @@
         $objWriter->save('php://output');
 
 
-    } 
+    // }
 ?>

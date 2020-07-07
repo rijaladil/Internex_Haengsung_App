@@ -37,7 +37,7 @@
 		    <th rowspan="2" width="150">Process</th>
 		    <th rowspan="2" width="50">No.MC</th>
 		    <th rowspan="2" width="200">Machine Name</th>
-		    <th colspan="4" width="400">Production Status</th>
+		    <th colspan="5" width="400">Production Status</th>
 		    <th colspan="2">Result NG</th>
 		    <th colspan="3">Operation</th>
 		    <th colspan="2">Andon</th>
@@ -45,6 +45,7 @@
 		  <tr>
 		    <th>Last Month Actual</th>
 		    <th>This Month Actual</th>
+		    <th>Planning</th>
 		    <th>Balance Qty</th>
 		    <th>%</th>
 		    <th>NG Qty</th>
@@ -66,19 +67,22 @@
 				$totLossTime	= 0;
 				$totAndonTimes	= 0;
 				$totAndonTime	= 0;
+				$totPlanning	= 0;
 			?>
 			<?php $i = 1; foreach ($data as $key) { ?>
 			<?php
-				$totActualLast		= ($key['qtyActualLast']-$key['qtyNgLast']) + $totActualLast;
-				$totActual		= ($key['qtyActual']-$key['qtyNg']) + $totActual;
-				$totBallance	= (($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']))+$totBallance;
-				$totNg			= $key['qtyNg'] + $totNg;
-				$totWorkTime	= $key['workingTime'] + $totWorkTime;
-				$totLossTime	= $key['lossTime'] + $totLossTime;
-				$totAndonTimes	= $key['andonTimes'] + $totAndonTimes;
-				$totAndonTime	= $key['andonTime'] + $totAndonTime;
+				$totActualLast = ($key['qtyActualLast']-$key['qtyNgLast']) + $totActualLast;
+				$totActual     = ($key['qtyActual']-$key['qtyNg']) + $totActual;
+				$totBallance   = (($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']))+$totBallance;
+				$totNg         = $key['qtyNg'] + $totNg;
+				$totPlanning   = $key['planning'] + $totPlanning;
+				$totWorkTime   = $key['workingTime'] + $totWorkTime;
+				$totLossTime   = $key['lossTime'] + $totLossTime;
+				$totAndonTimes = $key['andonTimes'] + $totAndonTimes;
+				$totAndonTime  = $key['andonTime'] + $totAndonTime;
 
 				$sumActual = $key['qtyActual']-$key['qtyNg'];
+				$planning = $key['planning'];
 				$sumActualLast = $key['qtyActualLast']-$key['qtyNgLast'];
 				$sumBallance = ($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']);
 			?>
@@ -88,9 +92,10 @@
 					<td><?php echo $key['mcNo']; ?></td>
 					<td><?php echo $key['mcName']; ?></td>
 					<td><?php echo rupiah2dec($sumActualLast); ?></td>
+					<td><?php echo rupiah2dec($planning); ?></td>
 					<td><?php echo rupiah2dec($sumActual); ?></td>
 					<td><?php echo rupiah2dec($sumBallance); ?></td>
-					<td>
+					<!-- <td>
 						<?php
 							if ($key['qtyActualLast'] == 0) {
 								echo cekData(0);
@@ -99,6 +104,11 @@
 							}else{
 								echo convertToPercentages($key['qtyActualLast'],$key['qtyActual']);
 							}
+						?>
+					</td> -->
+					<td>
+						<?php
+								echo convertToPercentages($sumActual,$planning);
 						?>
 					</td>
 					<td><?php echo rupiah2dec($key['qtyNg']*1); ?></td>
@@ -122,6 +132,7 @@
 		    <th colspan="4" align="center">Total</th>
 		    <th><?php echo rupiah2dec($totActualLast); ?></th>
 		    <th><?php echo rupiah2dec($totActual); ?></th>
+		    <th><?php echo rupiah2dec($totPlanning); ?></th>
 		    <th><?php echo rupiah2dec($totBallance); ?></th>
 		    <th><?php echo convertToPercentages($totActualLast, $totActual); ?></th>
 		    <!-- <th><?php echo ($totActual/$totActualLast)*100; ?></th> -->

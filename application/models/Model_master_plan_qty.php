@@ -182,6 +182,15 @@ class Model_master_plan_qty extends CI_Model
 
                 ,(
                     SELECT
+                        sum(qty.qty)
+                    FROM itx_t_master_plan_qty qty
+                    where
+                        qty.mc_id = mc.id
+                        and date_format(qty.date, '%Y-%m') = '$date'
+                ) as planning
+
+                ,(
+                    SELECT
                         sum(result.working_time)
                     FROM itx_t_result result
                     left join itx_t_master_plan_qty qty2

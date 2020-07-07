@@ -417,7 +417,6 @@
     }
 
     function downloadExcel(){
-    	console.log('data');
 		dep   = <?php echo $dept; ?>;
 		start = document.getElementById('datepicker1').value;
 		end   = document.getElementById('datepicker2').value;
