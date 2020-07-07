@@ -31,7 +31,7 @@
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
              // Judul
-            $this->excel->getActiveSheet()->setCellValue('A2','Actual Production '.$department->name);
+            $this->excel->getActiveSheet()->setCellValue('A2','ACTUAL PRODUCTION');
             $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(20);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
@@ -103,13 +103,11 @@
 
             $noColProb = 21;
             $noRowProb = 7;
-            $lastCol = 0;
             foreach ($data_problem as $prob) {
                 $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb,$noRowProb, $prob['name']);
 
 
                 $noColProb++;
-                // $lastCol = $noColProb;
             }
 
 
@@ -119,11 +117,11 @@
 
 
 
-            // $noColLoss = $lastCol;
-            $noColLoss = 37;
+            $noColLoss =37;
             $noRowLoss = 7;
             foreach ($data_losstime as $loss) {
                 $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss,$noRowLoss, $loss['name']);
+
                 $noColLoss++;
 
             }
@@ -161,20 +159,18 @@
 
 
             $noColProb2 = 21;
-            $lastCol = 0;
             foreach ($data_problem as $prob) {
                 $ng = $this->model_result_ng->get_data_ng($prob['id'], $key['idQty'], $key['mc_id']);
                     $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColProb2++,$rowStart, $ng->qty_ng);
-                $lastCol = $noColProb2;
-
+                   
             }
 
-            // $noColLoss2 = $lastCol;
-            $noColLoss2 = 37;
+             $noColLoss2 = 37;
             foreach ($data_losstime as $loss) {
-                $losst = $this->model_losstime->get_loss_by_filter($loss['id'], $key['idQty'], $key['mc_id']);
-                    $secLoss = ($losst->losstime == 0) ? '' : sprintf("%02d",floor($losst->losstime / 3600)) . ':' . sprintf("%02d",floor($losst->losstime / 60 % 60)) . ':' . sprintf("%02d",floor($losst->losstime % 60));
-                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss2++,$rowStart, $secLoss);
+                $losst = $this->model_losstime->get_loss_by_qtyId($loss['id']);
+                    $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss2++,$rowStart, $losst->losstime);
+                   
+                    
             }
 
 
@@ -182,8 +178,8 @@
             $i++;
             $noColProb2++;
             $noColLoss2++;
-
-
+             
+            
         }
 
         $this->excel->getActiveSheet()->getStyle("A6:AS1000")->applyFromArray(
