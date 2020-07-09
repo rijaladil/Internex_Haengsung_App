@@ -106,12 +106,20 @@
 
      $i = 1;
      $rowStart = 8;
-     for ($xx=1; $xx < 3; $xx++) {
+     // if ($data == 0) {
+
+      for ($xx=1; $xx < 3; $xx++) {
+         $data = $this->model_master_plan_qty->get_production_status_by_dept_id($date,$department);
+         // $data= $this->model_master_plan->get_by_dept_id($department, $date);
+         
+            foreach ($data as $key) {
+             $id = "'".$key['id']."'";
+
              $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $i);
              $this->excel->getActiveSheet()->getStyle('A'.$rowStart)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
              $this->excel->getActiveSheet()->mergeCells('A'.$rowStart.':A'.($rowStart+2));
 
-             $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $i);
+             $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $key['production_part_no']);
              $this->excel->getActiveSheet()->getStyle('B'.$rowStart)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
              $this->excel->getActiveSheet()->mergeCells('B'.$rowStart.':B'.($rowStart+2));
 
@@ -263,12 +271,12 @@
              $this->excel->getActiveSheet()->getStyle('AM'.$rowStart)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
              $this->excel->getActiveSheet()->mergeCells('AM'.$rowStart.':AM'.($rowStart+2));
 
+              $rowStart = $rowStart + 3;
+         }
 
+        // }
 
-
-
-
-    }
+     }
 
         $this->excel->getActiveSheet()->getStyle("A6:AM1000")->applyFromArray(
             array(
