@@ -51,4 +51,17 @@ class Model_losstime_category extends CI_Model
         }
     }
 
+    public function delete()
+    {
+        $text_id = $this->security->xss_clean($this->input->post('text_id'));
+        $this->db->where('id', $text_id);
+        $this->db->delete('itx_m_losstime_category');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

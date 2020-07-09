@@ -7,6 +7,7 @@ class Model_machine_problem extends CI_Model
     {
         $this->db->from('itx_m_machine_problem');
         $this->db->where('department_id', $id);
+        // $this->db->where('isDelete', '0');
         $this->db->order_by('name', 'asc');
         $query = $this->db->get();
         return $query->result_array();
@@ -21,6 +22,7 @@ class Model_machine_problem extends CI_Model
         $this->db->from('itx_m_machine_problem');
         $this->db->where('name', $text_name);
         $this->db->where('department_id', $text_dept);
+        // $this->db->where('isDelete', '0');
         $query = $this->db->get();
         $jum = $query->row()->jum;
 
@@ -44,8 +46,23 @@ class Model_machine_problem extends CI_Model
         $id = $this->security->xss_clean($this->input->post('text_id'));
         $this->db->set('editUser', 'System');
         $this->db->set('name', $text_name);
+        // $this->db->where('isDelete', '0');
         $this->db->where('id', $id);
         $this->db->update('itx_m_machine_problem');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $text_name = $this->security->xss_clean($this->input->post('text_name'));
+        $id = $this->security->xss_clean($this->input->post('text_id'));
+        $this->db->where('id', $id);
+        $this->db->delete('itx_m_machine_problem');
 
         if ($this->db->affected_rows() > 0) {
             return true;

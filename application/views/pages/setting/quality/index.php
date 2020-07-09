@@ -78,7 +78,7 @@
 		<div class="title">Update Quality <font id="idTitleEdit"></font></div>
 		<br>
 		Problem item : <input type="text" id="idUpdateName" name="">
-		<input type="text" id="idId" name="" hidden="">
+		<input type="text" id="id_update" name="" hidden="">
 		<button class="btn"  href="#" onclick="update()">UPDATE</button>
 		<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 	</div>
@@ -89,9 +89,9 @@
 	<div id="modalDelete" class="form-container">
 		<div class="title">Delete Quality <font id="idTitleEdit"></font></div>
 		<br>
-		Problem item : <input type="text" id="idUpdateName" name="">
-		<input type="text" id="idId" name="" hidden="" readonly>
-		<button class="cancel"  href="#" onclick="Delete()">DELETE</button>
+		Problem item : <input type="text" id="idDeleteName" name="">
+		<input type="text" id="id_delete" name="" hidden="" readonly>
+		<button class="cancel"  href="#" onclick="deleteItem()">DELETE</button>
 		<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
 </div>
@@ -131,13 +131,13 @@
 
 		function showModalEdit(id, name){
 			document.getElementById("myForm1").style.display = "block";
-			document.getElementById('idId').value = id;
+			document.getElementById('id_update').value = id;
 			document.getElementById('idUpdateName').value = document.getElementById('idValName'+id).innerHTML;
 			document.getElementById('idTitleEdit').innerHTML = name;
 		}
 
 		function update(id){
-			var id = document.getElementById('idId').value;
+			var id = document.getElementById('id_update').value;
 			var name = document.getElementById('idUpdateName').value;
 			if (name == '' || id == '') {
 				console.log('kosong');
@@ -165,11 +165,39 @@
 		}
 
 
-			function showModalDelete(id, name){
+		function showModalDelete(id, name){
 			document.getElementById("myFormDelete").style.display = "block";
-			document.getElementById('idId').value = id;
+			document.getElementById('id_delete').value = id;
 			document.getElementById('idDeleteName').value = document.getElementById('idValName'+id).innerHTML;
 			document.getElementById('idTitleDelete').innerHTML = name;
+		}
+
+		function deleteItem(id){
+			var id = document.getElementById('id_delete').value;
+			var name = document.getElementById('idDeleteName').value;
+			if (name == '' || id == '') {
+				console.log('kosong');
+			}else{
+				// console.log(name + ' -- ' +nip);
+
+			    $.ajax({
+			        url: "<?php echo base_url(); ?>setting/quality_delete/",
+			        // dataType: 'json',
+			        type: 'POST',
+			        data: {
+			            'text_name': name,
+			            'text_id': id,
+			            // 'text_level': level,
+			            // 'text_dept': dept,
+			            // 'text_pass': pass,
+			        },
+			        cache: false,
+			        success: function(msg){
+			        	location.reload();
+			        }
+			    });
+
+			}
 		}
 
 

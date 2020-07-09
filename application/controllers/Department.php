@@ -153,19 +153,19 @@ class Department extends CI_Controller {
 	}
 
 	function actual_download($department, $start, $end) {
-		$data['data']       = $this->model_master_plan->get_by_dept_id($department, $start, $end);
-		$data['start_date'] = $start;
-		$data['end_date']   = $end;
-		$data['department'] = $this->model_department->get_department_by_id($department);
-		$data['data_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
+		$data['data']          = $this->model_master_plan->get_by_dept_id($department, $start, $end);
+		$data['start_date']    = $start;
+		$data['end_date']      = $end;
+		$data['department']    = $this->model_department->get_department_by_id($department);
+		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
 		$this->load->view('pages/actual_production/download', $data);
 	}
 
 	function production_download($department, $date) {
-		$data['data']       = $this->model_master_plan->get_by_dept_id($department, $date);
-		$data['start_date'] = $date;
-		$data['data_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
+		$data['data']          = $this->model_master_plan->get_by_dept_id($department, $date);
+		$data['start_date']    = $date;
+		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
 		$this->load->view('pages/production_status/download', $data);
 	}

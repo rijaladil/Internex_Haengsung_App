@@ -37,7 +37,7 @@
 						 <td id="idName<?php echo $key['id']; ?>"><?php echo $key['name']; ?></td>
 						 <td class="text-center">
 						 	<a class="click-btn-u"  href="#" onclick="edit(<?php echo $key['id']; ?>)">Update</a>
-						 	<a class="click-btn-d"  href="#" onclick="Delete(<?php echo $key['id']; ?>)">Delete</a>
+						 	<a class="click-btn-d"  href="#" onclick="deleteModal(<?php echo $key['id']; ?>)">Delete</a>
 						 </td>
 					  </tr>
 			 	<?php } ?>
@@ -76,7 +76,7 @@
 		<br>
 		<input type="text" id="idIdDelete" name="" hidden="" readonly>
 		Name : <input type="text" id="idNameDelete" name="" readonly>
-		<button class="cancel" type="submit" id="" value="Update" onclick="update()">DELETE</button>
+		<button class="cancel" type="submit" id="" value="Update" onclick="deleting()">DELETE</button>
 		<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
 </div>
@@ -125,11 +125,12 @@
 		document.getElementById('idNameEdit').value = document.getElementById('idName'+i).innerHTML;
 	}
 
-	function Delete(i){
+	function deleteModal(i){
 		document.getElementById("myFormDelete").style.display = "block";
 		document.getElementById('idIdDelete').value = i;
 		document.getElementById('idNameDelete').value = document.getElementById('idName'+i).innerHTML;
 	}
+
 	function update(){
 		var id = document.getElementById('idIdEdit').value;
 		var name = document.getElementById('idNameEdit').value;
@@ -159,5 +160,22 @@
 		    });
 
 		}
-	}</script>
+	}
+
+	function deleting(){
+		var id = document.getElementById('idIdDelete').value;
+	    $.ajax({
+	        url: "<?php echo base_url(); ?>setting/losstime_delete/",
+	        type: 'POST',
+	        data: {
+	            'text_id': id
+	        },
+	        cache: false,
+	        success: function(msg){
+	        	location.reload();
+	        }
+	    });
+	}
+
+</script>
 </html>

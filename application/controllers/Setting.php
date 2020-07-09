@@ -64,6 +64,11 @@ class Setting extends CI_Controller {
 		$this->model_machine_problem->update();
 	}
 
+	public function quality_delete()
+	{
+		$this->model_machine_problem->delete();
+	}
+
 	public function losstime()
 	{
 		$this->load->view('template/header/index');
@@ -93,6 +98,23 @@ class Setting extends CI_Controller {
 	{
         if($this->model_losstime_category->update()){
 
+        $data = $this->model_losstime_category->get_all();
+
+		 	$i=1; foreach ($this->model_losstime_category->get_all() as $key) {
+		 	echo "
+				  <tr>
+					 <td class='text-center'>".$i++."</td>
+					 <td>".$key['name']."</td>
+				  </tr>";
+		 	}
+        }else{
+        	echo 'false';
+        }
+	}
+
+	public function losstime_delete()
+	{
+        if($this->model_losstime_category->delete()){
         $data = $this->model_losstime_category->get_all();
 
 		 	$i=1; foreach ($this->model_losstime_category->get_all() as $key) {
