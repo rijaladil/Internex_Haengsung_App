@@ -145,7 +145,7 @@ class Model_master_plan_qty extends CI_Model
     public function get_production_status_by_dept_id_url($department, $date)
     {
         $this->db->select("
-            plan.production_part_nox
+            plan.production_part_no
             ,plan.model
             ,plan.description
             ,plan.capaDay
