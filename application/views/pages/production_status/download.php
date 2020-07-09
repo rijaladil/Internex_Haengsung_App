@@ -36,7 +36,7 @@
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
             // Date
-            $this->excel->getActiveSheet()->setCellValue('A3', $start_date);
+            $this->excel->getActiveSheet()->setCellValue('A3', $date);
             $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(16);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
@@ -109,9 +109,9 @@
      // if ($data == 0) {
 
       for ($xx=1; $xx < 3; $xx++) {
-         $data = $this->model_master_plan_qty->get_production_status_by_dept_id($date,$department);
+         // $data = $this->model_master_plan_qty->get_production_status_by_dept_id($date,$department);
          // $data= $this->model_master_plan->get_by_dept_id($department, $date);
-         
+
             foreach ($data as $key) {
              $id = "'".$key['id']."'";
 

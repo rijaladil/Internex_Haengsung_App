@@ -27,6 +27,11 @@ class Department extends CI_Controller {
         $this->actual_production();
 	}
 
+	public function test()
+	{
+        echo "string";
+	}
+
 	public function actual_production($department=''){
 		if (isset($_POST['text_idQty']) && count($_POST['text_idQty']) > 0) {
 			$this->model_master_plan_qty->setMcOnSpk($department);
@@ -164,8 +169,8 @@ class Department extends CI_Controller {
 
 	function production_download($department, $date) {
 		// $data['data']       = $this->model_master_plan->get_by_dept_id($department, $date);
-		$data['data']		= $this->model_master_plan_qty->get_production_status_by_dept_id2($department, $date);
-		$data['start_date'] = $date;
+		$data['data']		= $this->model_master_plan_qty->get_production_status_by_dept_id_url($department, $date);
+		$data['date'] = $date;
 		$data['department'] = $this->model_department->get_department_by_id($department);
 		$data['data_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
