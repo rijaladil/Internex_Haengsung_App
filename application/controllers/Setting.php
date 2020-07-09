@@ -164,10 +164,24 @@ class Setting extends CI_Controller {
 
 	public function operator()
 	{
-		$data['data'] = $this->model_machine->get_by_line_setting();
+		$data['data'] = $this->model_operator->get_data();
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/setting/operator/index');
+	}
+
+	public function operator_add()
+	{
+		if ($this->model_operator->check_nip()) {
+			# code...
+			if($this->model_operator->add()) {
+				echo 1;
+			}else{
+				echo 0;
+			}
+		}else{
+			echo 0;
+		}
 	}
 
 }
