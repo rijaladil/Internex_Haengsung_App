@@ -31,5 +31,9 @@ class Summary extends CI_Controller {
             redirect('login');
         }
     }
+    function summary_download($date) {
+        $data['date'] = $date;
+        $this->load->view('pages/summary/download', $data);
+    }
 
 }
