@@ -38,6 +38,7 @@ class Department extends CI_Controller {
 	        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
 	        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
 	        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
+	        $data['data_operator']= $this->model_operator->get_data();
 			$this->load->view('template/header/index', $data);
 			$this->load->view('template/menu/index');
 			$this->load->view('pages/actual_production/index');
@@ -49,6 +50,7 @@ class Department extends CI_Controller {
 	        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
 	        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
 	        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
+	        $data['data_operator']= $this->model_operator->get_data();
 			$this->load->view('template/header/index', $data);
 			$this->load->view('template/menu/index');
 			$this->load->view('pages/actual_production/index');
