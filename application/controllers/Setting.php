@@ -184,4 +184,36 @@ class Setting extends CI_Controller {
 		}
 	}
 
+	public function operator_update()
+	{
+        $nip = $this->security->xss_clean($this->input->post('hid'));
+        $hid = $this->security->xss_clean($this->input->post('id_input_nip'));
+		if ($nip != $hid) {
+			if ($this->model_operator->check_nip()) {
+				# code...
+				if($this->model_operator->update()) {
+					echo 1;
+				}else{
+					echo 0;
+				}
+			}else{
+				echo 0;
+			}
+		}else{
+			if($this->model_operator->update()) {
+				echo 1;
+			}else{
+				echo 0;
+			}
+		}
+	}
+
+	public function operator_delete()
+	{
+		if($this->model_operator->delete()) {
+			echo 1;
+		}else{
+			echo 0;
+		}
+	}
 }

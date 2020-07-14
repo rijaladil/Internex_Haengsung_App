@@ -35,23 +35,24 @@
 	    <th width="">NIK</th>
 	    <th width="">Name</th>
 	    <th width="">Shift</th>
-		<th width="">Process</th>
+		<th width="">Department</th>
 		<th width="">Contact</th>
 		<th width="9%">Option</th>
 	  </tr>
 	</thead>
 	<tbody id="idContent">
 		<?php $i = 1; foreach ($data as $key) { ?>
+			<input hidden="" type="text" id="id_<?php echo $key['nip']; ?>_dept" name="" value="<?php echo $key['department_id']; ?>">
 			<tr>
 				<td class="text-center"><?php echo $i++; ?></td>
 		    	<td class="text-center"><?php echo $key['nip']; ?></td>
-			    <td class="text-center"><?php echo $key['name']; ?></td>
-			    <td class="text-center"><?php echo $key['shift']; ?></td>
-			    <td class="text-center"><?php echo $key['department_id']; ?></td>
-				<td class="text-center"><?php echo $key['mobile']; ?></td>
+			    <td class="text-center" id="id_<?php echo $key['nip']; ?>_name"><?php echo $key['name']; ?></td>
+			    <td class="text-center" id="id_<?php echo $key['nip']; ?>_shift"><?php echo $key['shift']; ?></td>
+			    <td class="text-center" id="id_<?php echo $key['nip']; ?>_deptName"><?php echo $key['dept']; ?></td>
+				<td class="text-center" id="id_<?php echo $key['nip']; ?>_phone"><?php echo $key['mobile']; ?></td>
 			    <td class="text-center">
-			    	<a class="click-btn-u" onclick="" href="#">Update</a>
-			    	<a class="click-btn-d" onclick="" href="#">Delete</a>
+			    	<a class="click-btn-u" onclick="showUpdate(<?php echo $key['nip']; ?>)" href="#">Update</a>
+			    	<a class="click-btn-d" onclick="showDelete(<?php echo $key['nip']; ?>)" href="#">Delete</a>
 			    </td>
 			  </tr>
 		<?php } ?>
@@ -65,22 +66,28 @@
 	<div id="modal" class="form-container">
 		<div class="title">+Add Opeartor </div>
 		<br>
-
-		Name : 		<input type="text" name="" id="id_input_name">
-		NIP : 		<input type="text" name="" id="id_input_nip">
-		Phone : 		<input type="text" name="" id="id_input_mobile">
-		Shift : 	<input type="text" name="" id="id_input_shift">
-		Dept:		<select id="id_input_dept">
-						<option value=''>Select</option>
-					    <?php foreach ($this->model_department->get_all() as $level) { ?>
-							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?>
-						</option>
-					<?php } ?>
-					</select>
-					<button class="btn" onclick='save()'>SAVE</button>
-					<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
+		NIP :
+		<input type="text" name="" id="id_input_nip">
+		Name :
+		<input type="text" name="" id="id_input_name">
+		Phone :
+		<input type="text" name="" id="id_input_mobile">
+		Shift :
+		<select id="id_input_shift">
+			<option value=''>Select</option>
+			<option value='1'>1</option>
+			<option value='2'>2</option>
+		</select>
+		Dept:
+		<select id="id_input_dept">
+			<option value=''>Select</option>
+		    <?php foreach ($this->model_department->get_all() as $level) { ?>
+				<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
+			<?php } ?>
+		</select>
+		<button class="btn" onclick='save()'>SAVE</button>
+		<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
 	</div>
-
 </div>
 
 <div class="form-popup" id="myForm1">
@@ -88,18 +95,21 @@
 		<div class="title">Update User</div>
 		<br>
 		<input type="text" name="" id="textUpdateHid" hidden="">
-		NIP : 		<input type="text" name="" id="textUpdateNip">
-		Name : 		<input type="text" name="" id="textUpdateName">
-		Password :	<input type="text" name="" id="textUpdatePassword" placeholder="Type here if you want to change the password">
-		Level :		<select id="textUpdateLevel">
-				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
-					<?php } ?>
-					</select>
+		NIP :
+		<input type="text" name="" id="textUpdateNip">
+		Name :
+		<input type="text" name="" id="textUpdateName">
+		Phone :
+		<input type="text" name="" id="textUpdatePhone">
+		Shift :
+		<select id="textUpdateShift">
+			<option value='1'>1</option>
+			<option value='2'>2</option>
+		</select>
 		Dept:		<select id="textUpdateDept">
-				    <?php foreach ($this->model_department->get_all() as $level) { ?>
-						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
-					<?php } ?>
+					    <?php foreach ($this->model_department->get_all() as $level) { ?>
+							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
+						<?php } ?>
 					</select>
 					<button class="btn" onclick='update()'>UPDATE</button>
 					<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
@@ -110,22 +120,18 @@
 	<div id="modalDelete" class="form-container">
 		<div class="title">Delete User</div>
 		<br>
-		<input type="text" name="" id="textDeleteHid" hidden="">
-		NIP : 		<input type="text" name="" id="textDeleteNip" readonly>
-		Name : 		<input type="text" name="" id="textDeleteName" readonly>
-		Password :	<input type="text" name="" id="textDeletePassword" placeholder="Type here if you want to change the password" readonly>
-		Level :		<input type="text" id="textDeleteLevel" readonly>
-				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option> -->
-					<?php } ?>
-
-		Dept:		<input type="text" id="textDeleteDept" readonly>
-				    <?php foreach ($this->model_department->get_all() as $level) { ?>
-						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option> -->
-					<?php } ?>
-
-					<button class="cancel" onclick='Delete()'>DELETE</button>
-					<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
+		NIP :
+		<input type="text" name="" id="textDeleteNip" readonly>
+		Name :
+		<input type="text" name="" id="textDeleteName" readonly>
+		Phone :
+		<input type="text" name="" id="textDeletePhone" readonly>
+		Shift :
+		<input type="text" name="" id="textDeleteShift" readonly>
+		Dept:
+		<input type="text" id="textDeleteDept" readonly>
+		<button class="cancel" onclick='remove()'>DELETE</button>
+		<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
 </div>
 
@@ -177,68 +183,90 @@
 	    element.value = valueToSelect;
 	}
 
-	// function showModalEdit(id){
-	// 	var idLevel = document.getElementById('textUpdateLevel'+id).value;
-	// 	var idDept = document.getElementById('textUpdateDept'+id).value;
+	function showUpdate(id){
+		var idShift = document.getElementById('id_'+id+'_shift').innerHTML;
+		var idDept = document.getElementById('id_'+id+'_dept').value;
 
-	//   	document.getElementById("myForm1").style.display = "block";
-	// 	document.getElementById('textUpdateHid').value = id;
-	// 	document.getElementById('textUpdateNip').value = id;
-	// 	document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
-	// 	document.getElementById('textUpdateLevel').value = document.getElementById('idValName'+id).innerHTML;
-	// 	document.getElementById('textUpdateDept').value = document.getElementById('idValName'+id).innerHTML;
+	  	document.getElementById("myForm1").style.display = "block";
+		document.getElementById('textUpdateHid').value = id;
+		document.getElementById('textUpdateNip').value = id;
+		document.getElementById('textUpdateName').value = document.getElementById('id_'+id+'_name').innerHTML;
+		document.getElementById('textUpdatePhone').value = document.getElementById('id_'+id+'_phone').innerHTML;
 
-	// 	selectElement('textUpdateLevel', idLevel);
-	// 	selectElement('textUpdateDept', idDept);
-	// }
+		selectElement('textUpdateDept', idDept);
+		selectElement('textUpdateShift', idShift);
+	}
 
-	// function showModalDelete(id){
-	// 	// var idLevel = document.getElementById('textDeleteLevel'+id).value;
-	// 	// var idDept = document.getElementById('textDeleteDept'+id).value;
+	function update(){
+		var hid   = $('#textUpdateHid').val();
+		var nip   = $('#textUpdateNip').val();
+		var name  = $('#textUpdateName').val();
+		var phone = $('#textUpdatePhone').val();
+		var shift = $('#textUpdateShift').val();
+		var dept  = $('#textUpdateDept').val();
+		if (
+			nip   == '' ||
+			name  == '' ||
+			phone == '' ||
+			shift == '' ||
+			dept  == ''
+			) {
+			console.log('kosong');
+		}else{
+		    $.ajax({
+		        url: "<?php echo base_url(); ?>setting/operator_update/",
+		        // dataType: 'json',
+		        type: 'POST',
+		        data: {
+					'hid': hid,
+					'id_input_nip': nip,
+					'name': name,
+					'phone': phone,
+					'shift': shift,
+					'dept': dept
+		        },
+		        cache: false,
+		        success: function(msg){
+		        	if (msg == 1) {
+		        		console.log('oke');
+			        	location.reload();
+		        	}else{
+		        		console.log('failed');
+		        	}
+		        }
+		    });
+		}
+	}
 
-	//   	document.getElementById("myFormDel").style.display = "block";
-	// 	document.getElementById('textDeleteHid').value = id;
-	// 	document.getElementById('textDeleteNip').value = id;
-	// 	document.getElementById('textDeleteName').value = document.getElementById('idValName'+id).innerHTML;
-	// 	document.getElementById('textDeleteLevel').value = document.getElementById('idValName'+id).innerHTML;
-	// 	document.getElementById('textDeleteDept').value = document.getElementById('idValName'+id).innerHTML;
+	function showDelete(id){
+	  	document.getElementById("myFormDel").style.display = "block";
+		document.getElementById('textDeleteNip').value = id;
+		document.getElementById('textDeleteName').value = document.getElementById('id_'+id+'_name').innerHTML;
+		document.getElementById('textDeletePhone').value = document.getElementById('id_'+id+'_phone').innerHTML;
+		document.getElementById('textDeleteShift').value = document.getElementById('id_'+id+'_shift').innerHTML;
+		document.getElementById('textDeleteDept').value = document.getElementById('id_'+id+'_deptName').innerHTML;
+	}
 
-	// 	selectElement('textDeleteLevel', idLevel);
-	// 	selectElement('textDeleteDept', idDept);
-	// }
-
-	// function update(id){
-	// 	var nip = document.getElementById('textUpdateNip').value;
-	// 	var hid = document.getElementById('textUpdateHid').value;
-	// 	var name = document.getElementById('textUpdateName').value;
-	// 	var level = $('#textUpdateLevel').val()
-	// 	var dept = $('#textUpdateDept').val()
-	// 	var pass = $('#textUpdatePassword').val()
-	// 	if (name == '' || nip == '') {
-	// 		console.log('kosong');
-	// 	}else{
-	// 		// console.log(name + ' -- ' +nip);
-
-	// 	    $.ajax({
-	// 	        url: "<?php echo base_url(); ?>setting/user_update/",
-	// 	        // dataType: 'json',
-	// 	        type: 'POST',
-	// 	        data: {
-	// 	            'hid': hid,
-	// 	            'text_name': name,
-	// 	            'text_nip': nip,
-	// 	            'text_level': level,
-	// 	            'text_dept': dept,
-	// 	            'text_pass': pass,
-	// 	        },
-	// 	        cache: false,
-	// 	        success: function(msg){
-	// 	        	location.reload();
-	// 	        }
-	// 	    });
-
-	// 	}
-	// }
+	function remove(){
+		var hid   = $('#textDeleteNip').val();
+	    $.ajax({
+	        url: "<?php echo base_url(); ?>setting/operator_delete/",
+	        // dataType: 'json',
+	        type: 'POST',
+	        data: {
+				'hid': hid,
+	        },
+	        cache: false,
+	        success: function(msg){
+	        	if (msg == 1) {
+	        		console.log('oke');
+		        	location.reload();
+	        	}else{
+	        		console.log('failed');
+	        	}
+	        }
+	    });
+	}
 
 </script>
 </html>
