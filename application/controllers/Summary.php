@@ -31,9 +31,14 @@ class Summary extends CI_Controller {
             redirect('login');
         }
     }
-    function summary_download($date) {
-        $data['date'] = $date;
+    function summary_download($text_date) 
+    {
+        $data['text_date'] = $this->security->xss_clean($this->input->post('text_date'));
+        $data['text_date'] = $text_date; 
+        $data['data'] = $this->model_master_plan_qty->get_summary();
+        $data['data_dept'] = $this->model_department->get_all();
         $this->load->view('pages/summary/download', $data);
     }
 
 }
+?>

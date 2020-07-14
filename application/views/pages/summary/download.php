@@ -31,12 +31,12 @@
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
              // Judul
-            $this->excel->getActiveSheet()->setCellValue('A2','Summary');
+            $this->excel->getActiveSheet()->setCellValue('A2','Summary Actual Status');
             $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(20);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
             // Date
-            $this->excel->getActiveSheet()->setCellValue('A3', $date);
+            $this->excel->getActiveSheet()->setCellValue('A3', $text_date);
             $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(16);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
@@ -99,15 +99,55 @@
 
      $i = 1;
      $rowStart = 8;
+      $totActualLast    = 0;
+      $totActual        = 0;
+      $totBallance      = 0;
+      $totNg            = 0;
+      $totWorkTime      = 0;
+      $totLossTime      = 0;
+      $totAndonTimes    = 0;
+      $totAndonTime     = 0;
+      $totPlanning      = 0;
   
       // for ($xx=1; $xx < 3; $xx++) {
   
 
-            foreach ($data as $key) {
-             $id = "'".$key['id']."'";
+      foreach ($data as $key) {
 
-         
-              $i++;
+      $totActualLast = ($key['qtyActualLast']-$key['qtyNgLast']) + $totActualLast;
+      $totActual     = ($key['qtyActual']-$key['qtyNg']) + $totActual;
+      $totBallance   = (($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']))+$totBallance;
+      $totNg         = $key['qtyNg'] + $totNg;
+      $totPlanning   = $key['planning'] + $totPlanning;
+      $totWorkTime   = $key['workingTime'] + $totWorkTime;
+      $totLossTime   = $key['lossTime'] + $totLossTime;
+      $totAndonTimes = $key['andonTimes'] + $totAndonTimes;
+      $totAndonTime  = $key['andonTime'] + $totAndonTime;
+      $sumActual     = $key['qtyActual']-$key['qtyNg'];
+      $planning      = $key['planning'];
+      $sumActualLast = $key['qtyActualLast']-$key['qtyNgLast'];
+      $sumBallance   = ($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']);
+
+       $id = "'".$key['id']."'";
+
+            $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $i++);
+            $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $key['deptName']);
+             $this->excel->getActiveSheet()->setCellValue('C'.$rowStart, $key['mcNo']);
+            $this->excel->getActiveSheet()->setCellValue('D'.$rowStart, $key['mcName']);
+            $this->excel->getActiveSheet()->setCellValue('E'.$rowStart, rupiah2dec($sumActualLast));
+            $this->excel->getActiveSheet()->setCellValue('F'.$rowStart, rupiah2dec($planning));
+            $this->excel->getActiveSheet()->setCellValue('G'.$rowStart, rupiah2dec($sumActual));
+            $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, rupiah2dec($sumBallance));
+            $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, convertToPercentages($sumActual,$planning));
+            $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, rupiah2dec($key['qtyNg']*1));
+            $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, convertToPercentages($key['qtyActual'], $key['qtyNg']));
+            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, secToMinute($key['workingTime']));
+            $this->excel->getActiveSheet()->setCellValue('M'.$rowStart, secToMinute($key['lossTime']));
+            $this->excel->getActiveSheet()->setCellValue('N'.$rowStart, ($key['workingTime'] > 0)? convertToPercentages(($key['workingTime']+$key['lossTime']), $key['workingTime']):'');
+            $this->excel->getActiveSheet()->setCellValue('O'.$rowStart, rupiah2dec($key['andonTimes']));
+            $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, secToMinute($key['andonTime']));
+            
+      $rowStart++;
 
 
      }
@@ -116,18 +156,18 @@
             $this->excel->getActiveSheet()->setCellValue('A43', 'Total');
             $this->excel->getActiveSheet()->mergeCells('A43:D43');
             $this->excel->getActiveSheet()->getStyle('A43:P43')->getFont()->setBold(true);
-            $this->excel->getActiveSheet()->setCellValue('E43', $i);
-            $this->excel->getActiveSheet()->setCellValue('F43', $i);
-            $this->excel->getActiveSheet()->setCellValue('G43', $i);
-            $this->excel->getActiveSheet()->setCellValue('H43', $i);
-            $this->excel->getActiveSheet()->setCellValue('I43', $i);
-            $this->excel->getActiveSheet()->setCellValue('J43', $i);
-            $this->excel->getActiveSheet()->setCellValue('K43', $i);
-            $this->excel->getActiveSheet()->setCellValue('L43', $i);
-            $this->excel->getActiveSheet()->setCellValue('M43', $i);
-            $this->excel->getActiveSheet()->setCellValue('N43', $i);
-            $this->excel->getActiveSheet()->setCellValue('O43', $i);
-            $this->excel->getActiveSheet()->setCellValue('P43', $i);
+            $this->excel->getActiveSheet()->setCellValue('E43', rupiah2dec($totActualLast));//Tot Last Month Actual
+            $this->excel->getActiveSheet()->setCellValue('F43', rupiah2dec($totActual));//Tot This Month Actual
+            $this->excel->getActiveSheet()->setCellValue('G43', rupiah2dec($totPlanning));//Tot Planning
+            $this->excel->getActiveSheet()->setCellValue('H43', rupiah2dec($totBallance));//Tot Balance Qty
+            $this->excel->getActiveSheet()->setCellValue('I43', convertToPercentages($totActualLast, $totActual));//Tot %
+            $this->excel->getActiveSheet()->setCellValue('J43', rupiah2dec($totNg));//Tot NG Qty
+            $this->excel->getActiveSheet()->setCellValue('K43', convertToPercentages($totActual, $totNg));//Tot NG%
+            $this->excel->getActiveSheet()->setCellValue('L43', secToMinute($totWorkTime));//Tot Work Time
+            $this->excel->getActiveSheet()->setCellValue('M43', secToMinute($totLossTime));//Tot Loss Time
+            $this->excel->getActiveSheet()->setCellValue('N43', ($totWorkTime > 0)? number_format((float)(($totWorkTime/($totWorkTime+$totLossTime))*100), 2, '.', ''):'');//Tot Operation%
+            $this->excel->getActiveSheet()->setCellValue('O43', rupiah2dec($totAndonTimes));//Tot Call
+            $this->excel->getActiveSheet()->setCellValue('P43', secToMinute($totAndonTime));//Tot Downtime
 
 
         $this->excel->getActiveSheet()->getStyle("A6:P43")->applyFromArray(
@@ -148,6 +188,35 @@
         ob_end_clean();
         $objWriter->save('php://output');
 
+      function cekData($data) {
+            if (isset($data) && $data > 0) {
+                  return $data;
+            }else{
+                  return "-";
+            }
+      }
 
+      function secToMinute($sec) {
+            return ($sec == 0) ? '' : sprintf("%02d",floor($sec / 3600)) . ':' . sprintf("%02d",floor($sec / 60 % 60)) . ':' . sprintf("%02d",floor($sec % 60));
+      }
+
+      function convertToPercentages($total, $val) {
+            if ($val == 0 && $total == 0) {
+                  return '';
+            }elseif ($val != 0 && $total == 0) {
+                  return number_format((float)100, 2, '.', '');
+            }else{
+                  // return number_format((float)100, 2, '.', '');
+                  return number_format(($val/$total)*100, 2, '.', '');
+            }
+      }
+
+      function rupiah2dec($total) {
+            if ($total == 0) {
+                  return "-";
+            }else{
+                  return number_format($total,0,',',',');
+            }
+      }
     // }
 ?>

@@ -14,7 +14,7 @@
 		<div class="form">
 			<div class="left">Summary Actual Status</div>
 			<div class="right">
-				<button class="btn-green"  onclick="downloadExcel()" form="cek">Excel</button>
+				<button class="btn-green"  onclick="downloadExcel()" form="cek" >Excel</button>
 				<button class="btn-blue">Search</button>
 			<!-- 	<input type="text" id="datepicker2" value="<?php echo date('Y-m');?>" />
 				<div>To</div> -->
@@ -194,8 +194,10 @@
 
 	<script type="text/javascript">
 		function downloadExcel(){
-			dates = document.getElementById('datepickersum').value;
+			// dep= document.getElementById('department').value;
+			dates= document.getElementById('datepickersum').value;
 	    	window.open("<?php echo base_url(); ?>summary/summary_download/"+dates);
+	    	// window.open("<?php echo base_url(); ?>summary/summary_download/"+dep+"/"+dates);
 	    }
 	</script>
 </body>
