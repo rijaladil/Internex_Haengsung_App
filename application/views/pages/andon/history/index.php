@@ -47,7 +47,7 @@
 		<div class="form">
 			<div class="left">Andon History</div>
 			<div class="right">
-				<button class="btn-green">Excel</button>
+				<a href="#" class="btn-green" onclick="downloads()">Excel</a>
 				<button class="btn-blue">Search</button>
 				<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
 				<div>To</div>
@@ -95,6 +95,14 @@
 		</table>
 
 	</div>
+
+	<script type="text/javascript">
+		function downloads(){
+			var start  = $('#datepicker1').val();
+			var finish = $('#datepicker2').val();
+	    	window.open("<?php echo base_url(); ?>andon/download_history/"+start+'/'+finish);
+		}
+	</script>
 
 </body>
 </html>

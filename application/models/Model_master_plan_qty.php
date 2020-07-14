@@ -429,6 +429,144 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
+    public function get_summary_url($text_date)
+    {
+        $department = $this->security->xss_clean($this->input->post('text_dept'));
+        $dateStart = $text_date;
+
+        if ($dateStart <> '') {
+            $date = $dateStart;
+        }else{
+            $date = date('Y-m');
+        }
+
+        $this->db->select("
+                dept.name as deptName
+                , mc.mc_no as mcNo
+                , mc.name as mcName
+
+                ,(
+                    SELECT
+                        sum(qty.qty)
+                    FROM itx_t_master_plan_qty qty
+                    where
+                        qty.mc_id = mc.id
+                        and date_format(qty.date, '%Y-%m') = '$date'
+                ) as planning
+
+                ,(
+                    SELECT
+                        sum(result.working_time)
+                    FROM itx_t_result result
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = result.masterplan_qty_id
+                    where
+                        result.machine_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as workingTime
+
+                ,(
+                    SELECT
+                        SUM(TIMESTAMPDIFF(SECOND, start_time, finish_time))
+                    FROM itx_t_losstime losstime
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = losstime.masterplan_qty_id
+                    where
+                        losstime.machine_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as lossTime
+
+                ,(
+                    SELECT
+                        sum(qty_actual)
+                    FROM itx_t_result result
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = result.masterplan_qty_id
+                    where
+                        result.machine_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as qtyActual
+
+                ,(
+                    SELECT
+                        sum(qty_actual)
+                    FROM itx_t_result result
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = result.masterplan_qty_id
+                    where
+                        result.machine_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = date_format(('$date-01' - interval 1 month), '%Y-%m')
+                ) as qtyActualLast
+
+                ,(
+                    SELECT
+                        sum(qty_ng)
+                    FROM itx_t_result_ng ng
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = ng.masterplan_qty_id
+                    where
+                        ng.mc_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as qtyNg
+
+                ,(
+                    SELECT
+                        sum(qty_ng)
+                    FROM itx_t_result_ng ng
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = ng.masterplan_qty_id
+                    where
+                        ng.mc_id = mc.id
+                        and date_format(qty2.date, '%Y-%m') = date_format(('$date' - interval 1 month), '%Y-%m')
+                ) as qtyNgLast
+
+                ,(
+                    SELECT
+                        count(*)
+                    FROM itx_t_andon andon
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = andon.masterplan_qty_id
+                    left join itx_t_master_plan plan2
+                        on plan2.id = qty2.masterplan_id
+                    left join itx_m_department dept2
+                        on dept2.name = plan2.department
+                    where
+                        andon.andon_status_id = 3
+                        and qty2.mc_id = mc.id
+                        and dept2.name = dept.name
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as andonTimes
+
+                ,(
+                    SELECT
+                        count(*)
+                    FROM itx_t_andon andon
+                    left join itx_t_master_plan_qty qty2
+                        on qty2.id = andon.masterplan_qty_id
+                    left join itx_t_master_plan plan2
+                        on plan2.id = qty2.masterplan_id
+                    left join itx_m_department dept2
+                        on dept2.name = plan2.department
+                    where
+                        andon.andon_status_id = 3
+                        and qty2.mc_id = mc.id
+                        and dept2.name = dept.name
+                        and date_format(qty2.date, '%Y-%m') = '$date'
+                ) as andonTime
+            ");
+        $this->db->from('itx_m_machine mc');
+        $this->db->join('itx_m_department dept', 'dept.id = mc.department_id', 'left');
+        $this->db->order_by('mc.mc_no', 'asc');
+        if( $department <> ''){
+            $this->db->where('dept.id', $department);
+        }
+        // $this->db->join('itx_t_master_plan_qty qty', 'qty.mc_id = mc.id', 'left');
+        // $this->db->join('itx_t_master_plan plan', 'plan.id = qty.masterplan_id', 'left');
+        // $this->db->join('itx_t_result result', 'result.masterplan_qty_id = qty.id', 'left');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
     public function get_summary_backup()
     {

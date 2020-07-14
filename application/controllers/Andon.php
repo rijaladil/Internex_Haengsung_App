@@ -47,6 +47,12 @@ class Andon extends CI_Controller {
 		$this->load->view('pages/andon/history/index');
 	}
 
+    public function download_history($start, $finish)
+    {
+        $data['data'] = $this->model_andon->get_history_url($start,$finish);
+        $this->load->view('pages/andon/history/download', $data);
+    }
+
 	public function jsonGetSum($date)
 	{
         echo json_encode($this->model_andon->jsonGetSum($date));
