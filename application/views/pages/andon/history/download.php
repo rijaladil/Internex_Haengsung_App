@@ -6,20 +6,8 @@
         //name the worksheet
         $this->excel->getActiveSheet()->setTitle('Summary');
 
-        // design
-        $this->excel->getActiveSheet()->getStyle("A6:P43")->applyFromArray(
-            array(
-                'borders' => array(
-                    'allborders' => array(
-                        'style' => PHPExcel_Style_Border::BORDER_THIN, PHPExcel_Style_Alignment::VERTICAL_CENTER,
-
-                    )
-                )
-            )
-        );
-
         $styleAja = array (
-                        'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
+                'alignment' => array('horizontal'=>PHPExcel_Style_Alignment::HORIZONTAL_CENTER)
             );
 
         // title
@@ -27,11 +15,11 @@
             $this->excel->getActiveSheet()->setCellValue('A1', 'PT DAE BAEK');
             $this->excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(26);
-            $this->excel->getActiveSheet()->getStyle('A1:AS7')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('A1:AS6')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
              // Judul
-            $this->excel->getActiveSheet()->setCellValue('A2','Summary');
+            $this->excel->getActiveSheet()->setCellValue('A2','History');
             $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(20);
             $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
@@ -61,74 +49,53 @@
 
         // header
             $this->excel->getActiveSheet()->setCellValue('A6', 'No');
-            $this->excel->getActiveSheet()->mergeCells('A6:A7');
             $this->excel->getActiveSheet()->setCellValue('B6', 'Process');
-            $this->excel->getActiveSheet()->mergeCells('B6:B7');
             $this->excel->getActiveSheet()->setCellValue('C6', 'No MC');
-            $this->excel->getActiveSheet()->mergeCells('C6:C7');
             $this->excel->getActiveSheet()->setCellValue('D6', 'Machine Name');
-            $this->excel->getActiveSheet()->mergeCells('D6:D7');
-
-            $this->excel->getActiveSheet()->setCellValue('E6', 'Production Status');
-            $this->excel->getActiveSheet()->mergeCells('E6:I6');
-            $this->excel->getActiveSheet()->setCellValue('J6', 'Result NG');
-            $this->excel->getActiveSheet()->mergeCells('J6:N6');
-            $this->excel->getActiveSheet()->setCellValue('L6', 'Operation');
-            $this->excel->getActiveSheet()->mergeCells('L6:N6');
-            $this->excel->getActiveSheet()->setCellValue('O6', 'Andon');
-            $this->excel->getActiveSheet()->mergeCells('O6:P6');
-            $this->excel->getActiveSheet()->setCellValue('E7', 'Last Month Actual');
-            $this->excel->getActiveSheet()->setCellValue('F7', 'This Month Actual');
-            $this->excel->getActiveSheet()->setCellValue('G7', 'Planning');
-            $this->excel->getActiveSheet()->setCellValue('H7', 'Balance Qty');
-            $this->excel->getActiveSheet()->setCellValue('I7', '%');
-            $this->excel->getActiveSheet()->setCellValue('J7', 'NG Qty');
-            $this->excel->getActiveSheet()->setCellValue('K7', 'NG %');
-            $this->excel->getActiveSheet()->setCellValue('L7', 'Working Time');
-            $this->excel->getActiveSheet()->setCellValue('M7', 'Loss Time');
-            $this->excel->getActiveSheet()->setCellValue('N7', 'Operation %');
-            $this->excel->getActiveSheet()->setCellValue('O7', 'Call');
-            $this->excel->getActiveSheet()->setCellValue('P7', 'Downtime');
+            $this->excel->getActiveSheet()->setCellValue('E6', 'Call');
+            $this->excel->getActiveSheet()->setCellValue('F6', 'Arrive');
+            $this->excel->getActiveSheet()->setCellValue('G6', 'Complete');
+            $this->excel->getActiveSheet()->setCellValue('H6', 'Downtime');
+            $this->excel->getActiveSheet()->setCellValue('I6', 'Machine Call');
+            $this->excel->getActiveSheet()->setCellValue('J6', 'Quality Call');
+            $this->excel->getActiveSheet()->setCellValue('K6', 'Material Time');
+            $this->excel->getActiveSheet()->setCellValue('L6', 'Dies Call');
 
 
-            // Model Information'
-
-
-
-
-
-     $i = 1;
-     $rowStart = 8;
-
-      // for ($xx=1; $xx < 3; $xx++) {
-
-
+            $no       = 1;
+            $rowStart = 7;
             foreach ($data as $key) {
-             $id = "'".$key['id']."'";
+                $this->excel->getActiveSheet()->setCellValue('A'.$rowStart, $no);
+                $this->excel->getActiveSheet()->setCellValue('B'.$rowStart, $key['deptName']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$rowStart, $key['mcNo']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$rowStart, $key['mcName']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$rowStart, $key['call']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$rowStart, secToMinute($key['arrival']));
+                $this->excel->getActiveSheet()->setCellValue('G'.$rowStart, secToMinute($key['completed']));
+                $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, secToMinute($key['downtime']));
+                $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, ($key['call_id'] == 1) ? 'Ok' : '');
+                $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, ($key['call_id'] == 4) ? 'Ok' : '');
+                $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, ($key['call_id'] == 2) ? 'Ok' : '');
+                $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, ($key['call_id'] == 3) ? 'Ok' : '');
+                $rowStart++;
+                $no++;
+            }
 
+        // design
+        $this->excel->getActiveSheet()->getStyle("A6:L".$rowStart)->applyFromArray(
+            array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN, PHPExcel_Style_Alignment::VERTICAL_CENTER,
 
-              $i++;
+                    )
+                )
+            )
+        );
 
-
-     }
-
-      // FOOTER
-            $this->excel->getActiveSheet()->setCellValue('A43', 'Total');
-            $this->excel->getActiveSheet()->mergeCells('A43:D43');
-            $this->excel->getActiveSheet()->getStyle('A43:P43')->getFont()->setBold(true);
-            $this->excel->getActiveSheet()->setCellValue('E43', $i);
-            $this->excel->getActiveSheet()->setCellValue('F43', $i);
-            $this->excel->getActiveSheet()->setCellValue('G43', $i);
-            $this->excel->getActiveSheet()->setCellValue('H43', $i);
-            $this->excel->getActiveSheet()->setCellValue('I43', $i);
-            $this->excel->getActiveSheet()->setCellValue('J43', $i);
-            $this->excel->getActiveSheet()->setCellValue('K43', $i);
-            $this->excel->getActiveSheet()->setCellValue('L43', $i);
-            $this->excel->getActiveSheet()->setCellValue('M43', $i);
-            $this->excel->getActiveSheet()->setCellValue('N43', $i);
-            $this->excel->getActiveSheet()->setCellValue('O43', $i);
-            $this->excel->getActiveSheet()->setCellValue('P43', $i);
-
+        function secToMinute($sec) {
+            return ($sec == 0) ? '' : sprintf("%02d",floor($sec / 3600)) . ':' . sprintf("%02d",floor($sec / 60 % 60)) . ':' . sprintf("%02d",floor($sec % 60));
+        }
 
         $this->excel->getActiveSheet()->getStyle("A6:P43")->applyFromArray(
             array(
