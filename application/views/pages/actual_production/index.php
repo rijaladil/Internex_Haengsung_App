@@ -269,7 +269,7 @@
 			},
 				success: function(msg){
 					if (msg == 1) {
-						window.alert("Success");
+						window.alert("Success, set to machine "+machine_id.options[machine_id.selectedIndex].text);
 						location.reload();
 					}else{
 						window.alert("Failed");
