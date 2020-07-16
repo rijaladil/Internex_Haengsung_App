@@ -20,7 +20,7 @@
 		<form id="normal" method="post" action="<?php echo base_url(); ?>department/actual_production/<?php echo $dept; ?>">
 			<!-- <a href="#" class="btn-green">Excel</a> -->
 			<button class="btn-green" onclick="downloadExcel()" form="cek">Excel</button>
-			<button class="btn-green2" onclick="saveMc()" form="cek">Save</button>
+			<!-- <button class="btn-green2" onclick="saveMc()" form="cek">Save</button> -->
 			<button class="btn-blue" type="submit" form="normal">Search</button>
 			<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
 			<div>To</div>
@@ -68,7 +68,7 @@
 					<td class="text-center">
 							<?php if ($key['status_close'] != 1 && $key['actual'] <= $key['planQty']  ) { ?>
 								<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
-								<select name="text_mc[]">
+								<select name="text_mc[]" onchange="setMachine(this, <?php echo $key['idQty']; ?>)">
 									<?php if ($key['status_close'] == 0 ) { ?>
 								    	<option>-</option>
 									<?php } ?>
@@ -105,7 +105,7 @@
 					</td>
 					<!-- <td class="text-center">-</td> -->
 					<td class="text-center">
-							
+
 								<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
 								<select name="text_mc[]">
 									<?php if ($key['status_close'] == 0 ) { ?>
@@ -118,7 +118,7 @@
 							<?php } ?>
 					</td>
 				</tr>
-			
+
 		</tbody>
 		</table>
 
@@ -255,6 +255,28 @@
 	    });
 
 	} );
+
+	function setMachine(machine_id, id_qty){
+		var mesin = machine_id.value;
+		var id = id_qty;
+		$.ajax({
+			url: "<?php echo base_url();?>department/setMcOnSpk/",
+			cache: false,
+			type: 'POST',
+			data: {
+				'mesin': mesin,
+				'id': id,
+			},
+				success: function(msg){
+					if (msg == 1) {
+						window.alert("Success");
+						location.reload();
+					}else{
+						window.alert("Failed");
+					}
+			}
+		});
+	}
 
 	function selectRow(id) {
 

@@ -28,9 +28,21 @@ class Department extends CI_Controller {
 	}
 
 	public function actual_production($department=''){
-		if (isset($_POST['text_idQty']) && count($_POST['text_idQty']) > 0) {
-			$this->model_master_plan_qty->setMcOnSpk($department);
+		// if (isset($_POST['text_idQty']) && count($_POST['text_idQty']) > 0) {
+		// 	$this->model_master_plan_qty->setMcOnSpk($department);
 
+	 //        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
+	 //        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
+	 //        $data['dept'] = $department;
+	 //        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $data['setStart'], $data['setEnd']);
+	 //        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
+	 //        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
+	 //        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
+	 //        $data['data_operator']= $this->model_operator->get_data();
+		// 	$this->load->view('template/header/index', $data);
+		// 	$this->load->view('template/menu/index');
+		// 	$this->load->view('pages/actual_production/index');
+		// }else{
 	        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
 	        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
 	        $data['dept'] = $department;
@@ -42,19 +54,18 @@ class Department extends CI_Controller {
 			$this->load->view('template/header/index', $data);
 			$this->load->view('template/menu/index');
 			$this->load->view('pages/actual_production/index');
+		// }
+	}
+
+
+	public function setMcOnSpk()
+	{
+		if ($this->model_master_plan_qty->setMcOnSpk()) {
+			echo 1;
 		}else{
-	        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
-	        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
-	        $data['dept'] = $department;
-	        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $data['setStart'], $data['setEnd']);
-	        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
-	        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
-	        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
-	        $data['data_operator']= $this->model_operator->get_data();
-			$this->load->view('template/header/index', $data);
-			$this->load->view('template/menu/index');
-			$this->load->view('pages/actual_production/index');
+			echo 0;
 		}
+
 	}
 
 	public function production_status($department='')
@@ -144,14 +155,14 @@ class Department extends CI_Controller {
 	}
 
 
-	public function setMachine($department='') {
-        $dateStart = $this->security->xss_clean($this->input->post('text_dateStart'));
-        $dateEnd = $this->security->xss_clean($this->input->post('text_dateEnd'));
+	// public function setMachine($department='') {
+ //        $dateStart = $this->security->xss_clean($this->input->post('text_dateStart'));
+ //        $dateEnd = $this->security->xss_clean($this->input->post('text_dateEnd'));
 
-		$this->model_master_plan_qty->setMcOnSpk($department);
-		$this->actual_production($department);
-		// redirect('department/actual_production/'.$department);
-	}
+	// 	$this->model_master_plan_qty->setMcOnSpk($department);
+	// 	$this->actual_production($department);
+	// 	// redirect('department/actual_production/'.$department);
+	// }
 
 	function actual_download($department, $start, $end) {
 		$data['data']          = $this->model_master_plan->get_by_dept_id($department, $start, $end);

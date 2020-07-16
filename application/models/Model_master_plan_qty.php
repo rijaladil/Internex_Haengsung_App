@@ -278,17 +278,30 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
-    public function setMcOnSpk($id)
+    public function setMcOnSpk()
     {
-		$text_idQty = ($_POST['text_idQty']);
-		$text_mc = ($_POST['text_mc']);
-		foreach ($text_idQty as $key => $value) {
+		// $text_idQty = ($_POST['text_idQty']);
+		// $text_mc = ($_POST['text_mc']);
+  //       $text_idQty = ($_POST['text_idQty']);
+  //       $text_mc = ($_POST['text_mc']);
+
+        $text_idQty = $this->security->xss_clean($this->input->post('id'));
+        $text_mc    = $this->security->xss_clean($this->input->post('mesin'));
+
+		// foreach ($text_idQty as $key => $value) {
+            // echo "update itx_t_master_plan_qty set mc_id = $text_mc[$key] where id = $text_idQty[$key] <br>";
 			// if ($text_mc[$key] != '-') {
-		        $this->db->set('mc_id', $text_mc[$key]);
-		        $this->db->where('id', $text_idQty[$key]);
-		        $this->db->update('itx_t_master_plan_qty');
+        $this->db->set('mc_id', $text_mc);
+        $this->db->where('id', $text_idQty);
+        $this->db->update('itx_t_master_plan_qty');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
 			// }
-		}
+		// }
     }
 
     public function get_summary()
