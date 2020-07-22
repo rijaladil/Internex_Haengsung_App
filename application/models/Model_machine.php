@@ -3,10 +3,14 @@
 class Model_machine extends CI_Model
 {
 
-    public function get_by_dept_id($id)
+    public function get_by_dept_id($id='')
     {
         $this->db->from('itx_m_machine');
-        $this->db->where('department_id', $id);
+        if ($id <> '') {
+            # code...
+            $this->db->where('department_id', $id);
+        }
+        $this->db->order_by('mc_no', 'asc');
         $query = $this->db->get();
         return $query->result_array();
     }

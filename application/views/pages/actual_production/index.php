@@ -66,19 +66,19 @@
 				<tr id="dataRow<?php echo $key['idQty']; ?>" onclick="selectRow(<?php echo $key['idQty']; ?>)" class="<?php echo ($key['status_close'] == 0) ? 'waiting' : (($key['status_close'] == 1) ? 'process' : 'completed') ; ?>">
 					<td class="text-center"><?php echo $i++; ?></td>
 					<td class="text-center">
-							<?php if ($key['status_close'] != 1 && $key['actual'] <= $key['planQty']  ) { ?>
-								<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
-								<select name="text_mc[]" onchange="setMachine(this, <?php echo $key['idQty']; ?>)">
-									<?php if ($key['status_close'] == 0 ) { ?>
-								    	<option>-</option>
-									<?php } ?>
-									<?php foreach ($data_machine as $mc) { ?>
-								    	<option value="<?php echo $mc['id']; ?>" <?php echo ($mc['id'] == $key['mc_id']) ? 'selected' : ''; ?>><?php echo $mc['mc_no']; ?></option>
-									<?php } ?>
-								</select>
-							<?php }else{ ?>
-								<?php echo $key['mcNo']; ?>
-							<?php } ?>
+						<?php if ($key['status_close'] != 1 && $key['actual'] <= $key['planQty']  ) { ?>
+							<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
+							<select name="text_mc[]" onchange="setMachine(this, <?php echo $key['idQty']; ?>)">
+								<?php if ($key['status_close'] == 0 ) { ?>
+							    	<option>-</option>
+								<?php } ?>
+								<?php foreach ($data_machine as $mc) { ?>
+							    	<option value="<?php echo $mc['id']; ?>" <?php echo ($mc['id'] == $key['mc_id']) ? 'selected' : ''; ?>><?php echo $mc['mc_no']; ?></option>
+								<?php } ?>
+							</select>
+						<?php }else{ ?>
+							<?php echo $key['mcNo']; ?>
+						<?php } ?>
 					</td>
 					<td><?php echo $key['mcName']; ?></td>
 					<td class="text-center"><?php echo $key['date']; ?></td>
@@ -103,21 +103,18 @@
 							 }
 						?>
 					</td>
-					<!-- <td class="text-center">-</td> -->
 					<td class="text-center">
-
-								<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
-								<select name="text_mc[]">
-									<?php if ($key['status_close'] == 0 ) { ?>
-								    	<option>-</option>
-									<?php } ?>
-									<?php foreach ($data_operator as $opr) { ?>
-								    	<option value="<?php echo $opr['nip']; ?>"><?php echo $opr['name']; ?></option>
-									<?php } ?>
-								</select>
+						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
+							<?php if ($key['operator_id'] == NULL ) { ?>
+						    	<option>-</option>
 							<?php } ?>
+							<?php foreach ($data_operator as $opr) { ?>
+						    	<option <?php echo ( $key['operator_id'] == $opr['nip'] ? 'selected' : ''); ?> value="<?php echo $opr['nip']; ?>"><?php echo $opr['name']; ?></option>
+							<?php } ?>
+						</select>
 					</td>
 				</tr>
+				<?php } ?>
 
 		</tbody>
 		</table>
@@ -267,13 +264,35 @@
 				'mesin': mesin,
 				'id': id,
 			},
-				success: function(msg){
-					if (msg == 1) {
-						window.alert("Success, set to machine "+machine_id.options[machine_id.selectedIndex].text);
-						location.reload();
-					}else{
-						window.alert("Failed");
-					}
+			success: function(msg){
+				if (msg == 1) {
+					window.alert("Success, set to machine "+machine_id.options[machine_id.selectedIndex].text);
+					location.reload();
+				}else{
+					window.alert("Failed");
+				}
+			}
+		});
+	}
+
+	function setOperator(operator_id, id_qty){
+		var operator = operator_id.value;
+		var id = id_qty;
+		$.ajax({
+			url: "<?php echo base_url();?>department/setOperator/",
+			cache: false,
+			type: 'POST',
+			data: {
+				'operator': operator,
+				'id': id,
+			},
+			success: function(msg){
+				if (msg == 1) {
+					window.alert("Success");
+					location.reload();
+				}else{
+					window.alert("Failed");
+				}
 			}
 		});
 	}

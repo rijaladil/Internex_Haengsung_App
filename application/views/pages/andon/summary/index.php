@@ -82,24 +82,32 @@
 
 	<script src="<?php echo base_url(); ?>assets/others/Highcharts-7.2.1/code/highcharts.js"></script>
 	<script src="<?php echo base_url(); ?>assets/others/Highcharts-7.2.1/code/modules/series-label.js"></script>
-	
+
 	<div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 	<form id="normal" method="post" action="<?php echo base_url(); ?>andon">
 		<div class="form">
 			<div class="left">Summary Actual Status</div>
 			<div class="right">
-				<button class="btn-green">Excel</button>
+				<a class="btn-green" onclick="downloadExcel()">Excel</a>
 				<button class="btn-blue">Search</button>
-<!--
-				<input type="text" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
-				<div>To</div>
- -->
+
 				<input type="text" name="text_dateStart" id="datepicker1"  autocomplete="off" value="<?php echo ($setStart == '') ? date('Y-m-d') : $setStart;?>"/>
+				<select class="form-control" name="text_machine" id="text_machine">
+					<option value="">All Machines <?php echo $selected_machine; ?></option>
+					<?php foreach ($this->model_machine->get_by_dept_id() as $key) { ?>
+						<option <?php echo ($selected_machine == $key['id'] ? 'selected' : '') ?> value="<?php echo $key['id']; ?>"><?php echo $key['mc_no']; ?></option>
+					<?php } ?>
+				</select>
+
+				<select class="form-control" name="text_dept" id="text_dept">
+					<option value="">All Process</option>
+					<?php foreach ($this->model_department->get_all() as $key) { ?>
+						<option <?php echo ($selected_dep == $key['id'] ? 'selected' : '') ?> value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
+					<?php } ?>
+				</select>
 			</div>
 		</div>
 	</form>
-
-
 
 	<div class="body-data">
 		<div>
@@ -110,8 +118,9 @@
 		<table id="" class="display textCenter" width="100%" border="1">
 		<thead>
 		  <tr>
+		    <th width="2%" rowspan="2">No</th>
 		    <th rowspan="2">Process</th>
-		    <th rowspan="2">No. M/C</th>
+		    <th width="5%" rowspan="2">No. M/C</th>
 		    <th rowspan="2">M/C Name</th>
 		    <th rowspan="2"></th>
 		    <th colspan="5">Actual Today</th>
@@ -131,11 +140,12 @@
 		  </tr>
 		</thead>
 		<tbody>
-			<?php foreach ($data as $key) { ?>
+			<?php $no = 1; foreach ($data as $key) { ?>
 				<tr>
+					<td rowspan="2"><?php echo $no++; ?></td>
 					<td rowspan="2"><?php echo $key['deptName']; ?></td>
 					<td rowspan="2"><?php echo $key['mcNo']; ?></td>
-					<td rowspan="2"><?php echo $key['mcName']; ?></td>
+					<td rowspan="2" nowrap=""><?php echo $key['mcName']; ?></td>
 					<td>Call</td>
 					<td class="bg-green"><?php echo $key['count1']; ?></td>
 					<td class="bg-blue"><?php echo $key['count4']; ?></td>
@@ -164,7 +174,6 @@
 			<?php } ?>
 		</tbody>
 		</table>
-
 	</div>
 
 </body>
@@ -185,13 +194,19 @@
         $(document).ready(function() {
 
 			date = document.getElementById("datepicker1").value;
+			dept = document.getElementById("text_dept").value;
+			machine = document.getElementById("text_machine").value;
 		    $.ajax({
-		        url: "<?php echo base_url(); ?>"+"andon/jsonGetSum/"+date,
+		        url: "<?php echo base_url(); ?>"+"andon/jsonGetSum",
 		        dataType: 'json',
 		        type: 'post',
 		        cache:false,
+		        data:{
+		        	'date' : date,
+		        	'dept' : dept,
+		        	'machine' : machine
+		        },
 		        success: function(data){
-
 		        	var dataDate = [];
 		        	var dataResponse = [];
 		        	var dataRepair = [];
@@ -243,13 +258,16 @@
 		        }
 		    });
 
-
-
 		    $.ajax({
-		        url: "<?php echo base_url(); ?>"+"andon/jsonGetSumDonut/"+date,
+		        url: "<?php echo base_url(); ?>"+"andon/jsonGetSumDonut/",
 		        dataType: 'json',
 		        type: 'post',
 		        cache:false,
+		        data:{
+		        	'date' : date,
+		        	'date' : date,
+		        	'machine' : machine
+		        },
 		        success: function(data){
 
 		        	machineCall = parseInt(data[0]['machineCall']);
@@ -292,7 +310,42 @@
 		        }
 		    });
 
+		    load_machine();
 
+		    // console.log(<?php echo $selected_machine;?>);
         });
+
+		// $("#text_dept").change(function(){
+		// 	load_machine();
+		// });
+
+		function selectElement(id, valueToSelect) {
+		    let element = document.getElementById(id);
+		    element.value = valueToSelect;
+		}
+
+	   function load_machine(){
+	      var text_dept = $("#text_dept").val();
+	      $.ajax({
+	         url: "<?php echo base_url();?>json/get_machines",
+	         cache: false,
+	         type: 'POST',
+	         data: {
+	            'text_dept': text_dept,
+	         },
+	         success: function(msg){
+	            $("#text_machine").html("<option value=''>All Machines</option>"+msg);
+			    selectElement('text_machine', '<?php echo $selected_machine;?>');
+	         }
+	      });
+	   }
+
+	   function downloadExcel(){
+			date    = document.getElementById("datepicker1").value;
+			dept    = document.getElementById("text_dept").value;
+			machine = document.getElementById("text_machine").value;
+
+	    	window.open("<?php echo base_url(); ?>andon/download_summary/"+date+'/'+(dept == '' ? 0 : dept)+'/'+(machine == '' ? 0 : machine));
+	   }
 
 	</script>

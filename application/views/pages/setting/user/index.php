@@ -32,7 +32,7 @@
 	<thead>
 	  <tr>
 	    <th width="3%" height="50px">No</th>
-	    <th width="">Process</th>
+	    <!-- <th width="">Process</th> -->
 	    <th width="10%">ID User</th>
 	    <th width="">Name</th>
 	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
@@ -47,7 +47,7 @@
 		<input hidden="" id="textUpdateDept<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['deptId']; ?>">
 			<tr>
 		    	<td class="text-center"><?php echo $i++; ?></td>
-			    <td class=""><?php echo $key['dept']; ?></td>
+			    <!-- <td class=""><?php echo $key['dept']; ?></td> -->
 			    <td class="text-center"><?php echo $key['nip']; ?></td>
 			    <td class="" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
 			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
@@ -85,14 +85,14 @@
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
 					<?php } ?>
 					</select>
-		Dept:		<select id="textDept">
+		<!-- Dept:		<select id="textDept">
 						<option value=''>Select</option>
 					    <?php foreach ($this->model_department->get_all() as $level) { ?>
 							<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?>
 
 						</option>
 					<?php } ?>
-					</select>
+					</select> -->
 					<button class="btn" onclick='save()'>SAVE</button>
 					<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
 	</div>
@@ -112,11 +112,11 @@
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option>
 					<?php } ?>
 					</select>
-		Dept:		<select id="textUpdateDept">
+		<!-- Dept:		<select id="textUpdateDept">
 				    <?php foreach ($this->model_department->get_all() as $level) { ?>
 						<option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option>
 					<?php } ?>
-					</select>
+					</select> -->
 					<button class="btn" onclick='update()'>UPDATE</button>
 					<button class="cancel" onclick='closeModalEdit()'>CLOSE</button>
 	</div>
@@ -129,18 +129,7 @@
 		<input type="text" name="" id="textDeleteHid" hidden="">
 		NIP : 		<input type="text" name="" id="textDeleteNip" readonly>
 		Name : 		<input type="text" name="" id="textDeleteName" readonly>
-		Password :	<input type="text" name="" id="textDeletePassword" placeholder="Type here if you want to change the password" readonly>
-		Level :		<input type="text" id="textDeleteLevel" readonly>
-				    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
-						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['description']; ?></option> -->
-					<?php } ?>
-
-		Dept:		<input type="text" id="textDeleteDept" readonly>
-				    <?php foreach ($this->model_department->get_all() as $level) { ?>
-						<!-- <option value="<?php echo $level['id']; ?>"><?php echo $level['name']; ?></option> -->
-					<?php } ?>
-
-					<button class="cancel" onclick='Delete()'>DELETE</button>
+					<button class="cancel" onclick='hapus()'>DELETE</button>
 					<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 	</div>
 </div>
@@ -151,9 +140,9 @@
 		var name = document.getElementById('textName').value;
 		var nip = document.getElementById('textNip').value;
 		var level = $('#textLevel').val()
-		var dept = $('#textDept').val()
+		// var dept = $('#textDept').val()
 		var pass = $('#textPassword').val()
-		if (name == '' || nip == '' || level == '' || dept == '' || pass == '') {
+		if (name == '' || nip == '' || level == '' || pass == '') {
 			console.log('kosong');
 		}else{
 			// console.log(name + ' -- ' +nip);
@@ -166,7 +155,7 @@
 		            'text_name': name,
 		            'text_nip': nip,
 		            'text_level': level,
-		            'text_dept': dept,
+		            // 'text_dept': dept,
 		            'text_pass': pass,
 		        },
 		        cache: false,
@@ -185,17 +174,17 @@
 
 	function showModalEdit(id){
 		var idLevel = document.getElementById('textUpdateLevel'+id).value;
-		var idDept = document.getElementById('textUpdateDept'+id).value;
+		// var idDept = document.getElementById('textUpdateDept'+id).value;
 
 	  	document.getElementById("myForm1").style.display = "block";
 		document.getElementById('textUpdateHid').value = id;
 		document.getElementById('textUpdateNip').value = id;
 		document.getElementById('textUpdateName').value = document.getElementById('idValName'+id).innerHTML;
 		document.getElementById('textUpdateLevel').value = document.getElementById('idValName'+id).innerHTML;
-		document.getElementById('textUpdateDept').value = document.getElementById('idValName'+id).innerHTML;
+		// document.getElementById('textUpdateDept').value = document.getElementById('idValName'+id).innerHTML;
 
 		selectElement('textUpdateLevel', idLevel);
-		selectElement('textUpdateDept', idDept);
+		// selectElement('textUpdateDept', idDept);
 	}
 
 	function showModalDelete(id){
@@ -206,11 +195,11 @@
 		document.getElementById('textDeleteHid').value = id;
 		document.getElementById('textDeleteNip').value = id;
 		document.getElementById('textDeleteName').value = document.getElementById('idValName'+id).innerHTML;
-		document.getElementById('textDeleteLevel').value = document.getElementById('idValName'+id).innerHTML;
-		document.getElementById('textDeleteDept').value = document.getElementById('idValName'+id).innerHTML;
+		// document.getElementById('textDeleteLevel').value = document.getElementById('idValName'+id).innerHTML;
+		// document.getElementById('textDeleteDept').value = document.getElementById('idValName'+id).innerHTML;
 
-		selectElement('textDeleteLevel', idLevel);
-		selectElement('textDeleteDept', idDept);
+		// selectElement('textDeleteLevel', idLevel);
+		// selectElement('textDeleteDept', idDept);
 	}
 
 	function update(id){
@@ -218,7 +207,7 @@
 		var hid = document.getElementById('textUpdateHid').value;
 		var name = document.getElementById('textUpdateName').value;
 		var level = $('#textUpdateLevel').val()
-		var dept = $('#textUpdateDept').val()
+		// var dept = $('#textUpdateDept').val()
 		var pass = $('#textUpdatePassword').val()
 		if (name == '' || nip == '') {
 			console.log('kosong');
@@ -234,8 +223,41 @@
 		            'text_name': name,
 		            'text_nip': nip,
 		            'text_level': level,
-		            'text_dept': dept,
+		            // 'text_dept': dept,
 		            'text_pass': pass,
+		        },
+		        cache: false,
+		        success: function(msg){
+		        	location.reload();
+		        }
+		    });
+
+		}
+	}
+
+	function hapus(id){
+		var nip = document.getElementById('textDeleteNip').value;
+		var hid = document.getElementById('textDeleteHid').value;
+		var name = document.getElementById('textDeleteName').value;
+		// var level = $('#textUpdateLevel').val()
+		// var dept = $('#textUpdateDept').val()
+		var pass = $('#textUpdatePassword').val()
+		if (name == '' || nip == '') {
+			console.log('kosong');
+		}else{
+			// console.log(name + ' -- ' +nip);
+
+		    $.ajax({
+		        url: "<?php echo base_url(); ?>setting/user_delete/",
+		        // dataType: 'json',
+		        type: 'POST',
+		        data: {
+		            'hid': hid,
+		            'text_name': name,
+		            'text_nip': nip,
+		            // 'text_level': level,
+		            // 'text_dept': dept,
+		            // 'text_pass': pass,
 		        },
 		        cache: false,
 		        success: function(msg){

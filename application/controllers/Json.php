@@ -12,4 +12,15 @@ class Json extends CI_Controller {
 	{
         echo json_encode($this->model_losstime->get_loss_by_qtyId($id));
 	}
+
+    public function get_machines()
+    {
+        $text_dept = $this->input->post('text_dept');
+        foreach ($this->model_machine->get_by_dept_id($text_dept) as $row) :
+          echo "<option value='". $row['id'] ."'>".$row['mc_no'] ."</option>";
+        endforeach;
+        return;
+    }
+
+
 }

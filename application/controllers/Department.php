@@ -65,13 +65,21 @@ class Department extends CI_Controller {
 		}else{
 			echo 0;
 		}
+	}
 
+	public function setOperator()
+	{
+		if ($this->model_master_plan_qty->setOperator()) {
+			echo 1;
+		}else{
+			echo 0;
+		}
 	}
 
 	public function production_status($department='')
 	{
-        $data['data'] = $this->model_master_plan_qty->get_production_status_by_dept_id($department);
-        $data['department'] = $department;
+		$data['data']       = $this->model_master_plan_qty->get_production_status_by_dept_id($department);
+		$data['department'] = $department;
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/production_status/index');

@@ -29,6 +29,8 @@ class Andon extends CI_Controller {
 
 	public function summary($department='')
 	{
+        $data['selected_dep'] = $this->security->xss_clean($this->input->post('text_dept'));
+        $data['selected_machine'] = $this->security->xss_clean($this->input->post('text_machine'));
         $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
         $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
         $data['data'] = $this->model_andon->get_summary();
@@ -53,14 +55,21 @@ class Andon extends CI_Controller {
         $this->load->view('pages/andon/history/download', $data);
     }
 
-	public function jsonGetSum($date)
+    public function download_summary($date, $dept, $machine)
+    {
+        $data['data'] = $this->model_andon->get_summary_url($date, $dept, $machine);
+        $data['date'] = $date;
+        $this->load->view('pages/andon/summary/download', $data);
+    }
+
+	public function jsonGetSum()
 	{
-        echo json_encode($this->model_andon->jsonGetSum($date));
+        echo json_encode($this->model_andon->jsonGetSum());
 	}
 
-	public function jsonGetSumDonut($date)
+	public function jsonGetSumDonut()
 	{
-        echo json_encode($this->model_andon->jsonGetSumDonut($date));
+        echo json_encode($this->model_andon->jsonGetSumDonut());
 	}
 
 }

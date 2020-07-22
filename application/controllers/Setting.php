@@ -47,6 +47,11 @@ class Setting extends CI_Controller {
 		$this->model_user->user_update();
 	}
 
+	public function user_delete()
+	{
+		$this->model_user->user_delete();
+	}
+
 	public function quality()
 	{
 		$this->load->view('template/header/index');

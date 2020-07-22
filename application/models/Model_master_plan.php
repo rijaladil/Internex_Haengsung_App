@@ -15,7 +15,8 @@ class Model_master_plan extends CI_Model
         	,qty.date date
         	,qty.mc_id
         	,qty.qty planQty
-        	,qty.status_close
+            ,qty.status_close
+        	,qty.operator_id
             ,mc.name mcName
         	,mc.mc_no mcNo
         	,date_format(result.start_time, '%y/%m/%d %H:%i') start
