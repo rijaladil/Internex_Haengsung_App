@@ -40,7 +40,7 @@
 		    <th rowspan="2" width="4.8%">MC Name</th>
 		    <th rowspan="2" width="5%">Date</th>
 		    <th colspan="4" width="27%" style="border-bottom: 1px solid white">Model Information</th>
-		    <th colspan="11" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
+		    <th colspan="12" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
 		  </tr>
 		  <tr>
 		    <th>Part Number</th>
@@ -57,7 +57,7 @@
 		    <th>Work Time</th>
 		    <th>Loss Time</th>
 		    <th>Operation %</th>
-		   <!--  <th>Shift</th> -->
+		    <th>Shift</th>
 		    <th>Worker</th>
 		  </tr>
 		</thead>
@@ -103,6 +103,19 @@
 							 }
 						?>
 					</td>
+					
+					<td class="text-center">
+						<select  style="-webkit-appearance: none;" <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
+							<?php if ($key['operator_id'] == NULL ) { ?>
+						    	<option hidden>-</option>
+							<?php } ?>
+							<?php foreach ($data_operator as $opr) { ?>
+						    	<option hidden  <?php echo ( $key['operator_id'] == $opr['nip'] ? 'selected' : ''); ?> value="<?php echo $opr['nip']; ?>"><?php echo $opr['shift']; ?></option>
+							<?php } ?>
+						</select>
+					</td>
+					
+
 					<td class="text-center">
 						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
 							<?php if ($key['operator_id'] == NULL ) { ?>
