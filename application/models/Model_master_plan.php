@@ -34,7 +34,13 @@ class Model_master_plan extends CI_Model
         		from itx_t_losstime losstime
         		where
         			losstime.masterplan_qty_id = qty.id
-        	) as losstime
+        	) as losstime,
+            ,(
+                select name
+                from itx_m_operator
+                where
+                    nip = qty.operator_id
+            ) as worker
         	");
         $this->db->from('itx_t_master_plan_qty qty');
         $this->db->join('itx_t_master_plan plan', 'plan.id = qty.masterplan_id', 'inner');

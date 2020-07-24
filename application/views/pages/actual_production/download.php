@@ -152,7 +152,7 @@
             $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('Q'.$rowStart, ($key['losstime'] == 0) ? '' : sprintf("%02d",floor($key['losstime'] / 3600)) . ':' . sprintf("%02d",floor($key['losstime'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['losstime'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('R'.$rowStart, ($key['status_close'] == 1 && $key['working_time'] > 0 || $key['status_close'] == 2 && $key['working_time'] > 0) ? (number_format((float)(($key['working_time']/($key['working_time']+$key['losstime']))*100), 2, '.', ''))  : '0' );//Opeation %
-            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, '');//Worker
+            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['worker']);//Worker
             // $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, '');//Worker
 
 
