@@ -179,6 +179,7 @@ class Department extends CI_Controller {
 		$data['department']    = $this->model_department->get_department_by_id($department);
 		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
+		$data['data_operator'] = $this->model_operator->get_data();
 		$this->load->view('pages/actual_production/download', $data);
 	}
 
