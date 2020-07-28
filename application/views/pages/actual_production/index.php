@@ -89,7 +89,6 @@
 					<td class="text-right"><?php echo rupiah0dec($key['planQty']); ?></td>
 					<td class="text-right" id="idQtyTot<?php echo $key['idQty']; ?>"><?php echo rupiah0dec($key['actual']-$key['ng']); ?></td>
 					<td class="text-right"><?php echo rupiah0dec(($key['actual']-$key['ng'])-$key['planQty']); ?></td>
-					<!-- <td class="text-right"><?php echo number_format((float)(($key['actual']-$key['ng'])/$key['planQty'])*100, 2, '.', ''); ?></td> -->
 					<td class="text-right"><?php echo rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100); ?></td>
 					<td class="text-right"><?php echo ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']); ?></td>
 					<td class="text-center"><?php echo $key['start']; ?></td>
@@ -103,7 +102,7 @@
 							 }
 						?>
 					</td>
-					
+
 					<td class="text-center">
 						<select  style="-webkit-appearance: none;" <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
 							<?php if ($key['operator_id'] == NULL ) { ?>
@@ -114,7 +113,7 @@
 							<?php } ?>
 						</select>
 					</td>
-					
+
 
 					<td class="text-center">
 						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">

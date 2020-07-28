@@ -145,22 +145,22 @@
             $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, $key['planQty']);
             $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, (rupiah0dec($key['actual']-$key['ng'])));
             $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, (rupiah0dec($key['actual']-$key['ng']-$key['planQty'])));
-            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100)));
+            // $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100)));
+            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec( (  ( $key['actual'] - $key['ng'] ) / $key['planQty']  ) * 100 )));
             $this->excel->getActiveSheet()->setCellValue('M'.$rowStart, ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']));
             $this->excel->getActiveSheet()->setCellValue('N'.$rowStart, $key['start']);
             $this->excel->getActiveSheet()->setCellValue('O'.$rowStart, ($key['finish'] == '00/00/00 00:00') ? '-' : $key['finish']);
             $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('Q'.$rowStart, ($key['losstime'] == 0) ? '' : sprintf("%02d",floor($key['losstime'] / 3600)) . ':' . sprintf("%02d",floor($key['losstime'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['losstime'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('R'.$rowStart, ($key['status_close'] == 1 && $key['working_time'] > 0 || $key['status_close'] == 2 && $key['working_time'] > 0) ? (number_format((float)(($key['working_time']/($key['working_time']+$key['losstime']))*100), 2, '.', ''))  : '0' );//Opeation %
-            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['worker']);//Worker
-            // $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, '');//Worker
+            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['shift']);//Worker
+            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $key['worker']);//Worker
 
-         foreach ($data_operator as $opr) {
-            $datopr = $this->model_operator->get_data( $opr['nip'], $key['idQty'],$key['operator_id']);
-            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $datopr->shift);//Shift
-            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $datopr->name);//Worker
-
-            }
+        //  foreach ($data_operator as $opr) {
+        //     $datopr = $this->model_operator->get_data( $opr['nip'], $key['idQty'],$key['operator_id']);
+        //     $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $datopr->shift);//Shift
+        //     $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $datopr->name);//Worker
+        // }
 
             $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, (rupiah0dec($key['actual']-$key['ng']))); //Prod Qty (diambil dari data aktual)
 

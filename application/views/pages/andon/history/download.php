@@ -73,10 +73,10 @@
                 $this->excel->getActiveSheet()->setCellValue('F'.$rowStart, secToMinute($key['arrival']));
                 $this->excel->getActiveSheet()->setCellValue('G'.$rowStart, secToMinute($key['completed']));
                 $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, secToMinute($key['downtime']));
-                $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, ($key['call_id'] == 1) ? 'Ok' : '');
-                $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, ($key['call_id'] == 4) ? 'Ok' : '');
-                $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, ($key['call_id'] == 2) ? 'Ok' : '');
-                $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, ($key['call_id'] == 3) ? 'Ok' : '');
+                $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, ($key['call_id'] == 1) ? '✓' : '');
+                $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, ($key['call_id'] == 4) ? '✓' : '');
+                $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, ($key['call_id'] == 2) ? '✓' : '');
+                $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, ($key['call_id'] == 3) ? '✓' : '');
                 $rowStart++;
                 $no++;
             }

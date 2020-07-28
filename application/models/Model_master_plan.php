@@ -41,6 +41,12 @@ class Model_master_plan extends CI_Model
                 where
                     nip = qty.operator_id
             ) as worker
+            ,(
+                select shift
+                from itx_m_operator
+                where
+                    nip = qty.operator_id
+            ) as shift
         	");
         $this->db->from('itx_t_master_plan_qty qty');
         $this->db->join('itx_t_master_plan plan', 'plan.id = qty.masterplan_id', 'inner');

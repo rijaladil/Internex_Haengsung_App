@@ -92,8 +92,8 @@
 					<td><?php echo $key['mcNo']; ?></td>
 					<td><?php echo $key['mcName']; ?></td>
 					<td><?php echo rupiah2dec($sumActualLast); ?></td>
-					<td><?php echo rupiah2dec($planning); ?></td>
 					<td><?php echo rupiah2dec($sumActual); ?></td>
+					<td><?php echo rupiah2dec($planning); ?></td>
 					<td><?php echo rupiah2dec($sumBallance); ?></td>
 					<!-- <td>
 						<?php
@@ -108,7 +108,7 @@
 					</td> -->
 					<td>
 						<?php
-								echo convertToPercentages($sumActual,$planning);
+								echo ($planning == 0 ? '' : number_format((($sumActual-$key['qtyNg'])/($planning)*100),0));
 						?>
 					</td>
 					<td><?php echo rupiah2dec($key['qtyNg']*1); ?></td>

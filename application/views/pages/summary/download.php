@@ -108,9 +108,9 @@
       $totAndonTimes    = 0;
       $totAndonTime     = 0;
       $totPlanning      = 0;
-  
+
       // for ($xx=1; $xx < 3; $xx++) {
-  
+
 
       foreach ($data as $key) {
 
@@ -140,19 +140,19 @@
             $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, rupiah2dec($sumBallance));
             $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, convertToPercentages($sumActual,$planning));
             $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, rupiah2dec($key['qtyNg']*1));
-            $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, convertToPercentages($key['qtyActual'], $key['qtyNg']));
+            $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, ($planning==0 ? '' : number_format((($sumActual-$key['qtyNg'])/($planning)*100),0)));
             $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, secToMinute($key['workingTime']));
             $this->excel->getActiveSheet()->setCellValue('M'.$rowStart, secToMinute($key['lossTime']));
             $this->excel->getActiveSheet()->setCellValue('N'.$rowStart, ($key['workingTime'] > 0)? convertToPercentages(($key['workingTime']+$key['lossTime']), $key['workingTime']):'');
             $this->excel->getActiveSheet()->setCellValue('O'.$rowStart, rupiah2dec($key['andonTimes']));
             $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, secToMinute($key['andonTime']));
-            
+
       $rowStart++;
 
 
      }
 
-      // FOOTER 
+      // FOOTER
             $this->excel->getActiveSheet()->setCellValue('A43', 'Total');
             $this->excel->getActiveSheet()->mergeCells('A43:D43');
             $this->excel->getActiveSheet()->getStyle('A43:P43')->getFont()->setBold(true);
