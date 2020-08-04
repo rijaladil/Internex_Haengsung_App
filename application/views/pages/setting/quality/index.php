@@ -46,10 +46,10 @@
 					<?php } ?>
 				</tbody>
 				<table>
-					  <tr>
+					  <tr <?php echo ( $i > 16 ? 'hidden=""' : ''); ?>>
 					  	<td colspan="3" style="border-top:1px solid black; text-align: center; background: white;">
 					  		<a onclick="showModalAdd(<?php echo $key['id']; ?>, '<?php echo $key['name']; ?>')" class="add-btn" href="#">
-					  			+Add
+					  			+Add <?php echo $i; ?>
 					  		</a>
 					  	</td>
 					  </tr>

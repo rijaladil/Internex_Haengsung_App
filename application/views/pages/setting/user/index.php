@@ -60,8 +60,8 @@
 				    </td>
 				<?php } ?>
 			    <td class="text-center">
-			    	<a class="click-btn-u" onclick="showModalEdit(<?php echo $key['nip']; ?>)" href="#">Update</a>
-			    	<a class="click-btn-d" onclick="showModalDelete(<?php echo $key['nip']; ?>)" href="#">Delete</a>
+			    	<a class="click-btn-u" onclick="showModalEdit('<?php echo $key['nip']; ?>')" href="#">Update</a>
+			    	<a class="click-btn-d" onclick="showModalDelete('<?php echo $key['nip']; ?>')" href="#">Delete</a>
 			    </td>
 			  </tr>
 			<?php } ?>

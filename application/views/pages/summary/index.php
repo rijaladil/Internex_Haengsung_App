@@ -108,7 +108,8 @@
 					</td> -->
 					<td>
 						<?php
-								echo ($planning == 0 ? '' : number_format((($sumActual-$key['qtyNg'])/($planning)*100),0));
+								// echo ($planning == 0 ? '' : number_format((($sumActual-$key['qtyNg'])/($planning)*100),0));
+								echo convertToPercentages($planning, ($sumActual-$key['qtyNg']));
 						?>
 					</td>
 					<td><?php echo rupiah2dec($key['qtyNg']*1); ?></td>
@@ -134,7 +135,7 @@
 		    <th><?php echo rupiah2dec($totActual); ?></th>
 		    <th><?php echo rupiah2dec($totPlanning); ?></th>
 		    <th><?php echo rupiah2dec($totBallance); ?></th>
-		    <th><?php echo convertToPercentages($totActualLast, $totActual); ?></th>
+		    <th><?php echo convertToPercentages($totPlanning, ($totActual-$totNg)); ?></th>
 		    <!-- <th><?php echo ($totActual/$totActualLast)*100; ?></th> -->
 		    <th><?php echo rupiah2dec($totNg); ?></th>
 		    <th>

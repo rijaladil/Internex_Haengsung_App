@@ -158,6 +158,15 @@ class Setting extends CI_Controller {
 		}
 	}
 
+	public function line_delete()
+	{
+		if($this->model_machine->delete()) {
+			echo json_encode('ok');
+		}else{
+			echo json_encode('failed');
+		}
+	}
+
 	public function line_add()
 	{
 		if($this->model_machine->add()) {

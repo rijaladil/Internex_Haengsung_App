@@ -51,8 +51,8 @@
 			    <td class="text-center" id="id_<?php echo $key['nip']; ?>_deptName"><?php echo $key['dept']; ?></td>
 				<td class="text-center" id="id_<?php echo $key['nip']; ?>_phone"><?php echo $key['mobile']; ?></td>
 			    <td class="text-center">
-			    	<a class="click-btn-u" onclick="showUpdate(<?php echo $key['nip']; ?>)" href="#">Update</a>
-			    	<a class="click-btn-d" onclick="showDelete(<?php echo $key['nip']; ?>)" href="#">Delete</a>
+			    	<a class="click-btn-u" onclick="showUpdate('<?php echo $key['nip']; ?>')" href="#">Update</a>
+			    	<a class="click-btn-d" onclick="showDelete('<?php echo $key['nip']; ?>')" href="#">Delete</a>
 			    </td>
 			  </tr>
 		<?php } ?>

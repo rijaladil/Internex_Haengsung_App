@@ -17,7 +17,7 @@
 <div class="form">
 	<div class="left">Loss Time Setting</div>
 
-	<button class="red right"  onclick="showModalAdd()">+ Add </button>
+	<button <?php echo ( count($this->model_losstime_category->get_all()) > 8 ? 'hidden=""' : '' ); ?> class="red right"  onclick="showModalAdd()">+ Add </button>
 	<!-- <button class="green margin-btn">Save</button> -->
 </div>
 <div class="body-data">

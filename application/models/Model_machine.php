@@ -99,4 +99,17 @@ class Model_machine extends CI_Model
         }
     }
 
+    public function delete()
+    {
+        $hid = $this->security->xss_clean($this->input->post('hid'));
+        $this->db->where('id', $hid);
+        $this->db->delete('itx_m_machine');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 }

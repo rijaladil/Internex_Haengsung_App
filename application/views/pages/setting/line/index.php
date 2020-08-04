@@ -62,8 +62,8 @@
 					 <td class="text-center"></td>
 					 <td class="text-center" id="idValRemark<?php echo $key['id']; ?>"><?php echo $key['remark']; ?></td>
 					 <td class="text-center">
-					 	<a class="click-btn-u" href="#/" onclick="showModalEdit(<?php echo $key['id']; ?>)">Update</a>
-					 	<a class="click-btn-d" href="#/" onclick="showModalDelete(<?php echo $key['id']; ?>)">Delete</a>
+					 	<a class="click-btn-u" href="#/" onclick="showModalEdit('<?php echo $key['id']; ?>')">Update</a>
+					 	<a class="click-btn-d" href="#/" onclick="showModalDelete('<?php echo $key['id']; ?>')">Delete</a>
 					 </td>
 				  </tr>
 			<?php } ?>
@@ -75,7 +75,7 @@
 		<div id="modalEdit" class="form-container">
 			<div class="title">Update Line MC</div>
 			<br>
-			Id :<input type="text" id="hid" name="" hidden="">
+			<input type="text" id="hid" name="" hidden="">
 			No.M/C :<input type="text" id="idInputEditMcNo" name="">
 			Machine Name : <input type="text" id="idInputEditName" name="">
 			Terminal IP No :<input type="text" id="idInputEditIp" name="">
@@ -185,7 +185,7 @@
 		<div id="modalDelete" class="form-container">
 			<div class="title">Delete Line MC</div>
 			<br>
-			Id :<input type="text" id="hid" name="" hidden="" readonly>
+			<input type="text" id="hid_delete" name="" readonly hidden="">
 			No.M/C :<input type="text" id="idInputDeleteMcNo" name="" readonly>
 			Machine Name : <input type="text" id="idInputDeleteName" name="" readonly>
 			Terminal IP No :<input type="text" id="idInputDeleteIp" name="" readonly>
@@ -208,7 +208,7 @@
 			        <?php foreach ($this->model_user->get_op() as $key) { ?>
 			            <!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 			        <?php } ?>
-			
+
 			   </td>
 			  </tr>
 			  <tr>
@@ -219,7 +219,7 @@
 					<?php foreach ($this->model_user->get_op() as $key) { ?>
 						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 					<?php } ?>
-				
+
 				</td>
 			    <td>
 			    3 Shift Worker :
@@ -228,12 +228,12 @@
 					<?php foreach ($this->model_user->get_op() as $key) { ?>
 						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 					<?php } ?>
-				
+
 				</td>
 			  </tr>
 			</table>
 
-			<button class="cancel"  href="#/" onclick="Delete()">DELETE</button>
+			<button class="cancel"  href="#/" onclick="deletes()">DELETE</button>
 			<button class="cancel-del" onclick='closeModalDelete()'>CLOSE</button>
 		</div>
 	</div>
@@ -263,17 +263,18 @@
 	}
 
 	function showModalDelete(id) {
+		console.log(id);
 		document.getElementById("myFormDelete").style.display = "block";
-		document.getElementById('hid').value = id;
+		document.getElementById('hid_delete').value = id;
 		document.getElementById('idInputDeleteMcNo').value = document.getElementById('idValMcNo'+id).innerHTML;
 		document.getElementById('idInputDeleteName').value = document.getElementById('idValName'+id).innerHTML;
 		document.getElementById('idInputDeleteIp').value = document.getElementById('idValIp'+id).innerHTML;
 		document.getElementById('idInputDeleteRemark').value = document.getElementById('idValRemark'+id).innerHTML;
-		var idDept = document.getElementById('idInputDeleteDept'+id).value;
+		// var idDept = document.getElementById('idInputDeleteDept'+id).value;
 		var idWork1 = document.getElementById('idValWorker1'+id).value;
 		var idWork2 = document.getElementById('idValWorker2'+id).value;
 		var idWork3 = document.getElementById('idValWorker3'+id).value;
-		selectElement('idInputDeleteDept', idDept);
+		// selectElement('idInputDeleteDept', idDept);
 		selectElement('idInputDeleteWorker1', idWork1);
 		selectElement('idInputDeleteWorker2', idWork2);
 		selectElement('idInputDeleteWorker3', idWork3);
@@ -307,6 +308,26 @@
 	            'text_work1': work1,
 	            'text_work2': work2,
 	            'text_work3': work3,
+	            'hid': id,
+	        },
+	        cache: false,
+	        success: function(msg){
+	        	if (msg == 'ok') {
+	        		location.reload();
+	        	}else{
+	        		console.log(msg);
+	        	}
+	        }
+	    });
+	}
+
+	function deletes(){
+		var id = document.getElementById('hid_delete').value;
+	    $.ajax({
+	        url: "<?php echo base_url(); ?>setting/line_delete/",
+	        dataType: 'json',
+	        type: 'POST',
+	        data: {
 	            'hid': id,
 	        },
 	        cache: false,
