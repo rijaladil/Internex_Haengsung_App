@@ -27,7 +27,7 @@
             $this->excel->getActiveSheet()->setCellValue('A1', 'PT DAE BAEK');
             $this->excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
             $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(26);
-            $this->excel->getActiveSheet()->getStyle('A1:AS7')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('A1:AU7')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
              // Judul
@@ -89,19 +89,11 @@
             $this->excel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
             $this->excel->getActiveSheet()->setCellValue('R7','Operation %');
             $this->excel->getActiveSheet()->getColumnDimension('R')->setWidth(12);
-            $this->excel->getActiveSheet()->setCellValue('S7','Shift');
-            $this->excel->getActiveSheet()->setCellValue('T7','Worker');
+            $this->excel->getActiveSheet()->setCellValue('S7','Counter');
+            $this->excel->getActiveSheet()->setCellValue('T7','Shift');
+            $this->excel->getActiveSheet()->setCellValue('U7','Worker');
 
-            // Prod Qty
-            $this->excel->getActiveSheet()->setCellValue('U6', 'Prod Qty');
-            $this->excel->getActiveSheet()->mergeCells('U6:U7');
-
-            // Result NG
-            $this->excel->getActiveSheet()->setCellValue('V6', 'Result NG');
-            $this->excel->getActiveSheet()->mergeCells('V6:AK6');
-
-
-            $noColProb = 21;
+            $noColProb = 22;
             $noRowProb = 7;
             $lastCol = 0;
             foreach ($data_problem as $prob) {
@@ -120,7 +112,7 @@
 
 
             // $noColLoss = $lastCol;
-            $noColLoss = 37;
+            $noColLoss = $noColProb;
             $noRowLoss = 7;
             foreach ($data_losstime as $loss) {
                 $this->excel->getActiveSheet()->setCellValueByColumnAndRow($noColLoss,$noRowLoss, $loss['name']);
@@ -143,18 +135,19 @@
             $this->excel->getActiveSheet()->setCellValue('G'.$rowStart, $key['description']);
             $this->excel->getActiveSheet()->setCellValue('H'.$rowStart, $key['capaHour']);
             $this->excel->getActiveSheet()->setCellValue('I'.$rowStart, $key['planQty']);
-            $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, (rupiah0dec($key['actual']-$key['ng'])));
-            $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, (rupiah0dec($key['actual']-$key['ng']-$key['planQty'])));
-            // $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100)));
-            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec( (  ( $key['actual'] - $key['ng'] ) / $key['planQty']  ) * 100 )));
+            $this->excel->getActiveSheet()->setCellValue('J'.$rowStart, (rupiah0dec(($key['actual']*$key['counter'])-$key['ng'])));
+            $this->excel->getActiveSheet()->setCellValue('K'.$rowStart, (rupiah0dec(($key['actual']*$key['counter'])-$key['ng']-$key['planQty'])));
+            // $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec(((($key['actual']*$key['counter'])-$key['ng'])/$key['planQty'])*100)));
+            $this->excel->getActiveSheet()->setCellValue('L'.$rowStart, (rupiah2dec( (  ( ($key['actual']*$key['counter']) - $key['ng'] ) / $key['planQty']  ) * 100 )));
             $this->excel->getActiveSheet()->setCellValue('M'.$rowStart, ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']));
             $this->excel->getActiveSheet()->setCellValue('N'.$rowStart, $key['start']);
             $this->excel->getActiveSheet()->setCellValue('O'.$rowStart, ($key['finish'] == '00/00/00 00:00') ? '-' : $key['finish']);
             $this->excel->getActiveSheet()->setCellValue('P'.$rowStart, ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('Q'.$rowStart, ($key['losstime'] == 0) ? '' : sprintf("%02d",floor($key['losstime'] / 3600)) . ':' . sprintf("%02d",floor($key['losstime'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['losstime'] % 60)));
             $this->excel->getActiveSheet()->setCellValue('R'.$rowStart, ($key['status_close'] == 1 && $key['working_time'] > 0 || $key['status_close'] == 2 && $key['working_time'] > 0) ? (number_format((float)(($key['working_time']/($key['working_time']+$key['losstime']))*100), 2, '.', ''))  : '0' );//Opeation %
-            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['shift']);//Worker
-            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $key['worker']);//Worker
+            $this->excel->getActiveSheet()->setCellValue('S'.$rowStart, $key['counter']);
+            $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $key['shift']);
+            $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, $key['worker']);
 
         //  foreach ($data_operator as $opr) {
         //     $datopr = $this->model_operator->get_data( $opr['nip'], $key['idQty'],$key['operator_id']);
@@ -162,11 +155,12 @@
         //     $this->excel->getActiveSheet()->setCellValue('T'.$rowStart, $datopr->name);//Worker
         // }
 
-            $this->excel->getActiveSheet()->setCellValue('U'.$rowStart, (rupiah0dec($key['actual']-$key['ng']))); //Prod Qty (diambil dari data aktual)
+            $this->excel->getActiveSheet()->setCellValue('V'.$rowStart, (rupiah0dec(($key['actual']*$key['counter'])-$key['ng']))); //Prod Qty (diambil dari data aktual)
 
 
 
-            $noColProb2 = 21;
+            $noColProb2 = 22;
+            $titleNoColProb2 = $noColProb2;
             $lastCol = 0;
             foreach ($data_problem as $prob) {
                 $ng = $this->model_result_ng->get_data_ng($prob['id'], $key['idQty'], $key['mc_id']);
@@ -176,7 +170,8 @@
             }
 
             // $noColLoss2 = $lastCol;
-            $noColLoss2 = 37;
+            $noColLoss2 = $noColProb2;
+            $titleNoColLoss2 = $noColLoss2;
             foreach ($data_losstime as $loss) {
                 $losst = $this->model_losstime->get_loss_by_filter($loss['id'], $key['idQty'], $key['mc_id']);
                     $secLoss = ($losst->losstime == 0) ? '' : sprintf("%02d",floor($losst->losstime / 3600)) . ':' . sprintf("%02d",floor($losst->losstime / 60 % 60)) . ':' . sprintf("%02d",floor($losst->losstime % 60));
@@ -191,6 +186,16 @@
 
 
         }
+
+        // Prod Qty
+        // $this->excel->getActiveSheet()->setCellValue('V6', 'Prod Qty');
+        // $this->excel->getActiveSheet()->mergeCells('V6:V7');
+        $this->excel->getActiveSheet()->setCellValueByColumnAndRow($titleNoColProb2,6, 'Prod Qty');
+
+        // Result NG
+        // $this->excel->getActiveSheet()->setCellValue('W6', 'Result NG');
+        // $this->excel->getActiveSheet()->mergeCells('W6:AK6');
+        $this->excel->getActiveSheet()->setCellValueByColumnAndRow($titleNoColLoss2,6, 'Prod Qty');
 
         $this->excel->getActiveSheet()->getStyle("A6:AR1000")->applyFromArray(
             array(
