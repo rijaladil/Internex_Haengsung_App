@@ -375,7 +375,7 @@ class Model_master_plan_qty extends CI_Model
 
                 ,(
                     SELECT
-                        sum(qty_actual)
+                        sum(qty_actual*counter)
                     FROM itx_t_result result
                     left join itx_t_master_plan_qty qty2
                         on qty2.id = result.masterplan_qty_id
@@ -386,7 +386,7 @@ class Model_master_plan_qty extends CI_Model
 
                 ,(
                     SELECT
-                        sum(qty_actual)
+                        sum(qty_actual*counter)
                     FROM itx_t_result result
                     left join itx_t_master_plan_qty qty2
                         on qty2.id = result.masterplan_qty_id
@@ -513,7 +513,7 @@ class Model_master_plan_qty extends CI_Model
 
                 ,(
                     SELECT
-                        sum(qty_actual)
+                        sum(qty_actual*counter)
                     FROM itx_t_result result
                     left join itx_t_master_plan_qty qty2
                         on qty2.id = result.masterplan_qty_id
@@ -524,7 +524,7 @@ class Model_master_plan_qty extends CI_Model
 
                 ,(
                     SELECT
-                        sum(qty_actual)
+                        sum(qty_actual*counter)
                     FROM itx_t_result result
                     left join itx_t_master_plan_qty qty2
                         on qty2.id = result.masterplan_qty_id
