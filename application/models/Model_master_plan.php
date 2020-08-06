@@ -10,7 +10,8 @@ class Model_master_plan extends CI_Model
         	plan.production_part_no
         	,plan.model
         	,plan.description
-        	,plan.capaHour
+            ,plan.capaHour
+        	,qty.counter
             ,qty.id idQty
         	,qty.date date
         	,qty.mc_id

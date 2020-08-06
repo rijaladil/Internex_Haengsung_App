@@ -76,6 +76,15 @@ class Department extends CI_Controller {
 		}
 	}
 
+	public function changeCounter()
+	{
+		if ($this->model_master_plan_qty->changeCounter()) {
+			echo 1;
+		}else{
+			echo 0;
+		}
+	}
+
 	public function production_status($department='')
 	{
 		$data['data']       = $this->model_master_plan_qty->get_production_status_by_dept_id($department);

@@ -310,6 +310,22 @@ class Model_master_plan_qty extends CI_Model
         }
     }
 
+    public function changeCounter()
+    {
+        $text_idQty = $this->security->xss_clean($this->input->post('id'));
+        $counter    = $this->security->xss_clean($this->input->post('counter'));
+
+        $this->db->set('counter', $counter);
+        $this->db->where('id', $text_idQty);
+        $this->db->update('itx_t_master_plan_qty');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function get_summary()
     {
         $department = $this->security->xss_clean($this->input->post('text_dept'));

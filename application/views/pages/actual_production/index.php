@@ -40,7 +40,7 @@
 		    <th rowspan="2" width="4.8%">MC Name</th>
 		    <th rowspan="2" width="5%">Date</th>
 		    <th colspan="4" width="27%" style="border-bottom: 1px solid white">Model Information</th>
-		    <th colspan="12" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
+		    <th colspan="13" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
 		  </tr>
 		  <tr>
 		    <th>Part Number</th>
@@ -57,6 +57,7 @@
 		    <th>Work Time</th>
 		    <th>Loss Time</th>
 		    <th>Operation %</th>
+		    <th>Counter</th>
 		    <th>Shift</th>
 		    <th>Worker</th>
 		  </tr>
@@ -66,7 +67,7 @@
 				<tr id="dataRow<?php echo $key['idQty']; ?>" onclick="selectRow(<?php echo $key['idQty']; ?>)" class="<?php echo ($key['status_close'] == 0) ? 'waiting' : (($key['status_close'] == 1) ? 'process' : 'completed') ; ?>">
 					<td class="text-center"><?php echo $i++; ?></td>
 					<td class="text-center">
-						<?php if ($key['status_close'] != 1 && $key['actual'] <= $key['planQty']  ) { ?>
+						<?php if ($key['status_close'] != 1 && ($key['actual']*$key['counter']) <= $key['planQty']  ) { ?>
 							<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
 							<select name="text_mc[]" onchange="setMachine(this, <?php echo $key['idQty']; ?>)">
 								<?php if ($key['status_close'] == 0 ) { ?>
@@ -87,9 +88,9 @@
 					<td><?php echo $key['description']; ?></td>
 					<td class="text-right"><?php echo rupiah2dec($key['capaHour']*1); ?></td>
 					<td class="text-right"><?php echo rupiah0dec($key['planQty']); ?></td>
-					<td class="text-right" id="idQtyTot<?php echo $key['idQty']; ?>"><?php echo rupiah0dec($key['actual']-$key['ng']); ?></td>
-					<td class="text-right"><?php echo rupiah0dec(($key['actual']-$key['ng'])-$key['planQty']); ?></td>
-					<td class="text-right"><?php echo rupiah2dec((($key['actual']-$key['ng'])/$key['planQty'])*100); ?></td>
+					<td class="text-right" id="idQtyTot<?php echo $key['idQty']; ?>"><?php echo rupiah0dec(($key['actual']*$key['counter'])-$key['ng']); ?></td>
+					<td class="text-right"><?php echo rupiah0dec((($key['actual']*$key['counter'])-$key['ng'])-$key['planQty']); ?></td>
+					<td class="text-right"><?php echo rupiah2dec(((($key['actual']*$key['counter'])-$key['ng'])/$key['planQty'])*100); ?></td>
 					<td class="text-right"><?php echo ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']); ?></td>
 					<td class="text-center"><?php echo $key['start']; ?></td>
 					<td class="text-center"><?php echo ($key['finish'] == '00/00/00 00:00') ? '-' : $key['finish']; ?></td>
@@ -104,7 +105,20 @@
 					</td>
 
 					<td class="text-center">
-						<select  style="-webkit-appearance: none;" <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
+						<select  <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> style="-webkit-appearance: none;" onchange="changeCounter(this, <?php echo $key['idQty']; ?>)">
+							<option <?php echo ( $key['counter'] == 1 ? 'selected' : ''); ?>>1</option>
+							<option <?php echo ( $key['counter'] == 2 ? 'selected' : ''); ?>>2</option>
+							<option <?php echo ( $key['counter'] == 3 ? 'selected' : ''); ?>>3</option>
+							<option <?php echo ( $key['counter'] == 4 ? 'selected' : ''); ?>>4</option>
+							<option <?php echo ( $key['counter'] == 5 ? 'selected' : ''); ?>>5</option>
+							<option <?php echo ( $key['counter'] == 6 ? 'selected' : ''); ?>>6</option>
+							<option <?php echo ( $key['counter'] == 7 ? 'selected' : ''); ?>>7</option>
+							<option <?php echo ( $key['counter'] == 8 ? 'selected' : ''); ?>>8</option>
+						</select>
+					</td>
+
+					<td class="text-center">
+						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> style="-webkit-appearance: none;" <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
 							<?php if ($key['operator_id'] == NULL ) { ?>
 						    	<option hidden>-</option>
 							<?php } ?>
@@ -296,6 +310,28 @@
 			type: 'POST',
 			data: {
 				'operator': operator,
+				'id': id,
+			},
+			success: function(msg){
+				if (msg == 1) {
+					window.alert("Success");
+					location.reload();
+				}else{
+					window.alert("Failed");
+				}
+			}
+		});
+	}
+
+	function changeCounter(form, id_qty){
+		var counter = form.value;
+		var id = id_qty;
+		$.ajax({
+			url: "<?php echo base_url();?>department/changeCounter/",
+			cache: false,
+			type: 'POST',
+			data: {
+				'counter': counter,
 				'id': id,
 			},
 			success: function(msg){
