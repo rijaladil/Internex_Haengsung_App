@@ -126,7 +126,7 @@
       $sumActual     = $key['qtyActual']-$key['qtyNg'];
       $planning      = $key['planning'];
       $sumActualLast = $key['qtyActualLast']-$key['qtyNgLast'];
-      $sumBallance   = ($key['qtyActual']-$key['qtyNg'])-($key['qtyActualLast']-$key['qtyNgLast']);
+      $sumBallance   = ($key['qtyActual']-$key['qtyNg'])-$key['planning'];
 
        $id = "'".$key['id']."'";
 
