@@ -15,7 +15,7 @@ class Andon extends CI_Controller {
             (
                 (!$this->session->userdata('loggin'))
                 ||
-                (!in_array($this->session->userdata('level'), array(1,2)))
+                (!in_array($this->session->userdata('level'), array(1,2,3,4)))
             )
         {
             redirect('login');

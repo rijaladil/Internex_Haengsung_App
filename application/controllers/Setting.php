@@ -6,24 +6,19 @@ class Setting extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->check_isvalidated();
-    }
-
-    private function check_isvalidated()
-    {
-        if
-            (
-                (!$this->session->userdata('loggin'))
-                ||
-                (!in_array($this->session->userdata('level'), array(1)))
-            )
-        {
-            redirect('login');
-        }
+        // $this->check_isvalidated();
     }
 
 	public function upload_spk()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
+
 		$this->load->view('template/header/index');
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/setting/upload_spk/index');
@@ -31,6 +26,13 @@ class Setting extends CI_Controller {
 
 	public function user()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
         $data['data'] = $this->model_user->get_all();
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
@@ -39,21 +41,49 @@ class Setting extends CI_Controller {
 
 	public function user_add()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_user->user_add();
 	}
 
 	public function user_update()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_user->user_update();
 	}
 
 	public function user_delete()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_user->user_delete();
 	}
 
 	public function quality()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->load->view('template/header/index');
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/setting/quality/index');
@@ -61,21 +91,49 @@ class Setting extends CI_Controller {
 
 	public function quality_add()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_machine_problem->add();
 	}
 
 	public function quality_update()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_machine_problem->update();
 	}
 
 	public function quality_delete()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->model_machine_problem->delete();
 	}
 
 	public function losstime()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->load->view('template/header/index');
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/setting/losstime/index');
@@ -83,6 +141,14 @@ class Setting extends CI_Controller {
 
 	public function losstime_add()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
+
         if($this->model_losstime_category->add()){
 
         $data = $this->model_losstime_category->get_all();
@@ -101,6 +167,13 @@ class Setting extends CI_Controller {
 
 	public function losstime_update()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
         if($this->model_losstime_category->update()){
 
         $data = $this->model_losstime_category->get_all();
@@ -119,6 +192,13 @@ class Setting extends CI_Controller {
 
 	public function losstime_delete()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
         if($this->model_losstime_category->delete()){
         $data = $this->model_losstime_category->get_all();
 
@@ -136,6 +216,13 @@ class Setting extends CI_Controller {
 
 	public function working()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$this->load->view('template/header/index');
 		$this->load->view('template/menu/index');
 		$this->load->view('pages/setting/working/index');
@@ -143,6 +230,13 @@ class Setting extends CI_Controller {
 
 	public function line()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$data['data'] = $this->model_machine->get_by_line_setting();
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
@@ -151,6 +245,13 @@ class Setting extends CI_Controller {
 
 	public function line_update()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		if($this->model_machine->update()) {
 			echo json_encode('ok');
 		}else{
@@ -160,6 +261,13 @@ class Setting extends CI_Controller {
 
 	public function line_delete()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		if($this->model_machine->delete()) {
 			echo json_encode('ok');
 		}else{
@@ -169,6 +277,13 @@ class Setting extends CI_Controller {
 
 	public function line_add()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		if($this->model_machine->add()) {
 			echo json_encode('ok');
 		}else{
@@ -178,6 +293,13 @@ class Setting extends CI_Controller {
 
 	public function operator()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		$data['data'] = $this->model_operator->get_data();
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
@@ -186,6 +308,13 @@ class Setting extends CI_Controller {
 
 	public function operator_add()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		if ($this->model_operator->check_nip()) {
 			# code...
 			if($this->model_operator->add()) {
@@ -200,6 +329,13 @@ class Setting extends CI_Controller {
 
 	public function operator_update()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
         $nip = $this->security->xss_clean($this->input->post('hid'));
         $hid = $this->security->xss_clean($this->input->post('id_input_nip'));
 		if ($nip != $hid) {
@@ -224,6 +360,13 @@ class Setting extends CI_Controller {
 
 	public function operator_delete()
 	{
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2,3)))
+            )
+        {
+            redirect('login');
+        }
 		if($this->model_operator->delete()) {
 			echo 1;
 		}else{

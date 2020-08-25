@@ -31,138 +31,45 @@
 		  </div>
 	  <?php } ?>
 
-<!--
-	  <div class="subnav">
-	    <button onclick="myFunction2()" class="subnavbtn">Powder Coating</button>
-	    <div id="myDropdown2" class="subnav-content">
-	      <a href="powder_coating_production_status.php">Production Status</a>
-	      <a href="powder_coating_actual_production.php">Actual Production</a>
-	  	</div>
-	  </div>
-	  <div class="subnav">
-	    <button onclick="myFunction3()" class="subnavbtn">H/S Press</button>
-	    <div id="myDropdown3" class="subnav-content">
-	      <a href="hs_press_production_status.php">Production Status</a>
-	      <a href="<?php echo base_url(); ?>department/actual_production/2">Actual Production</a>
-	    </div>
-	  </div>
-	  <div class="subnav">
-	    <button onclick="myFunction4()" class="subnavbtn">Press</button>
-	    <div id="myDropdown4" class="subnav-content">
-	      <a href="press_production_status.php">Production Status</a>
-	      <a href="press_actual_production.php">Actual Production</a>
-	     </div>
-	  </div>
-	  <div class="subnav">
-	    <button onclick="myFunction5()" class="subnavbtn">Assembly</button>
-	    <div id="myDropdown5" class="subnav-content">
-	      <a href="assembly_production_status.php">Production Status</a>
-	      <a href="assembly_actual_production.php">Actual Production</a>
-	     </div>
-	  </div>
- -->
-	  <div class="subnav">
-	    <button onclick="myFunction6()" class="subnavbtn">Andon</button>
-	    <div id="myDropdown6" class="subnav-content">
-	      <a href="<?php echo base_url(); ?>andon">Andon Summary</a>
-	      <a href="<?php echo base_url(); ?>andon/history">Andon History</a>
-	     </div>
-	  </div>
+	  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
+		  <div class="subnav">
+		    <button onclick="myFunction6()" class="subnavbtn">Andon</button>
+		    <div id="myDropdown6" class="subnav-content">
+		      <a href="<?php echo base_url(); ?>andon">Andon Summary</a>
+		      <a href="<?php echo base_url(); ?>andon/history">Andon History</a>
+		    </div>
+		  </div>
+	  <?php } ?>
+	  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
 	  <div class="subnav">
 	    <button onclick="myFunction7()" class="subnavbtn">Setting</button>
 	    <div id="myDropdown7" class="subnav-content">
-	      <a href="<?php echo base_url(); ?>setting/working">Working setting</a>
-	      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
-	      <a href="<?php echo base_url(); ?>setting/operator">Operator setting</a>
-	      <a href="<?php echo base_url(); ?>setting/quality">Quality setting</a>
-	      <a href="<?php echo base_url(); ?>setting/losstime">Loss Time setting</a>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/working">Working setting</a>
+		  <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
+		  <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/operator">Operator setting</a>
+		  <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/quality">Quality setting</a>
+		  <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/losstime">Loss Time setting</a>
+		  <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
 	      <a href="<?php echo base_url(); ?>setting/line">Line/MC setting</a>
-	      <a href="<?php echo base_url(); ?>setting/upload_spk">Upload SPK</a>
+	      <?php } ?>
+		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/upload_spk">Upload SPK</a>
+		  <?php } ?>
 	      </div>
 	  </div>
+	  <?php } ?>
 	  <a href="<?php echo base_url(); ?>login/logout">Logout</a>
 	</div>
-<!-- <script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("subnavbtn");
-var i;
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "none") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
-}
-
-	function myFunction1() {
-	  document.getElementById("myDropdown1").style.display="block";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction2() {
-	  document.getElementById("myDropdown2").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction3() {
-	  document.getElementById("myDropdown3").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction4() {
-	  document.getElementById("myDropdown4").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction5() {
-	  document.getElementById("myDropdown5").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction6() {
-	  document.getElementById("myDropdown6").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown7").style.display="none";
-	}
-	function myFunction7() {
-	  document.getElementById("myDropdown7").style.display="block";
-	  document.getElementById("myDropdown1").style.display="none";
-	  document.getElementById("myDropdown2").style.display="none";
-	  document.getElementById("myDropdown3").style.display="none";
-	  document.getElementById("myDropdown4").style.display="none";
-	  document.getElementById("myDropdown5").style.display="none";
-	  document.getElementById("myDropdown6").style.display="none";
-	}
-</script>
- -->
 </body>
 </html>
