@@ -134,16 +134,11 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
 	'model_user',
-	'model_user_level',
-	'model_master_plan',
+	'model_user_level',	
 	'model_department',
 	'model_machine',
 	'model_spk',
-	'model_master_plan_qty',
-	'model_machine_problem',
-	'model_losstime_category',
+	'model_master_plan_qty',	
 	'model_losstime',
-	'model_andon',
-	'model_result_ng',
-	'model_operator'
+	'model_andon'
 );

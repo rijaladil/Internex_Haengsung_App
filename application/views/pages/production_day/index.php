@@ -18,12 +18,10 @@
 	</script>
 
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
-<!-- <div id="load"><img src="images/save.gif"></div> -->
 <div class="form">
-	<div class="left">Production Status</div>
+	<div class="left">Production Status (Day)</div>
 	<div class="right">
-		<button class="btn-green" onclick="downloadExcel()" form="cek">Excel</button>
-		<!-- <button class="btn-green2">Save</button> -->
+		<button class="btn-green" onclick="downloadExcel_xxx()" form="cek">Excel</button>
 		<button class="btn-blue" onclick="getData()">Search</button>
 		<input type="text" id="datepickersum" name="text_date" value="<?php echo date('Y-m');?>"  autocomplete="off"/>
 	</div>
@@ -32,20 +30,20 @@
 	<table id="product-status" class="display" width="100%" border="0">
 	<thead>
 	  <tr>
-	    <th class="trth" rowspan="2" width="2%">No</th>
-	    <th class="trth" rowspan="2" width="7%">Part No</th>
-	    <th class="trth" rowspan="2" width="4%">Model </th>
-	    <th class="trth" rowspan="2" width="7%">Description</th>
-	    <th class="trth" rowspan="2" width="4%">Capa<br>/Day</th>
-	    <th class="trth" rowspan="2" width="3%">Item</th>
-	    <th class="trth" colspan="31" width="68%" style="border-bottom: 1px solid white">Production Plan</th>
-	   	<th class="trth" rowspan="2" width="3%">T/T</th>
-	    <th class="trth" rowspan="2" width="2%">%</th>
+	    <th class="trth" rowspan="2" width="7%">Process</th>
+	    <th class="trth" rowspan="2" width="4%">Line / MC</th>
+	    <th class="trth" rowspan="2" width="7%">Item</th>
+	    <th class="trth" colspan="31" width="82%" style="border-bottom: 1px solid white">Production</th>
+	    <th class="trth" rowspan="2" width="4%">Total</th>
+	   	
+
 	  </tr>
 	  <tr>
+
 	  	<?php for ($i=1; $i <= 31; $i++) { ?>
-	    	<th class="trth"><?php echo $i; ?></th>
+	    	<th class="trth" ><?php echo $i; ?></th>
 		<?php } ?>
+		
 	  </tr>
 	</thead>
 	<tbody id="idTableData">
@@ -64,7 +62,7 @@
 
 		// console.log(tgl);
 	    $.ajax({
-	        url: "<?php echo base_url(); ?>department/production_status_data/",
+	        url: "<?php echo base_url(); ?>department/production_day_data/",
 	        type: 'POST',
 	        data: {
 	            'tgl': tgl,
