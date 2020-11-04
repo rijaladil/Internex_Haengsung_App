@@ -26,19 +26,19 @@ if (!is_null($conn)) {
         $idxRowQuery = -1;
         foreach ($sheetData as $k => $row) {
             if ($k >= 2) {
-                if (intval($row['I']) === 0) {
+                if (intval($row['B']) === 0) {
                     continue;
                 }
 
                 $strs = "(";
                 $strs2 = "";
                 $tempTime = "";
-                foreach ($row as $j => $content) {
-                    if (in_array($j, array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'))) {
-                        if ($j == 'F') {
-                            $tempVal = $spreadsheet->getActiveSheet()->getCell('F' . $k)->getValue();
+                foreach ($row as $c => $content) {
+                    if (in_array($c, array('A', 'B'))) {
+                        if ($c == 'A') {
+                            $tempVal = $spreadsheet->getActiveSheet()->getCell('A' . $k)->getValue();
                             if (strstr($tempVal, "=") == true) {
-                                $tempVal = $spreadsheet->getActiveSheet()->getCell('F' . $k)->getCalculatedValue();
+                                $tempVal = $spreadsheet->getActiveSheet()->getCell('A' . $k)->getCalculatedValue();
                             }
                             $strs .= "'" . $tempVal . "',";
                         } else {
@@ -46,7 +46,7 @@ if (!is_null($conn)) {
                         }
                     } else {
                         $strsFinal = $strs;
-                        $dd = $spreadsheet->getActiveSheet()->getCell($j . '1')->getValue();
+                        $dd = $spreadsheet->getActiveSheet()->getCell($c . '1')->getValue();
                         $oD = Date::excelToDateTimeObject($dd);
                         if ($tempTime !== $oD->format("Y-m")) {
                             $strsFinal .= "'" . $oD->format("Y-m") . "', 'upload', 0);";
@@ -82,10 +82,10 @@ if (!is_null($conn)) {
                 $stmt = $conn->prepare($queries[0]);
                 $stmt->execute();
                 $stmt->closeCursor();
-                $idPlan = $conn->lastInsertId();
+                    // $idPlan = $conn->lastInsertId();
 
                 $stmt = $conn->prepare($queries[1]);
-                $stmt->bindParam(':masterid', $idPlan);
+                    // $stmt->bindParam(':masterid', $idPlan);
                 $stmt->execute();
                 $stmt->closeCursor();
 

@@ -130,12 +130,12 @@
 		    <th>Machine Call</th>
 		    <th>Quality Call</th>
 		    <th>Material Call</th>
-		    <th>Dies Call</th>
+		    <th>Help Call</th>
 		    <th>Total</th>
 		    <th>Machine Call</th>
 		    <th>Quality Call</th>
 		    <th>Material Call</th>
-		    <th>Dies Call</th>
+		    <th>Help Call</th>
 		    <th>Total</th>
 		  </tr>
 		</thead>
@@ -272,7 +272,7 @@
 
 		        	machineCall = parseInt(data[0]['machineCall']);
 		        	materialCall = parseInt(data[0]['materialCall']);
-		        	diesCall = parseInt(data[0]['diesCall']);
+		        	helpCall = parseInt(data[0]['helpCall']);
 		        	qualityCall = parseInt(data[0]['qualityCall']);
 
 					Highcharts.chart('container_donut', {
@@ -300,7 +300,7 @@
 					        data: [
 					            ['Machine Call', machineCall],
 					            ['Material Call', materialCall],
-					            ['Dies Call', diesCall],
+					            ['Help Call', helpCall],
 					            ['Quality Call',qualityCall]
 					        ],
 					        colors: ['#a1cab3','#de8e8e','#bfbf71','#63a6bf']

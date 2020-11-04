@@ -2,12 +2,12 @@
 <html>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style-login.css">
 <head>
-	<title>DAEBAEK</title>
+	<title>HAENGSUNG</title>
 </head>
 <body>
 <div class="login">
 	<div class="logo"><img src="<?php echo base_url(); ?>assets/images/logo.png"></div>
-	<div class="logo-text"><b>DAEBAEK</b><br><small>SMART FACTORY SYSTEM</small></div>
+	<div class="logo-text"><b>HAENGSUNG</b><br><small>SMART FACTORY SYSTEM</small></div>
     <form method="post" action="<?php echo base_url(); ?>login">
     	<input class="text-center" type="text" name="nip" placeholder="Username" required="required" autocomplete="off" />
         <input class="text-center" type="password" name="password" placeholder="Password" required="required" autocomplete="off" />
@@ -16,6 +16,6 @@
 
 
 </div>
-   	<div class="footer">PT DAEBAEK - 2019</div>
+   	<div class="footer">PT HAENGSUNG - 2020</div>
 </body>
 </html>

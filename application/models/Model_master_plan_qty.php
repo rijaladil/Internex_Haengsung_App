@@ -15,6 +15,8 @@ class Model_master_plan_qty extends CI_Model
 
     public function get_production_status_by_dept_id()
     {
+        
+        
         $date = $this->security->xss_clean($this->input->post('tgl'));
         $department = $this->security->xss_clean($this->input->post('department'));
         $this->db->select("

@@ -7,6 +7,7 @@ class Setting extends CI_Controller {
     {
         parent::__construct();
         // $this->check_isvalidated();
+
     }
 
 	public function upload_spk()
@@ -24,6 +25,58 @@ class Setting extends CI_Controller {
 		$this->load->view('pages/setting/upload_spk/index');
 	}
 
+    public function input_spk()
+    {
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
+        $data['data'] = $this->model_spk->get_all();
+        $this->load->view('template/header/index', $data);
+        $this->load->view('template/menu/index');
+        $this->load->view('pages/setting/input_spk/index');
+    }
+
+    public function spk_add()
+    {
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
+        $this->model_spk->spk_add();
+    }
+
+    public function spk_update()
+    {
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
+        $this->model_spk->spk_update();
+    }
+
+    public function spk_delete()
+    {
+        if
+            (
+                (!in_array($this->session->userdata('level'), array(1,2)))
+            )
+        {
+            redirect('login');
+        }
+        $this->model_spk->spk_delete();
+    }
+    
+    // user
 	public function user()
 	{
         if

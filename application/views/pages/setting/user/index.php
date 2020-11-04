@@ -34,6 +34,7 @@
 	    <th width="3%" height="50px">No</th>
 	    <!-- <th width="">Process</th> -->
 	    <th width="10%">ID User</th>
+	    <th width="20%">Password</th>
 	    <th width="">Name</th>
 	    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 		    <th width="5%"><?php echo $level['name']; ?></th>
@@ -47,8 +48,8 @@
 		<input hidden="" id="textUpdateDept<?php echo $key['nip']; ?>" type="" name="" value="<?php echo $key['deptId']; ?>">
 			<tr>
 		    	<td class="text-center"><?php echo $i++; ?></td>
-			    <!-- <td class=""><?php echo $key['dept']; ?></td> -->
 			    <td class="text-center"><?php echo $key['nip']; ?></td>
+			    <td class="text-center">****</td>
 			    <td class="" id="idValName<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></td>
 			    <?php foreach ($this->model_user_level->get_all() as $level) { ?>
 				    <td class="text-center">
@@ -188,18 +189,13 @@
 	}
 
 	function showModalDelete(id){
-		// var idLevel = document.getElementById('textDeleteLevel'+id).value;
-		// var idDept = document.getElementById('textDeleteDept'+id).value;
+
 
 	  	document.getElementById("myFormDel").style.display = "block";
 		document.getElementById('textDeleteHid').value = id;
 		document.getElementById('textDeleteNip').value = id;
 		document.getElementById('textDeleteName').value = document.getElementById('idValName'+id).innerHTML;
-		// document.getElementById('textDeleteLevel').value = document.getElementById('idValName'+id).innerHTML;
-		// document.getElementById('textDeleteDept').value = document.getElementById('idValName'+id).innerHTML;
 
-		// selectElement('textDeleteLevel', idLevel);
-		// selectElement('textDeleteDept', idDept);
 	}
 
 	function update(id){

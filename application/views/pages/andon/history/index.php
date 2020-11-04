@@ -71,7 +71,7 @@
 		    <th>Machine Call</th>
 		    <th>Quality Call</th>
 		    <th>Material Time</th>
-		    <th>Dies Call</th>
+		    <th>Help Call</th>
 		  </tr>
 		</thead>
 		<tbody>

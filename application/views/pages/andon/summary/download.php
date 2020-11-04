@@ -68,14 +68,14 @@
             $this->excel->getActiveSheet()->setCellValue('F7', 'Machine Call');
             $this->excel->getActiveSheet()->setCellValue('G7', 'Quality Call');
             $this->excel->getActiveSheet()->setCellValue('H7', 'Material Call');
-            $this->excel->getActiveSheet()->setCellValue('I7', 'Dies Call');
+            $this->excel->getActiveSheet()->setCellValue('I7', 'Help Call');
             $this->excel->getActiveSheet()->setCellValue('J7', 'Total');
             $this->excel->getActiveSheet()->setCellValue('K6', 'Actual Monthly');
             $this->excel->getActiveSheet()->mergeCells('K6:O6');
             $this->excel->getActiveSheet()->setCellValue('K7', 'Machine Call');
             $this->excel->getActiveSheet()->setCellValue('L7', 'Quality Call');
             $this->excel->getActiveSheet()->setCellValue('M7', 'Material Call');
-            $this->excel->getActiveSheet()->setCellValue('N7', 'Dies Call');
+            $this->excel->getActiveSheet()->setCellValue('N7', 'Help Call');
             $this->excel->getActiveSheet()->setCellValue('O7', 'Total');
 
             $no       = 1;

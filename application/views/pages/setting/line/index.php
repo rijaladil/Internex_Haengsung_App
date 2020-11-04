@@ -33,14 +33,14 @@
 			 <th width="10%">Process</th>
 			 <th width="4%">No.M/C  </th>
 			 <th width="13%">Machine  Name </th>
-			 <th width="8%">1 Shift Worker</th>
+	<!-- 		 <th width="8%">1 Shift Worker</th>
 			 <th width="8%">2 Shift Worker</th>
-			 <th width="8%">3 Shift Worker</th>
-			 <th width="10%">Operation of terminal</th>
+			 <th width="8%">3 Shift Worker</th> -->
+			 <!-- <th width="10%">Operation of terminal</th> -->
 			 <th width="10%">Terminal  IP No</th>
-			 <th width="10%">Terminal S/W Update</th>
-			 <th width="10%">Remarks</th>
-			 <th width="11%">Option</th>
+			 <!-- <th width="10%">Terminal S/W Update</th> -->
+			 <th width="30%">Remarks</th>
+			 <th width="10%">Option</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -54,12 +54,12 @@
 					 <td class="text-center"><?php echo $key['dept']; ?></td>
 					 <td class="text-center" id="idValMcNo<?php echo $key['id']; ?>"><?php echo $key['mc_no']; ?></td>
 					 <td class="text-center" id="idValName<?php echo $key['id']; ?>"><?php echo $key['name']; ?></td>
-					 <td class="text-center"><?php echo $key['worker1']; ?></td>
+<!-- 					 <td class="text-center"><?php echo $key['worker1']; ?></td>
 					 <td class="text-center"><?php echo $key['worker2']; ?></td>
-					 <td class="text-center"><?php echo $key['worker3']; ?></td>
-					 <td class="text-center"></td>
+					 <td class="text-center"><?php echo $key['worker3']; ?></td> -->
+					 <!-- <td class="text-center"></td> -->
 					 <td class="text-center" id="idValIp<?php echo $key['id']; ?>"><?php echo $key['ip_address']; ?></td>
-					 <td class="text-center"></td>
+					 <!-- <td class="text-center"></td> -->
 					 <td class="text-center" id="idValRemark<?php echo $key['id']; ?>"><?php echo $key['remark']; ?></td>
 					 <td class="text-center">
 					 	<a class="click-btn-u" href="#/" onclick="showModalEdit('<?php echo $key['id']; ?>')">Update</a>
@@ -91,7 +91,7 @@
 			        <?php } ?>
 			    </select>
 			    </td>
-			    <td>
+			   <!--  <td>
 			    1 Shift Worker :
 			    <select id="idInputEditWorker1">
 			        <option value="0">Pilih</option>
@@ -120,7 +120,7 @@
 					<?php } ?>
 				</select>
 				</td>
-			  </tr>
+			  </tr> -->
 			</table>
 
 			<button class="btn"  href="#/" onclick="update()">UPDATE</button>
@@ -135,7 +135,7 @@
 			<br>
 			No.M/C : <input type="text" id="idInputAddMcNo" name="">
 			Machine Name : <input type="text" id="idInputAddName" name="">
-			Terminal IP No :<input type="text" id="idInputAddIp" name="">
+
 			<table width="100%" border="0">
 			  <tr>
 			    <td>
@@ -146,7 +146,7 @@
 							<?php } ?>
 						</select>
 			    </td>
-			    <td>
+			    <!-- <td>
 			1 Shift Worker : <select id="idInputAddWorker1">
 							<option value="0">Pilih</option>
 							<?php foreach ($this->model_user->get_op() as $key) { ?>
@@ -172,8 +172,10 @@
 							<?php } ?>
 						</select>
 			    </td>
-			  </tr>
+			  </tr> -->
 			</table>
+			Terminal IP No :<input type="text" id="idInputAddIp" name="">
+			Remarks :<input type="text" id="idInputEditRemark" name="">
 
 			<button class="btn" href="#/" onclick="save()">SAVE</button>
 			<button class="cancel" onclick='closeFormInput()'>CLOSE</button>
@@ -195,18 +197,15 @@
 			    <td>
 			    Process:
 			    <select id="idInputDeleteDept" readonly>
-			       <!--  <option value="0">Pilih</option> -->
 			        <?php foreach ($this->model_department->get_all() as $key) { ?>
 			            <option value="<?php echo $key['id']; ?>"><?php echo $key['name']; ?></option>
 			        <?php } ?>
 			    </select>
 			    </td>
-			    <td>
+			    <!-- <td>
 			    1 Shift Worker :
 			    <input type="text"  id="idInputDeleteWorker1" readonly>
-			        <!-- <option value="0">Pilih</option> -->
 			        <?php foreach ($this->model_user->get_op() as $key) { ?>
-			            <!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 			        <?php } ?>
 
 			   </td>
@@ -215,22 +214,18 @@
 			    <td>
 			    2 Shift Worker :
 			    <input type="text"  id="idInputDeleteWorker2" readonly>
-					<!-- <option value="0">Pilih</option> -->
 					<?php foreach ($this->model_user->get_op() as $key) { ?>
-						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 					<?php } ?>
 
 				</td>
 			    <td>
 			    3 Shift Worker :
 			    <input type="text"  id="idInputDeleteWorker3" readonly>
-					<!-- <option value="0">Pilih</option> -->
 					<?php foreach ($this->model_user->get_op() as $key) { ?>
-						<!-- <option value="<?php echo $key['nip']; ?>"><?php echo $key['name']; ?></option> -->
 					<?php } ?>
 
 				</td>
-			  </tr>
+			  </tr> -->
 			</table>
 
 			<button class="cancel"  href="#/" onclick="deletes()">DELETE</button>
@@ -253,13 +248,13 @@
 		document.getElementById('idInputEditIp').value = document.getElementById('idValIp'+id).innerHTML;
 		document.getElementById('idInputEditRemark').value = document.getElementById('idValRemark'+id).innerHTML;
 		var idDept = document.getElementById('idInputEditDept'+id).value;
-		var idWork1 = document.getElementById('idValWorker1'+id).value;
-		var idWork2 = document.getElementById('idValWorker2'+id).value;
-		var idWork3 = document.getElementById('idValWorker3'+id).value;
+		// var idWork1 = document.getElementById('idValWorker1'+id).value;
+		// var idWork2 = document.getElementById('idValWorker2'+id).value;
+		// var idWork3 = document.getElementById('idValWorker3'+id).value;
 		selectElement('idInputEditDept', idDept);
-		selectElement('idInputEditWorker1', idWork1);
-		selectElement('idInputEditWorker2', idWork2);
-		selectElement('idInputEditWorker3', idWork3);
+		// selectElement('idInputEditWorker1', idWork1);
+		// selectElement('idInputEditWorker2', idWork2);
+		// selectElement('idInputEditWorker3', idWork3);
 	}
 
 	function showModalDelete(id) {
@@ -271,13 +266,13 @@
 		document.getElementById('idInputDeleteIp').value = document.getElementById('idValIp'+id).innerHTML;
 		document.getElementById('idInputDeleteRemark').value = document.getElementById('idValRemark'+id).innerHTML;
 		// var idDept = document.getElementById('idInputDeleteDept'+id).value;
-		var idWork1 = document.getElementById('idValWorker1'+id).value;
-		var idWork2 = document.getElementById('idValWorker2'+id).value;
-		var idWork3 = document.getElementById('idValWorker3'+id).value;
+		// var idWork1 = document.getElementById('idValWorker1'+id).value;
+		// var idWork2 = document.getElementById('idValWorker2'+id).value;
+		// var idWork3 = document.getElementById('idValWorker3'+id).value;
 		// selectElement('idInputDeleteDept', idDept);
-		selectElement('idInputDeleteWorker1', idWork1);
-		selectElement('idInputDeleteWorker2', idWork2);
-		selectElement('idInputDeleteWorker3', idWork3);
+		// selectElement('idInputDeleteWorker1', idWork1);
+		// selectElement('idInputDeleteWorker2', idWork2);
+		// selectElement('idInputDeleteWorker3', idWork3);
 	}
 
 	function selectElement(id, valueToSelect) {
@@ -292,9 +287,9 @@
 		var ip = document.getElementById('idInputEditIp').value;
 		var remark = document.getElementById('idInputEditRemark').value;
 		var idDept = document.getElementById('idInputEditDept').value;
-		var work1 = document.getElementById('idInputEditWorker1').value;
-		var work2 = document.getElementById('idInputEditWorker2').value;
-		var work3 = document.getElementById('idInputEditWorker3').value;
+		// var work1 = document.getElementById('idInputEditWorker1').value;
+		// var work2 = document.getElementById('idInputEditWorker2').value;
+		// var work3 = document.getElementById('idInputEditWorker3').value;
 	    $.ajax({
 	        url: "<?php echo base_url(); ?>setting/line_update/",
 	        dataType: 'json',
@@ -305,9 +300,9 @@
 	            'text_dept': idDept,
 	            'text_ip': ip,
 	            'text_remark': remark,
-	            'text_work1': work1,
-	            'text_work2': work2,
-	            'text_work3': work3,
+	            // 'text_work1': work1,
+	            // 'text_work2': work2,
+	            // 'text_work3': work3,
 	            'hid': id,
 	        },
 	        cache: false,
@@ -345,10 +340,12 @@
 		var mcNo = document.getElementById('idInputAddMcNo').value;
 		var name = document.getElementById('idInputAddName').value;
 		var ip = document.getElementById('idInputAddIp').value;
+		var remark = document.getElementById('idInputEditRemark').value;
 		var idDept = document.getElementById('idInputAddDept').value;
-		var work1 = document.getElementById('idInputAddWorker1').value;
-		var work2 = document.getElementById('idInputAddWorker2').value;
-		var work3 = document.getElementById('idInputAddWorker3').value;
+		// var work1 = document.getElementById('idInputAddWorker1').value;
+		// var work2 = document.getElementById('idInputAddWorker2').value;
+		// var work3 = document.getElementById('idInputAddWorker3').value;
+
 	    $.ajax({
 	        url: "<?php echo base_url(); ?>setting/line_add/",
 	        dataType: 'json',
@@ -358,9 +355,10 @@
 	            'text_name': name,
 	            'text_dept': idDept,
 	            'text_ip': ip,
-	            'text_work1': work1,
-	            'text_work2': work2,
-	            'text_work3': work3,
+	            'text_remark': remark,
+	            // 'text_work1': work1,
+	            // 'text_work2': work2,
+	            // 'text_work3': work3,
 	        },
 	        cache: false,
 	        success: function(msg){

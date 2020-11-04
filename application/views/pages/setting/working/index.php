@@ -710,8 +710,23 @@
 		
 		<table width="100%" border="0">
 		  <tr>
-		    <td>Day of the Week :<input type="text" name="" id=""></td>
-		    <td>Shift :<input type="text" name="" id=""></td>
+		    <td>Day of the Week :
+		    	<select name="" id="">
+		    		<option>Monday</option>
+		    		<option>Tuesday</option>
+		    		<option>Wednesday</option>
+		    		<option>Thursday</option>
+		    		<option>Friday</option>
+		    		<option>Saturday</option>
+		    		<option>Sunday</option>
+		    	</select>
+		    </td>
+		    <td>Shift 
+		    	<select name="" id="">
+		    		<option>1</option>
+		    		<option>2</option>
+		    		<option>3</option>
+		    	</select></td>
 		  </tr>
 		  <tr>
 		    <td>Start Time :<input type="text" name="" id=""></td>

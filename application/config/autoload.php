@@ -138,6 +138,7 @@ $autoload['model'] = array(
 	'model_master_plan',
 	'model_department',
 	'model_machine',
+	'model_spk',
 	'model_master_plan_qty',
 	'model_machine_problem',
 	'model_losstime_category',

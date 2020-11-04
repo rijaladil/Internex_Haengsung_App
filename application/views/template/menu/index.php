@@ -6,20 +6,14 @@
 <body>
 <!-- HEADER -->
 	<div class="head">
-		<div class="left">PT. DAE BAEK</div>
-		<div class="center">DAE BAEK SMART FACTORY SYSTEM</div>
+		<div class="left">PT. HAENGSUNG</div>
+		<div class="center">HAENGSUNG SMART FACTORY SYSTEM</div>
 		<div class="right time"></div>
 	</div>
 <!-- LOGIN -->
 	<div class="login"><!-- Login : D.Agus --></div>
 <!-- MENU & SUBMENU -->
 	<div class="navbar">
-	  <div class="subnav">
-	    <button onclick="myFunction1()" class="subnavbtn">Summary</button>
-	    <div id="myDropdown1" class="subnav-content">
-	      <a href="<?php echo base_url(); ?>">Summary</a>
-	    </div>
-	  </div>
 
 	  <?php foreach ($this->model_department->get_all() as $key) { ?>
 		  <div class="subnav">
@@ -44,24 +38,12 @@
 	  <div class="subnav">
 	    <button onclick="myFunction7()" class="subnavbtn">Setting</button>
 	    <div id="myDropdown7" class="subnav-content">
-		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-		      <a href="<?php echo base_url(); ?>setting/working">Working setting</a>
-		  <?php } ?>
 		  <?php if ( (in_array($this->session->userdata('level'), array(1,2))) ) { ?>
 		      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
 		  <?php } ?>
-		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-		      <a href="<?php echo base_url(); ?>setting/operator">Operator setting</a>
+	       <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
+		      <a href="<?php echo base_url(); ?>setting/input_spk">Input Planning</a>
 		  <?php } ?>
-		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-		      <a href="<?php echo base_url(); ?>setting/quality">Quality setting</a>
-		  <?php } ?>
-		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-		      <a href="<?php echo base_url(); ?>setting/losstime">Loss Time setting</a>
-		  <?php } ?>
-		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-	      <a href="<?php echo base_url(); ?>setting/line">Line/MC setting</a>
-	      <?php } ?>
 		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
 		      <a href="<?php echo base_url(); ?>setting/upload_spk">Upload SPK</a>
 		  <?php } ?>

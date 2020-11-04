@@ -59,7 +59,7 @@
             $this->excel->getActiveSheet()->setCellValue('I6', 'Machine Call');
             $this->excel->getActiveSheet()->setCellValue('J6', 'Quality Call');
             $this->excel->getActiveSheet()->setCellValue('K6', 'Material Time');
-            $this->excel->getActiveSheet()->setCellValue('L6', 'Dies Call');
+            $this->excel->getActiveSheet()->setCellValue('L6', 'Help Call');
 
 
             $no       = 1;

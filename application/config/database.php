@@ -76,14 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'internex_daebaek',
+	 'hostname' => 'internex.co.id',
+	 'username' => 'u8003544_haengsung',
+	 'password' => '12internex34',
+	 'database' => 'u8003544_haengsung_counting',
 
-	// 'hostname' => '192.168.88.200',
-	// 'username' => 'root',
-	// 'password' => '1234',
+	//'hostname' => 'localhost',
+	//'username' => 'root',
+	//'password' => '123asd456',
+	//'database' => 'internex_daebaek',
 
 	// 'hostname' => '192.168.3.5',
 	// 'username' => 'rnd',

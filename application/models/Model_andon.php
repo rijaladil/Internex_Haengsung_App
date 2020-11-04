@@ -299,7 +299,7 @@ class Model_andon extends CI_Model
         $this->db->SELECT("
                 SUM(IF(andon.andon_call_id = 1 and andon.andon_status_id = 3, 1, 0)) as machineCall
                 ,SUM(IF(andon.andon_call_id = 2 and andon.andon_status_id = 3, 1, 0)) as materialCall
-                ,SUM(IF(andon.andon_call_id = 3 and andon.andon_status_id = 3, 1, 0)) as diesCall
+                ,SUM(IF(andon.andon_call_id = 3 and andon.andon_status_id = 3, 1, 0)) as helpCall
                 ,SUM(IF(andon.andon_call_id = 4 and andon.andon_status_id = 3, 1, 0)) as qualityCall
             ");
         $this->db->FROM('itx_t_andon andon');
