@@ -15,16 +15,32 @@
 <!-- MENU & SUBMENU -->
 	<div class="navbar">
 
-	  <?php foreach ($this->model_department->get_all() as $key) { ?>
+ 	  <?php foreach ($this->model_department->get_all() as $key) { ?>
 		  <div class="subnav">
 		    <button onclick="myFunction2()" class="subnavbtn"><?php echo $key['name']; ?></button>
 		    <div id="myDropdown3" class="subnav-content">
-		      <a href="<?php echo base_url(); ?>department/production_status/<?php echo $key['id']; ?>">Production Status</a>
-		      <a href="<?php echo base_url(); ?>department/actual_production/<?php echo $key['id']; ?>">Actual Production</a>
+		      <a href="<?php echo base_url(); ?>department/production_day/<?php echo $key['id']; ?>">Production Day</a>
+		      <a href="<?php echo base_url(); ?>department/production_model/<?php echo $key['id']; ?>">Production Model</a>
+		    </div>
+		  </div>
+	  <?php } ?> 
+	 <!--  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
+		  <div class="subnav">
+		    <button onclick="myFunction6()" class="subnavbtn">Assembly</button>
+		    <div id="myDropdown3" class="subnav-content">
+		      <a href="<?php echo base_url(); ?>department/production_day/1">Production Day</a>
+		      <a href="<?php echo base_url(); ?>department/production_model/1">Production Model</a>
 		    </div>
 		  </div>
 	  <?php } ?>
-
+	  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
+		  <div class="subnav">
+		    <button onclick="myFunction6()" class="subnavbtn">Clamping</button>
+		    <div id="myDropdown3" class="subnav-content">
+		      <a href="<?php echo base_url(); ?>department/production_day/2">Production Day</a>
+		    </div>
+		  </div>
+	  <?php } ?> -->
 	  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
 		  <div class="subnav">
 		    <button onclick="myFunction6()" class="subnavbtn">Andon</button>

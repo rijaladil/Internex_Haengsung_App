@@ -24,37 +24,20 @@ class Department extends CI_Controller {
 
 	public function index()
 	{
-        $this->actual_production();
+        $this->production_model();
 	}
 
-	public function actual_production($department=''){
-		// if (isset($_POST['text_idQty']) && count($_POST['text_idQty']) > 0) {
-		// 	$this->model_master_plan_qty->setMcOnSpk($department);
-
-	 //        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
-	 //        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
-	 //        $data['dept'] = $department;
-	 //        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $data['setStart'], $data['setEnd']);
-	 //        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
-	 //        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
-	 //        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
-	 //        $data['data_operator']= $this->model_operator->get_data();
-		// 	$this->load->view('template/header/index', $data);
-		// 	$this->load->view('template/menu/index');
-		// 	$this->load->view('pages/actual_production/index');
-		// }else{
+	public function production_model($department=''){
 	        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
 	        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
 	        $data['dept'] = $department;
-	        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $data['setStart'], $data['setEnd']);
+
 	        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
-	        $data['data_machine_problem'] = $this->model_machine_problem->get_all_by_dept_id($department);
-	        $data['data_losstime_category'] = $this->model_losstime_category->get_all();
-	        $data['data_operator']= $this->model_operator->get_data();
+
 			$this->load->view('template/header/index', $data);
 			$this->load->view('template/menu/index');
-			$this->load->view('pages/actual_production/index');
-		// }
+			$this->load->view('pages/production_model/index');
+
 	}
 
 
@@ -85,18 +68,18 @@ class Department extends CI_Controller {
 		}
 	}
 
-	public function production_status($department='')
+	public function production_day($department='')
 	{
-		$data['data']       = $this->model_master_plan_qty->get_production_status_by_dept_id($department);
+		$data['data']       = $this->model_master_plan_qty->get_production_day_by_dept_id($department);
 		$data['department'] = $department;
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
-		$this->load->view('pages/production_status/index');
+		$this->load->view('pages/production_day/index');
 	}
 
-	public function production_status_data()
+	public function production_day_data()
 	{
-        $data = $this->model_master_plan_qty->get_production_status_by_dept_id();
+        $data = $this->model_master_plan_qty->get_production_day_by_dept_id();
         $no = 1;
 
         foreach ($data as $key) {
@@ -172,15 +155,6 @@ class Department extends CI_Controller {
 	}
 
 
-	// public function setMachine($department='') {
- //        $dateStart = $this->security->xss_clean($this->input->post('text_dateStart'));
- //        $dateEnd = $this->security->xss_clean($this->input->post('text_dateEnd'));
-
-	// 	$this->model_master_plan_qty->setMcOnSpk($department);
-	// 	$this->actual_production($department);
-	// 	// redirect('department/actual_production/'.$department);
-	// }
-
 	function actual_download($department, $start, $end) {
 		$data['data']          = $this->model_master_plan->get_by_dept_id($department, $start, $end);
 		$data['start_date']    = $start;
@@ -189,17 +163,17 @@ class Department extends CI_Controller {
 		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
 		$data['data_operator'] = $this->model_operator->get_data();
-		$this->load->view('pages/actual_production/download', $data);
+		$this->load->view('pages/production_model/download', $data);
 	}
 
 	function production_download($department, $date) {
 		// $data['data']       = $this->model_master_plan->get_by_dept_id($department, $date);
-		$data['data']          = $this->model_master_plan_qty->get_production_status_by_dept_id_url($department, $date);
+		$data['data']          = $this->model_master_plan_qty->get_production_day_by_dept_id_url($department, $date);
 		$data['date']          = $date;
 		$data['department']    = $this->model_department->get_department_by_id($department);
 		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
 		$data['data_losstime'] = $this->model_losstime_category->get_all();
-		$this->load->view('pages/production_status/download', $data);
+		$this->load->view('pages/production_day/download', $data);
 	}
 
 }

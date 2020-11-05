@@ -1,6 +1,6 @@
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
-	<div class="left">Actual Production</div>
+	<div class="left">Production Model</div>
 	<label><div class="all" id="all">
 		<input type="checkbox" name="all" value="all" checked="" id="idCheckAll" onclick="checkViewAll()">All
 	</div></label>
@@ -17,9 +17,9 @@
 		<input type="checkbox" name="details" value="details" checked="" onclick="checkDetail()">Details
 	</div></label>
 	<div class="right">
-		<form id="normal" method="post" action="<?php echo base_url(); ?>department/actual_production/<?php echo $dept; ?>">
+		<form id="normal" method="post" action="<?php echo base_url(); ?>department/production_model/<?php echo $dept; ?>">
 			<!-- <a href="#" class="btn-green">Excel</a> -->
-			<button class="btn-green" onclick="downloadExcel()" form="cek">Excel</button>
+			<button class="btn-green" onclick="downloadExcel_xxx()" form="cek">Excel</button>
 			<!-- <button class="btn-green2" onclick="saveMc()" form="cek">Save</button> -->
 			<button class="btn-blue" type="submit" form="normal">Search</button>
 			<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
@@ -29,40 +29,30 @@
 	</div>
 </div>
 <div class="body-data blue1">
-	<form id="formSetMachine" method="post" action="<?php echo base_url(); ?>department/actual_production/<?php echo $dept; ?>">
+	<form id="formSetMachine" method="post" action="<?php echo base_url(); ?>department/production_model/<?php echo $dept; ?>">
 		<input type="hidden" name="text_dateStart" id="idStart" />
 		<input type="hidden" name="text_dateEnd" id="idEnd" />
 		<table id="actual-production" class="display" width="100%" border="1">
 		<thead>
 		  <tr>
-		    <th rowspan="2" width="3%">No</th>
-		    <th rowspan="2" width="3.9%">MC No</th>
-		    <th rowspan="2" width="4.8%">MC Name</th>
-		    <th rowspan="2" width="5%">Date</th>
-		    <th colspan="4" width="27%" style="border-bottom: 1px solid white">Model Information</th>
-		    <th colspan="13" width="61%" style="border-bottom: 1px solid white">Actual Production</th>
+		    <th rowspan="2" width="5%">No</th>
+		    <th rowspan="2" width="5%">Line </th>
+		    <th rowspan="2" width="15%">Part No</th>
+		    <th rowspan="2" width="10%">Start Date</th>
+		    <th rowspan="2" width="10%">End Date</th>
+		    <th colspan="6" width="50%" style="border-bottom: 1px solid white">Production</th>
+		    <th rowspan="2" width="5%">Ranking</th>
 		  </tr>
 		  <tr>
-		    <th>Part Number</th>
-		    <th>Model</th>
-		    <th>Description</th>
-		    <th>Capa/hour</th>
-		    <th>Plan Qty </th>
-		    <th>Actual Qty</th>
-		    <th>Balance</th>
-		    <th>Prod. %</th>
-		    <th>NG Qty</th>
-		    <th>Start</th>
-		    <th>End</th>
-		    <th>Work Time</th>
-		    <th>Loss Time</th>
-		    <th>Operation %</th>
-		    <th>Counter</th>
-		    <th>Shift</th>
-		    <th>Worker</th>
+		    <th>Plan Qty</th>
+		    <th>Tabe Qty</th>
+		    <th>Input Qty</th>
+		    <th>Output Qty</th>
+		    <th>+/-</th>
+		    <th>%</th>
 		  </tr>
 		</thead>
-		<tbody>
+<!-- 		<tbody>
 			<?php $i = 1; foreach ($data as $key) { ?>
 				<tr id="dataRow<?php echo $key['idQty']; ?>" onclick="selectRow(<?php echo $key['idQty']; ?>)" class="<?php echo ($key['status_close'] == 0) ? 'waiting' : (($key['status_close'] == 1) ? 'process' : 'completed') ; ?>">
 					<td class="text-center"><?php echo $i++; ?></td>
@@ -142,111 +132,13 @@
 				</tr>
 				<?php } ?>
 
-		</tbody>
+		</tbody> -->
 		</table>
 
 	</form>
 </div>
 
-<div id="divDetail" style="display: block;">
-	<div class="shift1">
-		<table width="100%" border="1">
-		  <tr>
-		    <th class="blue3">Shif 1</td>
-		    <th colspan="<?php echo count($data_machine_problem); ?>" class="blue1">Shift 1 Result NG</th>
-		    <th colspan="<?php echo count($data_losstime_category)+1; ?>" class="blue2">Shift 1 Loss Time</th>
-		  </tr>
-		  <tr>
-		    <th class="blue3">Prod Qty</th>
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-		    	<th class="blue1"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <th width="5%" class="blue2"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		    <th width="6%" class="blue2">Total</th>
-		  <tr>
-		    <td class="text-center" id="idValTot1"></td>
 
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-			    <td class="idNg text-center" id="idNg1<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <td class="idLoss text-center" id="idLoss1<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		    <td class="text-center" id="idLoss1Tot">&nbsp;</td>
-		  </tr>
-		</table>
-	</div>
-	<div class="shift2">
-		<table width="100%" border="1">
-		  <tr>
-		    <th class="blue3">Shif 2</td>
-		    <th colspan="<?php echo count($data_machine_problem); ?>" class="blue1">Shift 2 Result NG</th>
-		    <th colspan="<?php echo count($data_losstime_category)+1; ?>" class="blue2">Shift 2 Loss Time</th>
-		  </tr>
-		  <tr>
-		    <th class="blue3">Prod Qty</th>
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-		    	<th class="blue1"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <th width="5%" class="blue2"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		    <th width="6%" class="blue2">Total</th>
-		  </tr>
-		  <tr>
-		    <td class="text-center" id="idValTot2"></td>
-
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-			    <td class="idNg text-center" id="idNg2<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <td class="idLoss text-center" id="idLoss2<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		    <td id="idLoss2Tot" class="text-center">&nbsp;</td>
-		  </tr>
-
-		</table>
-	</div>
-	<div class="shift3">
-		<table width="100%" border="1">
-		  <tr>
-		    <th class="blue3">Shif 3</td>
-		    <th colspan="<?php echo count($data_machine_problem); ?>" class="blue1">Shift 3 Result NG</th>
-		    <th colspan="<?php echo count($data_losstime_category)+1; ?>" class="blue2">Shift 3 Loss Time</th>
-		  </tr>
-		  <tr>
-		    <th class="blue3">Prod Qty</th>
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-		    	<th class="blue1"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <th width="5%" class="blue2"><?php echo $key['name']; ?></th>
-			<?php } ?>
-		    <th width="6%" class="blue2">Total</th>
-		  </tr>
-
-		  <tr>
-		    <td id="idValTot3" class="text-center"></td>
-
-		  	<?php foreach ($data_machine_problem as $key) { ?>
-			    <td class="idNg text-center" id="idNg3<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		  	<?php foreach ($data_losstime_category as $key) { ?>
-			    <td class="idLoss text-center" id="idLoss3<?php echo $key['id']; ?>"></td>
-			<?php } ?>
-
-		    <td id="idLoss3Tot" class="text-center">&nbsp;</td>
-		  </tr>
-		</table>
-	</div>
-</div>
 
 <?php
 	function rupiah2dec($total) {
