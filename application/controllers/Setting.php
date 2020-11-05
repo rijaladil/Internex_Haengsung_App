@@ -75,7 +75,7 @@ class Setting extends CI_Controller {
         }
         $this->model_spk->spk_delete();
     }
-    
+
     // user
 	public function user()
 	{
@@ -426,4 +426,108 @@ class Setting extends CI_Controller {
 			echo 0;
 		}
 	}
+
+    public function import()
+    {
+        error_reporting(E_ALL ^ E_WARNING );
+        if(isset($_FILES["file"]["name"]))
+        {
+            $path   = $_FILES["file"]["tmp_name"];
+            $object = IOFactory::load($path);
+            $token  = time();
+            foreach($object->getWorksheetIterator() as $worksheet)
+            {
+                $highestRow    = $worksheet->getHighestRow();
+                $highestColumn = $worksheet->getHighestColumn();
+                $char          = $worksheet->getCellByColumnAndRow(0, 1)->getValue();
+                $type          = substr($char,0,3);
+                $date          = '';
+                $kolom         = 0;
+                $admin_id      = $this->session->userdata('id_user');
+                $no            = 1;
+                $order         = [];
+
+                for ($i=1; $i <= 7 ; $i++) {
+                    $tanggal = $worksheet->getCellByColumnAndRow(1+$i, 2)->getValue();
+                    $val = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($tanggal));
+                    if ($val == date('Y-m-d')) {
+                        $date = $val;
+                        $kolom = 1+$i;
+                    }
+                }
+
+
+                if ($type == 'ASS') {
+
+                    $this->model_master_plan_qty->delete(1);
+                    for($row = 3; $row <= $highestRow; $row++){
+                        $department = 1;
+                        $line       = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $machine    = $this->model_machine->detail($line);
+                        $partnumber = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
+                        $value      = $worksheet->getCellByColumnAndRow($kolom, $row)->getValue();
+                        if ($machine != '' && $partnumber != '' && $value > 0) {
+
+                            array_push($order, $machine->id);
+
+                            $check_array = array_count_values($order);
+
+
+                            $data = array(
+                                'department_id'       => $department,
+                                'mc_id'               => $machine->id,
+                                'part_no'             => $partnumber,
+                                'counter'             => 1,
+                                'date'                => date('Y-m-d'),
+                                'qty'                 => $value,
+                                'rank'                => $check_array[$machine->id],
+                                'status_close_input'  => 0,
+                                'status_close_output' => 0,
+                                'createDate'          => date('Y-m-d H:i:s'),
+                                'createUser'          => 'upload:'.$admin_id
+                            );
+                            $this->model_master_plan_qty->import($data);
+                        }
+                    }
+
+                }else{
+                    $this->model_master_plan_qty->delete(2);
+                    for($row = 3; $row <= $highestRow; $row++){
+                        $department = 2;
+                        $line       = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $machine    = $this->model_machine->detail($line);
+                        $partnumber = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
+                        $value      = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        if ($machine != '' && $partnumber != '' && $value > 0) {
+                            array_push($order, $machine->id);
+                            $check_array = array_count_values($order);
+                            $data = array(
+                                'department_id'       => $department,
+                                'mc_id'               => $machine->id,
+                                'part_no'             => $partnumber,
+                                'counter'             => 1,
+                                'date'                => date('Y-m-d'),
+                                'qty'                 => $value,
+                                'rank'                => $check_array[$machine->id],
+                                'status_close_input'  => 0,
+                                'status_close_output' => 0,
+                                'createDate'          => date('Y-m-d H:i:s'),
+                                'createUser'          => 'upload:'.$admin_id
+                            );
+                            $this->model_master_plan_qty->import($data);
+                        }
+                    }
+                }
+                $msg = array(
+                    'status' => 'success',
+                    'rows' => $no
+                );
+                echo json_encode($msg);
+            }
+        }else{
+            $data = array('status' => 'nofile');
+            echo json_encode($data);
+        }
+    }
+
 }

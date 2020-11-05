@@ -12,11 +12,22 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
+    public function import($data)
+    {
+        $this->db->insert('itx_t_master_plan_qty', $data);
+    }
+
+    public function delete($dep)
+    {
+        $this->db->where('department_id', $dep);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->delete('itx_t_master_plan_qty');
+    }
 
     public function get_production_status_by_dept_id()
     {
-        
-        
+
+
         $date = $this->security->xss_clean($this->input->post('tgl'));
         $department = $this->security->xss_clean($this->input->post('department'));
         $this->db->select("
