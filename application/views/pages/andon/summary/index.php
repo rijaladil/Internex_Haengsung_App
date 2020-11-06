@@ -121,21 +121,21 @@
 		    <th width="2%" rowspan="2">No</th>
 		    <th rowspan="2">Process</th>
 		    <th width="5%" rowspan="2">No. M/C</th>
-		    <th rowspan="2">M/C Name</th>
+		    <!-- <th rowspan="2">M/C Name</th> -->
 		    <th rowspan="2"></th>
 		    <th colspan="5">Actual Today</th>
 		    <th colspan="5">Actual Monthly</th>
 		  </tr>
 		  <tr>
-		    <th>Machine Call</th>
-		    <th>Quality Call</th>
-		    <th>Material Call</th>
-		    <th>Help Call</th>
+		    <th>Machine</th>
+		    <th>Quality</th>
+		    <th>Material</th>
+		    <th>Help</th>
 		    <th>Total</th>
-		    <th>Machine Call</th>
-		    <th>Quality Call</th>
-		    <th>Material Call</th>
-		    <th>Help Call</th>
+		    <th>Machine</th>
+		    <th>Quality</th>
+		    <th>Material</th>
+		    <th>Help</th>
 		    <th>Total</th>
 		  </tr>
 		</thead>
@@ -145,7 +145,7 @@
 					<td rowspan="2"><?php echo $no++; ?></td>
 					<td rowspan="2"><?php echo $key['deptName']; ?></td>
 					<td rowspan="2"><?php echo $key['mcNo']; ?></td>
-					<td rowspan="2" nowrap=""><?php echo $key['mcName']; ?></td>
+					<!-- <td rowspan="2" nowrap=""><?php echo $key['mcName']; ?></td> -->
 					<td>Call</td>
 					<td class="bg-green"><?php echo $key['count1']; ?></td>
 					<td class="bg-blue"><?php echo $key['count4']; ?></td>
@@ -298,10 +298,10 @@
 					    series: [{
 					        name: 'Delivered amount',
 					        data: [
-					            ['Machine Call', machineCall],
-					            ['Material Call', materialCall],
-					            ['Help Call', helpCall],
-					            ['Quality Call',qualityCall]
+					            ['Machine', machineCall],
+					            ['Material', materialCall],
+					            ['Help', helpCall],
+					            ['Quality',qualityCall]
 					        ],
 					        colors: ['#a1cab3','#de8e8e','#bfbf71','#63a6bf']
 					    }]

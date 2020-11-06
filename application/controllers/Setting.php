@@ -34,7 +34,8 @@ class Setting extends CI_Controller {
         {
             redirect('login');
         }
-        $data['data'] = $this->model_spk->get_all();
+        $data['data_clamping'] = $this->model_spk->get_all_clamping();
+        $data['data_assy'] = $this->model_spk->get_all_assy();
         $this->load->view('template/header/index', $data);
         $this->load->view('template/menu/index');
         $this->load->view('pages/setting/input_spk/index');

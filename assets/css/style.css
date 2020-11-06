@@ -409,6 +409,24 @@ html, body{
 				text-align: center;
 			}
 
+		.body-data .upload  button {
+			float: right;
+			padding-top:-2em;
+			width:15em;
+		/*	padding: 1em;*/
+			background: #00b0f0;
+			color: white;
+			font-size:1vw;
+			font-weight:bold;
+			border:none;
+			margin:.25em;
+			margin-right: 1em;
+			}
+
+			.body-data .upload button:hover{
+				background: #4dcfff;
+				color: #999;
+			}
 		.body-data button {
 			float: right;
 			margin-top:1em;
@@ -426,6 +444,9 @@ html, body{
 				color: #999;
 			}
 
+
+
+
 		.body-data .qs1{
 			float: left;
 			width: 23%;
@@ -438,7 +459,13 @@ html, body{
 
 		.body-data .slt{
 			float: left;
-			width: 50%;
+			width: 47%;
+			margin:1.5em;
+			}
+
+		.body-data .slt-r{
+			float: right;
+			width: 47%;
 			margin:1.5em;
 			}
 
@@ -463,6 +490,7 @@ html, body{
 		.blue1 table th, table .blue1{background:#203864 !important;}
 		.blue2 table th, table .blue2{background:#1f4e79 !important;}
 		.blue3 table th, table .blue3{background:#00b0f0 !important;}
+
 
 		.tblth{
 			background:#00b0f0 !important;

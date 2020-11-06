@@ -15,16 +15,7 @@
 <!-- MENU & SUBMENU -->
 	<div class="navbar">
 
- 	  <?php foreach ($this->model_department->get_all() as $key) { ?>
-		  <div class="subnav">
-		    <button onclick="myFunction2()" class="subnavbtn"><?php echo $key['name']; ?></button>
-		    <div id="myDropdown3" class="subnav-content">
-		      <a href="<?php echo base_url(); ?>department/production_day/<?php echo $key['id']; ?>">Production Day</a>
-		      <a href="<?php echo base_url(); ?>department/production_model/<?php echo $key['id']; ?>">Production Model</a>
-		    </div>
-		  </div>
-	  <?php } ?> 
-	 <!--  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
+	 <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
 		  <div class="subnav">
 		    <button onclick="myFunction6()" class="subnavbtn">Assembly</button>
 		    <div id="myDropdown3" class="subnav-content">
@@ -40,7 +31,7 @@
 		      <a href="<?php echo base_url(); ?>department/production_day/2">Production Day</a>
 		    </div>
 		  </div>
-	  <?php } ?> -->
+	  <?php } ?> 
 	  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3,4))) ) { ?>
 		  <div class="subnav">
 		    <button onclick="myFunction6()" class="subnavbtn">Andon</button>

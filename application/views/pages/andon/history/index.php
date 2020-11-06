@@ -63,15 +63,15 @@
 		    <th>No</th>
 		    <th>Process</th>
 		    <th>No. M/C</th>
-		    <th>Machine Name</th>
+		    <th>Zone</th>
 		    <th>Call</th>
 		    <th>Arrive</th>
 		    <th>Complete</th>
 		    <th>Downtime</th>
-		    <th>Machine Call</th>
-		    <th>Quality Call</th>
+		    <th>Machine</th>
+		    <th>Quality</th>
 		    <th>Material Time</th>
-		    <th>Help Call</th>
+		    <th>Help</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -80,7 +80,7 @@
 					<td><?php echo $no++; ?></td>
 					<td><?php echo $key['deptName']; ?></td>
 					<td><?php echo $key['mcNo']; ?></td>
-					<td><?php echo $key['mcName']; ?></td>
+					<td><?php echo $key['zone']; ?></td>
 					<td><?php echo $key['call']; ?></td>
 					<td><?php echo secToMinute($key['arrival']); ?></td>
 					<td><?php echo secToMinute($key['completed']); ?></td>

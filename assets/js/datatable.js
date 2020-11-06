@@ -98,6 +98,32 @@ $(document).ready(function() {
 
 } );
 
+// setting-production-Planning-1
+$(document).ready(function() {
+    $('#setting1').DataTable({
+        "scrollY"       : "548px",
+        "scrollCollapse": true,
+        "searching"     : false,
+        "paging"        : false,
+        "info"          : false,
+        "ordering"      : false
+
+    });
+} );
+
+
+$(document).ready(function() {
+    $('#setting2').DataTable({
+        "scrollY"       : "548px",
+        "scrollCollapse": true,
+        "searching"     : false,
+        "paging"        : false,
+        "info"          : false,
+        "ordering"      : false
+
+    });
+} );
+
 
 // setting-quality
 $(document).ready(function() {
@@ -150,5 +176,6 @@ $(document).ready(function() {
         "info"          : false,
         "ordering"      : false
     });
+
 
 } );

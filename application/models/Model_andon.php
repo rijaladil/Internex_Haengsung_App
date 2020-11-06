@@ -10,6 +10,7 @@ class Model_andon extends CI_Model
 
         $this->db->select("
         		mc.name as mcName
+                , andon.pos_id as zone
         		, mc.mc_no as mcNo
                 , dep.name as deptName
         		, andon.datetime as call
@@ -43,6 +44,7 @@ class Model_andon extends CI_Model
     {
         $this->db->select("
                 mc.name as mcName
+                , andon.pos_id as zone
                 , mc.mc_no as mcNo
                 , dep.name as deptName
                 , andon.datetime as call
@@ -89,6 +91,7 @@ class Model_andon extends CI_Model
         $this->db->select("
                 mc.name as mcName
                 , mc.mc_no as mcNo
+                , andon.pos_id as zone
                 , dep.name as deptName
                 , andon.datetime as call
 
@@ -147,6 +150,7 @@ class Model_andon extends CI_Model
         $this->db->from('itx_m_machine mc');
         $this->db->join('itx_m_department dep', 'dep.id = mc.department_id');
         $this->db->join('itx_t_andon andon', 'mc.id = andon.machine_id', 'left');
+        // $this->db->join('itx_t_andon andon', 'mc.id = andon.machine_id', 'left');
 
         if ($dept <> '') {
             $this->db->where('dep.id', $dept);
@@ -156,13 +160,6 @@ class Model_andon extends CI_Model
             $this->db->where('mc.id', $machine);
         }
 
-        // $this->db->where('andon.andon_status_id', '3');
-
-        // if ($dateStart <> '') {
-        //     $this->db->where("date_format(andon.datetime, '%Y-%m-%d') = ", $dateStart);
-        // }else{
-        //     $this->db->where("date_format(andon.datetime, '%Y-%m-%d') = ", date('Y-m-d'));
-        // }
 
         $this->db->group_by('mc.id');
         $query = $this->db->get();
@@ -183,6 +180,7 @@ class Model_andon extends CI_Model
                 mc.name as mcName
                 , mc.mc_no as mcNo
                 , dep.name as deptName
+                , andon.pos_id as zone
                 , andon.datetime as call
 
                 , SUM(IF(andon.andon_call_id = 1 and date_format(datetime, '%Y-%m-%d') = date_format($tanggal, '%Y-%m-%d'), 1, 0) ) as count1
@@ -248,14 +246,6 @@ class Model_andon extends CI_Model
         if ($machine <> 0) {
             $this->db->where('mc.id', $machine);
         }
-
-        // $this->db->where('andon.andon_status_id', '3');
-
-        // if ($dateStart <> '') {
-        //     $this->db->where("date_format(andon.datetime, '%Y-%m-%d') = ", $dateStart);
-        // }else{
-        //     $this->db->where("date_format(andon.datetime, '%Y-%m-%d') = ", date('Y-m-d'));
-        // }
 
         $this->db->group_by('mc.id');
         $query = $this->db->get();

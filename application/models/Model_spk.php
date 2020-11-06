@@ -3,26 +3,51 @@
 class Model_spk extends CI_Model
 {
 
-    public function get_all()
+    public function get_all_clamping()
     {
         $this->db->select('itx_t_master_plan_qty.id, 
                             itx_t_master_plan_qty.mc_id, 
                             itx_m_department.name,
                             itx_m_machine.mc_no, 
                             itx_t_master_plan_qty.counter, 
+                            itx_t_master_plan_qty.part_no, 
+                            itx_t_master_plan_qty.rank, 
                             itx_t_master_plan_qty.date, 
                             itx_t_master_plan_qty.qty, 
                             itx_t_master_plan_qty.status_close_input,
                             itx_t_master_plan_qty.status_close_output
                             ');
         $this->db->from('itx_t_master_plan_qty');
-       
         $this->db->join('itx_m_machine', 'itx_t_master_plan_qty.mc_id = itx_m_machine.id', 'left');
         $this->db->join('itx_m_department', 'itx_t_master_plan_qty.department_id = itx_m_department.id', 'left');
+        $this->db->where('itx_m_department.id','2');
+        $this->db->where('itx_t_master_plan_qty.date','CURDATE()',FALSE);
         $query = $this->db->get();
         return $query->result_array();
     }
 
+    public function get_all_assy()
+    {
+        $this->db->select('itx_t_master_plan_qty.id, 
+                            itx_t_master_plan_qty.mc_id, 
+                            itx_m_department.name,
+                            itx_m_machine.mc_no, 
+                            itx_t_master_plan_qty.counter, 
+                            itx_t_master_plan_qty.part_no, 
+                            itx_t_master_plan_qty.rank, 
+                            itx_t_master_plan_qty.date, 
+                            itx_t_master_plan_qty.qty, 
+                            itx_t_master_plan_qty.status_close_input,
+                            itx_t_master_plan_qty.status_close_output
+                            ');
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->join('itx_m_machine', 'itx_t_master_plan_qty.mc_id = itx_m_machine.id', 'left');
+        $this->db->join('itx_m_department', 'itx_t_master_plan_qty.department_id = itx_m_department.id', 'left');
+        $this->db->where('itx_m_department.id','1');
+         $this->db->where('itx_t_master_plan_qty.date','CURDATE()',FALSE);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function spk_add()
     {   
         $text_department = $this->security->xss_clean($this->input->post('text_department'));
