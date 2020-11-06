@@ -70,7 +70,7 @@ class Department extends CI_Controller {
 
 	public function production_day($department='')
 	{
-		$data['data']       = $this->model_master_plan_qty->get_production_day_by_dept_id($department);
+		// $data['data']       = $this->model_master_plan_qty->get_production_day_by_dept_id($department);
 		$data['department'] = $department;
 		$this->load->view('template/header/index', $data);
 		$this->load->view('template/menu/index');
@@ -87,28 +87,38 @@ class Department extends CI_Controller {
 	        echo "
 
 				<tr>
-					<td class='ft'>".$no++."</td>
-					<td class='ft'>".$key['production_part_no']."</td>
-					<td class='ft'>".$key['model']."</td>
-					<td class='ft'>".$key['description']."</td>
-					<td class='ft'>".$this->numberFor2($key['capaDay'])."</td>
-					<td class='ft'><div>Plan</div><br><div class='fgreen'>Actual</div><br><div class='fred'>Ng</div></td>
+					<td class='ft'>".$key['dept']."</td>
+					<td class='ft'>".$key['part_no']."</td>
+					<td class='ft'>
+						<div>Plan</div><br>
+						<div class=''>Table</div><br>
+						<div class=''>Input</div><br>
+						<div class=''>Output</div><br>
+						<div class=''>+/-</div><br>
+						<div class=''>%</div>
+					</td>
 					";
 					for ($i=1; $i <= 31 ; $i++) {
 						echo "
 					<td class='fb' style='border-right: 1px solid #d2d2d2; padding:0px 3px 0px 3px !important'>
 						<div>".$this->colBlack($key['planDay'.$i])."</div><br>
-						<div class=''>".$this->colGreen($key['actualDay'.$i]-$key['ngQty'.$i])."</div><br>
-						<div class='fred'>".$this->colRed($key['ngQty'.$i]*1)."</div><br>
+						<div class=''>".$this->colBlack($key['result_table_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_input_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_output_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_output_Day'.$i]-$key['planDay'.$i] )."</div><br>
+						<div class=''>".( empty($key['planDay'.$i]) ? '' : number_format($key['result_output_Day'.$i]/$key['planDay'.$i]*100, 1) )."</div><br>
 					</td>";
 					}
 
 					echo "
 					<td class='ft'>
 						<div>".$this->numberFor($key['planQtyTot']*1)."</div><br>
-						<div class=''>".$this->colGreen($key['actualQtyTot']-$key['ngQtyTot'])."</div><br>
-						<div class='fred'>".$this->colRed($key['ngQtyTot']*1)."</div><br></td>
-					<td class='ft'>".$this->colBlackPer((($key['actualQtyTot']-$key['ngQtyTot'])/$key['planQtyTot'])*100)."</td>
+						<div>".$this->numberFor($key['tableQtyTot']*1)."</div><br>
+						<div>".$this->numberFor($key['inputQtyTot']*1)."</div><br>
+						<div>".$this->numberFor($key['outputQtyTot']*1)."</div><br>
+						<div>".$this->numberFor(($key['outputQtyTot']*1) - ($key['planQtyTot']*1))."</div><br>
+						<div>".( empty($key['planQtyTot']) ? '' : number_format($key['outputQtyTot']/$key['planQtyTot']*100, 1) )."</div><br>
+					</td>
 				</tr>
 	        ";
         }
