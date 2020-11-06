@@ -88,7 +88,7 @@ class Department extends CI_Controller {
 
 				<tr>
 					<td class='ft'>".$key['dept']."</td>
-					<td class='ft'>".$key['part_no']."</td>
+					<td class='ft'>".$key['machine']."</td>
 					<td class='ft'>
 						<div>Plan</div><br>
 						<div class=''>Table</div><br>

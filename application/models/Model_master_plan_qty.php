@@ -134,6 +134,7 @@ class Model_master_plan_qty extends CI_Model
 
             qty.*,
             dept.name as dept,
+            machine.name as machine,
             SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', qty.qty, 0) ) AS planDay1
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', qty.qty, 0) ) AS planDay2
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', qty.qty, 0) ) AS planDay3
@@ -270,6 +271,7 @@ class Model_master_plan_qty extends CI_Model
         $this->db->from('itx_t_master_plan_qty qty');
         $this->db->join('itx_m_department dept', 'dept.id = qty.department_id', 'left');
         $this->db->join('itx_t_result result', 'result.masterplan_qty_id = qty.id', 'left');
+        $this->db->join('itx_m_machine machine', 'machine.id = result.machine_id', 'left');
         if ($date <> '') {
             $this->db->where("date_format(qty.date, '%Y-%m') =", $date);
         }else{
