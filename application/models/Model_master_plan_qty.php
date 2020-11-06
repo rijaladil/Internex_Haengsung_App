@@ -16,12 +16,32 @@ class Model_master_plan_qty extends CI_Model
     {
         $this->db->select('max(rank) as rank');
         $this->db->from('itx_t_master_plan_qty');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = itx_t_master_plan_qty.id');
         $this->db->where('department_id', $department);
         $this->db->where('mc_id', $line);
-        // $this->db->where('part_no', $machine);
-        $this->db->where('status_close_input + status_close_output > 0', null, false);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->where('(qty_table+qty_input+qty_output) is not null', null, false);
+        // $this->db->where('status_close_input + status_close_output > 0', null, false);
         $query = $this->db->get();
         return $query->row();
+    }
+
+    public function is_run($department, $line, $partnumber)
+    {
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = itx_t_master_plan_qty.id');
+        $this->db->where('department_id', $department);
+        $this->db->where('mc_id', $line);
+        $this->db->where('part_no', $partnumber);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->where('(qty_table+qty_input+qty_output) is not null', null, false);
+        $query = $this->db->get();
+        $data = $query->num_rows();
+        if ($data > 0) {
+            return true;
+        }else{
+            false;
+        }
     }
 
     public function check_existing($department, $machine, $partnumber)
@@ -30,6 +50,7 @@ class Model_master_plan_qty extends CI_Model
         $this->db->where('department_id', $department);
         $this->db->where('mc_id', $machine);
         $this->db->where('part_no', $partnumber);
+        $this->db->where('date', date('Y-m-d'));
         $query = $this->db->get();
         $existing = $query->num_rows();
         return $existing;
@@ -46,18 +67,60 @@ class Model_master_plan_qty extends CI_Model
         $this->db->set('editDate', $data['editDate']);
         $this->db->set('editUser', $data['editUser']);
         $this->db->set('qty', $data['qty']);
+        $this->db->set('rank', $data['rank']);
+        $this->db->where('date', date('Y-m-d'));
         $this->db->where('department_id', $data['department_id']);
         $this->db->where('mc_id', $data['mc_id']);
         $this->db->where('part_no', $data['part_no']);
         $this->db->update('itx_t_master_plan_qty');
+    }
 
+    public function update_runing($data)
+    {
+        $this->db->set('editDate', $data['editDate']);
+        $this->db->set('editUser', $data['editUser']);
+        $this->db->set('qty', $data['qty']);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->where('department_id', $data['department_id']);
+        $this->db->where('mc_id', $data['mc_id']);
+        $this->db->where('part_no', $data['part_no']);
+        $this->db->update('itx_t_master_plan_qty');
     }
 
     public function delete($dep)
     {
+        $this->db->select('itx_t_master_plan_qty.id id');
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = itx_t_master_plan_qty.id');
         $this->db->where('department_id', $dep);
         $this->db->where('date', date('Y-m-d'));
-        $this->db->where('(status_close_input + status_close_output) = 0', null, false);
+        $this->db->where('(qty_table+qty_input+qty_output) is null', null, false);
+        $query    = $this->db->get();
+        $existing = $query->result_array();
+
+        foreach ($existing as $key) {
+            $this->db->where('itx_t_master_plan_qty.id', $key['id']);
+            $this->db->delete('itx_t_master_plan_qty');
+        }
+    }
+
+    public function delete_exist($data)
+    {
+        $this->db->where('itx_t_master_plan_qty.department_id', $data['department_id']);
+        $this->db->where('itx_t_master_plan_qty.mc_id', $data['mc_id']);
+        $this->db->where('itx_t_master_plan_qty.part_no', $data['part_no']);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->delete('itx_t_master_plan_qty');
+
+        // $this->db->where('department_id', $dep);
+        // $this->db->where('date', date('Y-m-d'));
+        // $this->db->delete('itx_t_master_plan_qty');
+    }
+
+    public function del($dep)
+    {
+        $this->db->where('department_id', $dep);
+        $this->db->where('date', date('Y-m-d'));
         $this->db->delete('itx_t_master_plan_qty');
     }
 
