@@ -14,7 +14,7 @@
 
 
 <head>
-	<title>PT HAENGSUNGK</title>
+	<title>PT HAENGSUNG</title>
 </head>
 <body>
 

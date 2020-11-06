@@ -15,6 +15,14 @@ class Model_machine extends CI_Model
         return $query->result_array();
     }
 
+    public function detail($id)
+    {
+        $this->db->from('itx_m_machine');
+        $this->db->where('mc_no_alias2', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     public function get_by_line_setting()
     {
         $this->db->select('

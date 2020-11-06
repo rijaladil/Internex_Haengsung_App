@@ -12,11 +12,59 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
+    public function check_last_rank($department, $line)
+    {
+        $this->db->select('max(rank) as rank');
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->where('department_id', $department);
+        $this->db->where('mc_id', $line);
+        // $this->db->where('part_no', $machine);
+        $this->db->where('status_close_input + status_close_output > 0', null, false);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+    public function check_existing($department, $machine, $partnumber)
+    {
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->where('department_id', $department);
+        $this->db->where('mc_id', $machine);
+        $this->db->where('part_no', $partnumber);
+        $query = $this->db->get();
+        $existing = $query->num_rows();
+        return $existing;
+    }
+
+    public function import($data)
+    {
+        $this->db->insert('itx_t_master_plan_qty', $data);
+
+    }
+
+    public function update($data)
+    {
+        $this->db->set('editDate', $data['editDate']);
+        $this->db->set('editUser', $data['editUser']);
+        $this->db->set('qty', $data['qty']);
+        $this->db->where('department_id', $data['department_id']);
+        $this->db->where('mc_id', $data['mc_id']);
+        $this->db->where('part_no', $data['part_no']);
+        $this->db->update('itx_t_master_plan_qty');
+
+    }
+
+    public function delete($dep)
+    {
+        $this->db->where('department_id', $dep);
+        $this->db->where('date', date('Y-m-d'));
+        $this->db->where('(status_close_input + status_close_output) = 0', null, false);
+        $this->db->delete('itx_t_master_plan_qty');
+    }
 
     public function get_production_day_by_dept_id()
     {
-        
-        
+
+
         $date = $this->security->xss_clean($this->input->post('tgl'));
         $department = $this->security->xss_clean($this->input->post('department'));
         $this->db->select("
@@ -105,13 +153,13 @@ class Model_master_plan_qty extends CI_Model
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', qty.qty, 0) ) AS planDay30
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', qty.qty, 0) ) AS planDay31
 
-            
 
-           
+
+
 
             ,SUM(qty.qty) AS planQtyTot
             ,SUM(result.qty_output) AS actualQtyTot
-           
+
 
 
             ");
@@ -375,7 +423,7 @@ class Model_master_plan_qty extends CI_Model
                         and date_format(qty2.date, '%Y-%m') = date_format(('$date-01' - interval 1 month), '%Y-%m')
                 ) as qtyActualLast
 
-                
+
 
                 ,(
                     SELECT
@@ -493,7 +541,7 @@ class Model_master_plan_qty extends CI_Model
                     and qty2.mc_id = mc.id
                     and dept2.name = dept.name
             ) as andonTime
-            
+
             ");
         $this->db->from('itx_t_master_plan_qty qty');
         $this->db->join('itx_t_master_plan plan', 'plan.id = qty.masterplan_id', 'left');
