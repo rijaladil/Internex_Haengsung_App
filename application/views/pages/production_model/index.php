@@ -52,87 +52,25 @@
 		    <th>%</th>
 		  </tr>
 		</thead>
-<!-- 		<tbody>
+ 		<tbody>
 			<?php $i = 1; foreach ($data as $key) { ?>
-				<tr id="dataRow<?php echo $key['idQty']; ?>" onclick="selectRow(<?php echo $key['idQty']; ?>)" class="<?php echo ($key['status_close'] == 0) ? 'waiting' : (($key['status_close'] == 1) ? 'process' : 'completed') ; ?>">
+				<tr  id="dataRow<?php echo $key['qid']; ?>" onclick="selectRow(<?php echo $key['qid']; ?>)" class="<?php echo ($key['start_date'] == 0) ? 'waiting' : (($key['end_date'] == 0) ? 'process' : 'completed') ; ?>">
 					<td class="text-center"><?php echo $i++; ?></td>
-					<td class="text-center">
-						<?php if ($key['status_close'] != 1 && ($key['actual']*$key['counter']) <= $key['planQty']  ) { ?>
-							<input type="hidden" name="text_idQty[]" value="<?php echo $key['idQty']; ?>">
-							<select name="text_mc[]" onchange="setMachine(this, <?php echo $key['idQty']; ?>)">
-								<?php if ($key['status_close'] == 0 ) { ?>
-							    	<option>-</option>
-								<?php } ?>
-								<?php foreach ($data_machine as $mc) { ?>
-							    	<option value="<?php echo $mc['id']; ?>" <?php echo ($mc['id'] == $key['mc_id']) ? 'selected' : ''; ?>><?php echo $mc['mc_no']; ?></option>
-								<?php } ?>
-							</select>
-						<?php }else{ ?>
-							<?php echo $key['mcNo']; ?>
-						<?php } ?>
-					</td>
-					<td><?php echo $key['mcName']; ?></td>
-					<td class="text-center"><?php echo $key['date']; ?></td>
-					<td><?php echo $key['production_part_no']; ?></td>
-					<td><?php echo $key['model']; ?></td>
-					<td><?php echo $key['description']; ?></td>
-					<td class="text-right"><?php echo rupiah2dec($key['capaHour']*1); ?></td>
-					<td class="text-right"><?php echo rupiah0dec($key['planQty']); ?></td>
-					<td class="text-right" id="idQtyTot<?php echo $key['idQty']; ?>"><?php echo rupiah0dec(($key['actual']*$key['counter'])-$key['ng']); ?></td>
-					<td class="text-right"><?php echo rupiah0dec((($key['actual']*$key['counter'])-$key['ng'])-$key['planQty']); ?></td>
-					<td class="text-right"><?php echo rupiah2dec(((($key['actual']*$key['counter'])-$key['ng'])/$key['planQty'])*100); ?></td>
-					<td class="text-right"><?php echo ($key['ng'] == '') ? rupiah0dec(0) : rupiah0dec($key['ng']); ?></td>
-					<td class="text-center"><?php echo $key['start']; ?></td>
-					<td class="text-center"><?php echo ($key['finish'] == '00/00/00 00:00') ? '-' : $key['finish']; ?></td>
-					<td class="text-center"><?php echo ($key['working_time'] == 0) ? '' : sprintf("%02d",floor($key['working_time'] / 3600)) . ':' . sprintf("%02d",floor($key['working_time'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['working_time'] % 60)); ?></td>
-					<td class="text-center"><?php echo ($key['losstime'] == 0) ? '' : sprintf("%02d",floor($key['losstime'] / 3600)) . ':' . sprintf("%02d",floor($key['losstime'] / 60 % 60)) . ':' . sprintf("%02d",floor($key['losstime'] % 60)); ?></td>
-					<td class="text-center">
-						<?php
-							if ($key['status_close'] == 1 && $key['working_time'] > 0 || $key['status_close'] == 2 && $key['working_time'] > 0) {
-								echo number_format((float)(($key['working_time']/($key['working_time']+$key['losstime']))*100), 2, '.', '');
-							 }
-						?>
-					</td>
-
-					<td class="text-center">
-						<select  <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> style="-webkit-appearance: none;" onchange="changeCounter(this, <?php echo $key['idQty']; ?>)">
-							<option <?php echo ( $key['counter'] == 1 ? 'selected' : ''); ?>>1</option>
-							<option <?php echo ( $key['counter'] == 2 ? 'selected' : ''); ?>>2</option>
-							<option <?php echo ( $key['counter'] == 3 ? 'selected' : ''); ?>>3</option>
-							<option <?php echo ( $key['counter'] == 4 ? 'selected' : ''); ?>>4</option>
-							<option <?php echo ( $key['counter'] == 5 ? 'selected' : ''); ?>>5</option>
-							<option <?php echo ( $key['counter'] == 6 ? 'selected' : ''); ?>>6</option>
-							<option <?php echo ( $key['counter'] == 7 ? 'selected' : ''); ?>>7</option>
-							<option <?php echo ( $key['counter'] == 8 ? 'selected' : ''); ?>>8</option>
-						</select>
-					</td>
-
-					<td class="text-center">
-						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> style="-webkit-appearance: none;" <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
-							<?php if ($key['operator_id'] == NULL ) { ?>
-						    	<option hidden>-</option>
-							<?php } ?>
-							<?php foreach ($data_operator as $opr) { ?>
-						    	<option hidden  <?php echo ( $key['operator_id'] == $opr['nip'] ? 'selected' : ''); ?> value="<?php echo $opr['nip']; ?>"><?php echo $opr['shift']; ?></option>
-							<?php } ?>
-						</select>
-					</td>
-
-
-					<td class="text-center">
-						<select <?php echo ($key['status_close'] == 1 || $key['status_close'] == 2 ? 'disabled' : ''); ?> name="text_operator[]" onchange="setOperator(this, <?php echo $key['idQty']; ?>)">
-							<?php if ($key['operator_id'] == NULL ) { ?>
-						    	<option>-</option>
-							<?php } ?>
-							<?php foreach ($data_operator as $opr) { ?>
-						    	<option <?php echo ( $key['operator_id'] == $opr['nip'] ? 'selected' : ''); ?> value="<?php echo $opr['nip']; ?>"><?php echo $opr['name']; ?></option>
-							<?php } ?>
-						</select>
-					</td>
+					<td class="text-center"><?php echo $key['line']; ?></td>
+					<td class="text-center"><?php echo $key['part_no']; ?></td>
+					<td class="text-center"><?php echo $key['start_date']; ?></td>
+					<td class="text-center"><?php echo $key['end_date']; ?></td>
+					<td class="text-center"><?php echo $key['plan_qty']; ?></td>
+					<td class="text-center"><?php echo $key['table_qty']; ?></td>
+					<td class="text-center"><?php echo $key['input_qty']; ?></td>
+					<td class="text-center"><?php echo $key['output_qty']; ?></td>
+					<td class="text-center"><?php echo $key['result']; ?></td>
+					<td class="text-center"><?php echo number_format($key['persen'],2,",","."); ?></td>
+					<td class="text-center"><?php echo $key['rank']; ?></td>
 				</tr>
 				<?php } ?>
 
-		</tbody> -->
+		</tbody>
 		</table>
 
 	</form>

@@ -5,6 +5,7 @@ class Model_machine extends CI_Model
 
     public function get_by_dept_id($id='')
     {
+        
         $this->db->from('itx_m_machine');
         if ($id <> '') {
             # code...

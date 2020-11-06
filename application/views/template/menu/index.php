@@ -49,7 +49,7 @@
 		      <a href="<?php echo base_url(); ?>setting/user">User setting</a>
 		  <?php } ?>
 	       <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
-		      <a href="<?php echo base_url(); ?>setting/input_spk">Input Planning</a>
+		      <a href="<?php echo base_url(); ?>setting/input_spk">Planning</a>
 		  <?php } ?>
 		  <?php if ( (in_array($this->session->userdata('level'), array(1,2,3))) ) { ?>
 		      <a href="<?php echo base_url(); ?>setting/upload_spk">Upload SPK</a>

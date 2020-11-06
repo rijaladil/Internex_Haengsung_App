@@ -31,6 +31,7 @@ class Department extends CI_Controller {
 	        $data['setStart'] = $this->security->xss_clean($this->input->post('text_dateStart'));
 	        $data['setEnd'] = $this->security->xss_clean($this->input->post('text_dateEnd'));
 	        $data['dept'] = $department;
+	        $data['data'] = $this->model_master_plan->get_by_dept_id($department, $data['setStart'], $data['setEnd']);
 
 	        $data['data_machine'] = $this->model_machine->get_by_dept_id($department);
 

@@ -22,6 +22,8 @@ class Model_spk extends CI_Model
         $this->db->join('itx_m_department', 'itx_t_master_plan_qty.department_id = itx_m_department.id', 'left');
         $this->db->where('itx_m_department.id','2');
         $this->db->where('itx_t_master_plan_qty.date','CURDATE()',FALSE);
+        $this->db->order_by('itx_m_machine.mc_no');
+        $this->db->order_by('itx_t_master_plan_qty.rank');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -44,7 +46,9 @@ class Model_spk extends CI_Model
         $this->db->join('itx_m_machine', 'itx_t_master_plan_qty.mc_id = itx_m_machine.id', 'left');
         $this->db->join('itx_m_department', 'itx_t_master_plan_qty.department_id = itx_m_department.id', 'left');
         $this->db->where('itx_m_department.id','1');
-         $this->db->where('itx_t_master_plan_qty.date','CURDATE()',FALSE);
+        $this->db->where('itx_t_master_plan_qty.date','CURDATE()',FALSE);
+        $this->db->order_by('itx_m_machine.mc_no');
+        $this->db->order_by('itx_t_master_plan_qty.rank');
         $query = $this->db->get();
         return $query->result_array();
     }
