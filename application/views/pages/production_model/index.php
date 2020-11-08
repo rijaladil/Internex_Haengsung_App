@@ -53,7 +53,7 @@
 		  </tr>
 		</thead>
  		<tbody>
-			<?php $i = 1; foreach ($data as $key) { ?>
+			<?php $i = 1; foreach ($dataA as $key) { ?>
 				<tr  id="dataRow<?php echo $key['qid']; ?>" onclick="selectRow(<?php echo $key['qid']; ?>)" class="<?php echo ($key['start_date'] == 0) ? 'waiting' : (($key['end_date'] == 0) ? 'process' : 'completed') ; ?>">
 					<td class="text-center"><?php echo $i++; ?></td>
 					<td class="text-center"><?php echo $key['line']; ?></td>
@@ -71,8 +71,171 @@
 				<?php } ?>
 
 		</tbody>
+		
+			<?php $i = 1; foreach ($dataAtot as $key) { ?>
+				<tr style="background: #0070c0; font-weight: bold; color: white;">
+					<td class="text-center"></td>
+					<td class="text-center">TOTAL</td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"><?php echo number_format($key['tot_plan_qty']); ?></td>
+					<td class="text-center"><?php echo number_format($key['tot_table_qty']); ?></td>
+					<td class="text-center"><?php echo number_format($key['tot_input_qty']); ?></td>
+					<td class="text-center"><?php echo number_format($key['tot_output_qty']); ?></td>
+					<td class="text-center"><?php echo number_format($key['tot_result']); ?></td>
+					<td class="text-center"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
+					<td class="text-center"></td>
+				</tr>
+				<?php } ?>
+
+		
 		</table>
 
+		<!-- B -->
+		<div style="margin:2em;"></div>
+		<table id="actual-production" class="display" width="100%" border="1">
+
+		<thead hidden>
+		  <tr>
+		    <th rowspan="2" width="5%">No</th>
+		    <th rowspan="2" width="5%">Line </th>
+		    <th rowspan="2" width="15%">Part No</th>
+		    <th rowspan="2" width="10%">Start Date</th>
+		    <th rowspan="2" width="10%">End Date</th>
+		    <th colspan="6" width="50%" style="border-bottom: 1px solid white">Production</th>
+		    <th rowspan="2" width="5%">Ranking</th>
+		  </tr>
+		  <tr>
+		    <th>Plan Qty</th>
+		    <th>Tabe Qty</th>
+		    <th>Input Qty</th>
+		    <th>Output Qty</th>
+		    <th>+/-</th>
+		    <th>%</th>
+		  </tr>
+		</thead>
+		  <!-- <tr>
+		    <td colspan="12">&nbsp</td>
+		  </tr>
+ -->
+ 		<tbody>
+			<?php $i = 1; foreach ($dataB as $key) { ?>
+				<tr  id="dataRow<?php echo $key['qid']; ?>" onclick="selectRow(<?php echo $key['qid']; ?>)" class="<?php echo ($key['start_date'] == 0) ? 'waiting' : (($key['end_date'] == 0) ? 'process' : 'completed') ; ?>">
+					<td class="text-center" width="5%"><?php echo $i++; ?></td>
+					<td class="text-center" width="5%"><?php echo $key['line']; ?></td>
+					<td class="text-center" width="15%"><?php echo $key['part_no']; ?></td>
+					<td class="text-center" width="10%"><?php echo $key['start_date']; ?></td>
+					<td class="text-center" width="10%"><?php echo $key['end_date']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['plan_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['table_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['input_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['output_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
+					<td class="text-center" width="5%"><?php echo $key['rank']; ?></td>
+				</tr>
+				<?php } ?>
+
+		</tbody>
+				<?php $i = 1; foreach ($dataBtot as $key) { ?>
+				<tr style="background: #0070c0; font-weight: bold; color: white;">
+					<td class="text-center" width="5%"></td>
+					<td class="text-center" width="5%">TOTAL</td>
+					<td class="text-center" width="15%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_plan_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_table_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_input_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
+					<td class="text-center" width="5%"></td>
+				</tr>
+				<?php } ?>
+		</table>
+
+		<!-- C -->
+		<div style="margin:2em;"></div>
+		<table id="actual-production" class="display" width="100%" border="1">
+		<thead hidden>
+		  <tr>
+		    <th rowspan="2" width="5%">No</th>
+		    <th rowspan="2" width="5%">Line </th>
+		    <th rowspan="2" width="15%">Part No</th>
+		    <th rowspan="2" width="10%">Start Date</th>
+		    <th rowspan="2" width="10%">End Date</th>
+		    <th colspan="6" width="50%" style="border-bottom: 1px solid white">Production</th>
+		    <th rowspan="2" width="5%">Ranking</th>
+		  </tr>
+		  <tr>
+		    <th>Plan Qty</th>
+		    <th>Tabe Qty</th>
+		    <th>Input Qty</th>
+		    <th>Output Qty</th>
+		    <th>+/-</th>
+		    <th>%</th>
+		  </tr>
+		</thead>
+		  
+ 		<tbody>
+			<?php $i = 1; foreach ($dataC as $key) { ?>
+				<tr  id="dataRow<?php echo $key['qid']; ?>" onclick="selectRow(<?php echo $key['qid']; ?>)" class="<?php echo ($key['start_date'] == 0) ? 'waiting' : (($key['end_date'] == 0) ? 'process' : 'completed') ; ?>">
+					<td class="text-center" width="5%"><?php echo $i++; ?></td>
+					<td class="text-center" width="5%"><?php echo $key['line']; ?></td>
+					<td class="text-center" width="15%"><?php echo $key['part_no']; ?></td>
+					<td class="text-center" width="10%"><?php echo $key['start_date']; ?></td>
+					<td class="text-center" width="10%"><?php echo $key['end_date']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['plan_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['table_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['input_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['output_qty']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
+					<td class="text-center" width="5%"><?php echo $key['rank']; ?></td>
+				</tr>
+				<?php } ?>
+
+		</tbody>
+				<?php $i = 1; foreach ($dataCtot as $key) { ?>
+				<tr style="background: #0070c0; font-weight: bold; color: white;">
+					<td class="text-center" width="5%"></td>
+					<td class="text-center" width="5%">TOTAL</td>
+					<td class="text-center" width="15%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_plan_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_table_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_input_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
+					<td class="text-center" width="5%"></td>
+				</tr>
+				<?php } ?>
+		</table>
+		<div style="margin:2em;"></div>
+		<table width="100%" border="">
+				<?php $i = 1; foreach ($datatot as $key) { ?>
+				<tr style="background: #00b050; font-weight: bold; color: white;">
+					
+					<td class="text-center" colspan="2" width="10%">GRAND TOTAL</td>
+					<td class="text-center" width="15%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_plan_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_table_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_input_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
+					<td class="text-center" width="5%"></td>
+				</tr>
+				<?php } ?>
+		</table>
+
+		</table>
 	</form>
 </div>
 
