@@ -23,19 +23,19 @@
 
 <div id="load"><img src="<?php echo base_url(); ?>assets/images/save.gif"></div>
 <div class="form">
-	<div class="left">Production Planning</div>
+	<div class="left">Production Planning Today</div>
 </div>
 
 <div class="body-data">
 	<div class="slt">
-		<div class="upload"><button>Upload Add Excel</button></div>
+		<!-- <div class="upload"><button>Upload Add Excel</button></div> -->
 		<table id="setting1" class="display" border="0">
 		<thead>
 		  <tr>
-		    <th colspan="4">Assembly SPK</th>
-		    <th colspan="2">
+		    <th colspan="6">Assembly SPK</th>
+		   <!--  <th colspan="2">
 		    	<input type="text" readonly="" name="date" id="datepicker1" value="">
-		    </th>
+		    </th> -->
 		  </tr>
 		  <tr >
 		    <th width="10%">Date</th>
@@ -54,11 +54,11 @@
 			    <td class="text-center"><?php echo $key['mc_no']; ?></td>
 			    <td class="text-center"><?php echo $key['part_no']; ?></td>
 			    <td class="text-center"><?php echo number_format($key['qty']); ?></td>
-			    <td class="text-center">=</td>
+			    <td class="text-center"><?php echo $key['rank']; ?></td>
 			 </tr>
 		<?php } ?>
 		</tbody>
-		<tfoot >
+		<!-- <tfoot >
 			<tr >
 			    <td class="text-center"></td>
 			    <td class="text-center"></td>
@@ -67,17 +67,17 @@
 			    <td class="text-center">xxxx</td>
 			    <td class="text-center"></td>
 			 </tr>
-		</tfoot>
+		</tfoot> -->
 		</table>
 	</div>
 
 	<div class="slt-r">
-		<div class="upload"><button>Upload Add Excel</button></div>
+		<!-- <div class="upload"><button>Upload Add Excel</button></div> -->
 		<table id="setting2" class="display" width="50%" border="0">
 		<thead>
 		  <tr>
-		    <th colspan="4">Clamping SPK</th>
-		    <th colspan="2"><input type="text" readonly="" name="date" id="datepicker2" value=""></th>
+		    <th colspan="6">Clamping SPK</th>
+		   <!--  <th colspan="2"><input type="text" readonly="" name="date" id="datepicker2" value=""></th> -->
 		  </tr>
 		  <tr>
 		    <th width="10%">Date</th>
@@ -96,13 +96,13 @@
 				    <td class="text-center"><?php echo $key['mc_no']; ?></td>
 				    <td class="text-center"><?php echo $key['part_no']; ?></td>
 				    <td class="text-center"><?php echo number_format($key['qty']); ?></td>
-				    <td class="text-center" >=</td>
+				   <td class="text-center"><?php echo $key['rank']; ?></td>
 
 				  </tr>
 				<?php } ?>
 
 		</tbody>
-		<tfoot >
+		<!-- <tfoot >
 			<tr >
 			    <td class="text-center"></td>
 			    <td class="text-center"></td>
@@ -111,7 +111,7 @@
 			    <td class="text-center">xxxx</td>
 			    <td class="text-center"></td>
 			 </tr>
-		</tfoot>
+		</tfoot> -->
 		</table>
 	</div>
 </div>
