@@ -42,7 +42,7 @@ class Model_master_plan extends CI_Model
         }else{
 	        $this->db->where('itx_t_master_plan_qty.date = ', date('Y-m-d'));
         }
-
+        $this->db->order_by('rank','ASC');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -86,7 +86,7 @@ class Model_master_plan extends CI_Model
         }else{
             $this->db->where('itx_t_master_plan_qty.date = ', date('Y-m-d'));
         }
-
+        $this->db->order_by('rank','ASC');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -130,7 +130,7 @@ class Model_master_plan extends CI_Model
         }else{
             $this->db->where('itx_t_master_plan_qty.date = ', date('Y-m-d'));
         }
-
+        $this->db->order_by('rank','ASC');
         $query = $this->db->get();
         return $query->result_array();
     }

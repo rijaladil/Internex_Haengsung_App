@@ -67,7 +67,7 @@
 					<td class="text-center"><?php echo $key['result']; ?></td>
 					<td class="text-center"><?php echo number_format($key['persen'],2,",","."); ?></td>
 					<td class="text-center">
-						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+						<input type="number" class="form-control pm-input" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
 					</td>
 				</tr>
 				<?php } ?>
@@ -136,7 +136,7 @@
 					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
 					<td class="text-center">
-						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+						<input type="number" class="form-control pm-input" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
 					</td>
 				</tr>
 				<?php } ?>
@@ -198,7 +198,7 @@
 					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
 					<td class="text-center">
-						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+						<input type="number" class="form-control pm-input" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
 					</td>
 				</tr>
 				<?php } ?>
