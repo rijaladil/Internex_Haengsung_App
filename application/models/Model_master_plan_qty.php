@@ -279,7 +279,7 @@ class Model_master_plan_qty extends CI_Model
             $this->db->where("date_format(qty.date, '%Y-%m') =", date('Y-m'));
         }
         $this->db->where('dept.id', $department);
-        // $this->db->group_by('plan.production_part_no');
+        $this->db->group_by('machine.id');
         // $this->db->order_by('plan.production_part_no');
         $query = $this->db->get();
         return $query->result_array();
