@@ -59,6 +59,15 @@ class Department extends CI_Controller {
 		}
 	}
 
+	public function updateRank()
+	{
+		if ($this->model_master_plan_qty->updateRank()) {
+			echo 1;
+		}else{
+			echo 0;
+		}
+	}
+
 	public function setOperator()
 	{
 		if ($this->model_master_plan_qty->setOperator()) {
@@ -134,8 +143,8 @@ class Department extends CI_Controller {
 
 
 	        ";
-	        
-	     
+
+
         }
 	}
 
@@ -146,7 +155,7 @@ class Department extends CI_Controller {
 
 
  //       foreach ($data as $key) {
-  
+
 	//         // total
 	//          echo "
 
@@ -184,7 +193,7 @@ class Department extends CI_Controller {
 	// 				</td>
 	// 			</tr>
 
-				
+
 	//         ";
  //        }
 	// }

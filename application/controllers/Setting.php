@@ -458,9 +458,14 @@ class Setting extends CI_Controller {
                     $val = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($tanggal));
                     if ($val == date('Y-m-d')) {
                         $date = $val;
-                        $kolom = 1+$i;
+                        if ($kolom == 0) {
+                            $kolom = $kolom + ($i+1);
+                        }
+                        // $kolom = $kolom + 1;
                     }
                 }
+
+                // var_dump($kolom);
 
 
                 if ($type == 'ASS') {
@@ -473,7 +478,6 @@ class Setting extends CI_Controller {
                         $machine         = $this->model_machine->detail($line);
                         $partnumber      = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
                         $value           = $worksheet->getCellByColumnAndRow($kolom, $row)->getValue();
-
 
 
                         if ($machine != '' && $partnumber != '') {

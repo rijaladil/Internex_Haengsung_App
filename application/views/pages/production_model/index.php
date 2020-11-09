@@ -66,12 +66,14 @@
 					<td class="text-center"><?php echo $key['output_qty']; ?></td>
 					<td class="text-center"><?php echo $key['result']; ?></td>
 					<td class="text-center"><?php echo number_format($key['persen'],2,",","."); ?></td>
-					<td class="text-center"><?php echo $key['rank']; ?></td>
+					<td class="text-center">
+						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+					</td>
 				</tr>
 				<?php } ?>
 
 		</tbody>
-		
+
 			<?php $i = 1; foreach ($dataAtot as $key) { ?>
 				<tr style="background: #0070c0; font-weight: bold; color: white;">
 					<td class="text-center"></td>
@@ -89,7 +91,7 @@
 				</tr>
 				<?php } ?>
 
-		
+
 		</table>
 
 		<!-- B -->
@@ -133,7 +135,9 @@
 					<td class="text-center" width="8.33%"><?php echo $key['output_qty']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
-					<td class="text-center" width="5%"><?php echo $key['rank']; ?></td>
+					<td class="text-center">
+						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+					</td>
 				</tr>
 				<?php } ?>
 
@@ -178,7 +182,7 @@
 		    <th>%</th>
 		  </tr>
 		</thead>
-		  
+
  		<tbody>
 			<?php $i = 1; foreach ($dataC as $key) { ?>
 				<tr  id="dataRow<?php echo $key['qid']; ?>" onclick="selectRow(<?php echo $key['qid']; ?>)" class="<?php echo ($key['start_date'] == 0) ? 'waiting' : (($key['end_date'] == 0) ? 'process' : 'completed') ; ?>">
@@ -193,7 +197,9 @@
 					<td class="text-center" width="8.33%"><?php echo $key['output_qty']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo $key['result']; ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['persen'],2,",","."); ?></td>
-					<td class="text-center" width="5%"><?php echo $key['rank']; ?></td>
+					<td class="text-center">
+						<input type="number" class="form-control" value="<?php echo $key['rank']; ?>" onchange="updateRank(this, <?php echo $key['qid']; ?>)">
+					</td>
 				</tr>
 				<?php } ?>
 
@@ -219,7 +225,7 @@
 		<table width="100%" border="">
 				<?php $i = 1; foreach ($datatot as $key) { ?>
 				<tr style="background: #00b050; font-weight: bold; color: white;">
-					
+
 					<td class="text-center" colspan="2" width="10%">GRAND TOTAL</td>
 					<td class="text-center" width="15%"></td>
 					<td class="text-center" width="10%"></td>
@@ -270,7 +276,26 @@
 	        "info"			: false
 	    });
 
+		$("[type='number']").keypress(function (evt) {
+		    evt.preventDefault();
+		});
 	} );
+
+	function updateRank(form, id) {
+		var nilai = form.value;
+		$.ajax({
+			url: "<?php echo base_url();?>department/updateRank/",
+			cache: false,
+			type: 'POST',
+			data: {
+				'id': id,
+				'rank': nilai,
+			},
+			success: function(msg){
+				console.log(msg);
+			}
+		});
+	}
 
 	function setMachine(machine_id, id_qty){
 		var mesin = machine_id.value;
@@ -340,58 +365,58 @@
 
 	function selectRow(id) {
 
-        $('.bg-selected').removeClass('bg-selected');
-        $('#dataRow'+id).addClass('bg-selected');
-        isi = document.getElementById("idQtyTot"+id).innerHTML;
-        isinya = isi.toString();
-		document.getElementById("idValTot1").innerHTML = isinya;
+  //       $('.bg-selected').removeClass('bg-selected');
+  //       $('#dataRow'+id).addClass('bg-selected');
+  //       isi = document.getElementById("idQtyTot"+id).innerHTML;
+  //       isinya = isi.toString();
+		// document.getElementById("idValTot1").innerHTML = isinya;
 
-	    $.ajax({
-	        url: "<?php echo base_url(); ?>json/getNgByIdQty/"+id,
-	        dataType: 'json',
-	        type: 'post',
-	        cache:false,
-	        success: function(data){
-        		ng = document.getElementsByClassName('idNg');
-        		for (var i = 0; i < ng.length; i++) {
-        			document.getElementsByClassName('idNg')[i].innerHTML = '';
-        		}
+	 //    $.ajax({
+	 //        url: "<?php echo base_url(); ?>json/getNgByIdQty/"+id,
+	 //        dataType: 'json',
+	 //        type: 'post',
+	 //        cache:false,
+	 //        success: function(data){
+  //       		ng = document.getElementsByClassName('idNg');
+  //       		for (var i = 0; i < ng.length; i++) {
+  //       			document.getElementsByClassName('idNg')[i].innerHTML = '';
+  //       		}
 
-	        	if (data.length > 0) {
-	        		for (var i = 0; i < data.length; i++) {
-	        			document.getElementById("idNg1"+data[i]['machine_problem_id']).innerHTML = data[i]['qty_ng'];
-	        		}
-	        	}else{
-	        	}
-	        }
-	    });
+	 //        	if (data.length > 0) {
+	 //        		for (var i = 0; i < data.length; i++) {
+	 //        			document.getElementById("idNg1"+data[i]['machine_problem_id']).innerHTML = data[i]['qty_ng'];
+	 //        		}
+	 //        	}else{
+	 //        	}
+	 //        }
+	 //    });
 
-	    $.ajax({
-	        url: "<?php echo base_url(); ?>json/getLossByIdQty/"+id,
-	        dataType: 'json',
-	        type: 'post',
-	        cache:false,
-	        success: function(data){
-        		ng = document.getElementsByClassName('idLoss');
-    			document.getElementById("idLoss1Tot").innerHTML = '';
-        		for (var i = 0; i < ng.length; i++) {
-        			document.getElementsByClassName('idLoss')[i].innerHTML = '';
-        		}
+	 //    $.ajax({
+	 //        url: "<?php echo base_url(); ?>json/getLossByIdQty/"+id,
+	 //        dataType: 'json',
+	 //        type: 'post',
+	 //        cache:false,
+	 //        success: function(data){
+  //       		ng = document.getElementsByClassName('idLoss');
+  //   			document.getElementById("idLoss1Tot").innerHTML = '';
+  //       		for (var i = 0; i < ng.length; i++) {
+  //       			document.getElementsByClassName('idLoss')[i].innerHTML = '';
+  //       		}
 
-	        	if (data.length > 0) {
-	        		totLoss = 0;
-	        		for (var i = 0; i < data.length; i++) {
-	        			totLoss = parseInt(data[i]['losstime']) + totLoss;
-	        			document.getElementById("idLoss1"+data[i]['losstime_cat_id']).innerHTML = convertSecondstoTime(data[i]['losstime']);
-	        			var hasilLossTot = (totLoss);
-						if (isNaN(hasilLossTot)) hasilLossTot = 0;
-	        			document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(hasilLossTot);
-	        			// document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(totLoss);
-	        		}
-	        	}else{
-	        	}
-	        }
-	    });
+	 //        	if (data.length > 0) {
+	 //        		totLoss = 0;
+	 //        		for (var i = 0; i < data.length; i++) {
+	 //        			totLoss = parseInt(data[i]['losstime']) + totLoss;
+	 //        			document.getElementById("idLoss1"+data[i]['losstime_cat_id']).innerHTML = convertSecondstoTime(data[i]['losstime']);
+	 //        			var hasilLossTot = (totLoss);
+		// 				if (isNaN(hasilLossTot)) hasilLossTot = 0;
+	 //        			document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(hasilLossTot);
+	 //        			// document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(totLoss);
+	 //        		}
+	 //        	}else{
+	 //        	}
+	 //        }
+	 //    });
 	}
 
     function convertSecondstoTime(given_seconds) {

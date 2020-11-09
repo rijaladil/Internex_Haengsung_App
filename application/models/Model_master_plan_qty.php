@@ -117,6 +117,21 @@ class Model_master_plan_qty extends CI_Model
         // $this->db->delete('itx_t_master_plan_qty');
     }
 
+    public function updateRank()
+    {
+        $id  = $this->security->xss_clean($this->input->post('id'));
+        $val = $this->security->xss_clean($this->input->post('rank'));
+        $this->db->set('itx_t_master_plan_qty.rank', $val);
+        $this->db->where('id', $id);
+        $this->db->update('itx_t_master_plan_qty');
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function del($dep)
     {
         $this->db->where('department_id', $dep);
