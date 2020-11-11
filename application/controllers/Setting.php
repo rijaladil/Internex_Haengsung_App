@@ -554,7 +554,7 @@ class Setting extends CI_Controller {
                         $line       = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                         $machine    = $this->model_machine->detail($line);
                         $partnumber = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
-                        $value      = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $value      = $worksheet->getCellByColumnAndRow($kolom, $row)->getValue();
                         if ($machine != '' && $partnumber != '') {
 
                             if ($value > 0) {
