@@ -94,6 +94,7 @@ class Model_master_plan_qty extends CI_Model
         $this->db->join('itx_t_result result', 'result.masterplan_qty_id = itx_t_master_plan_qty.id');
         $this->db->where('department_id', $dep);
         $this->db->where('date', date('Y-m-d'));
+        $this->db->where('(status_close_output+status_close_input) = 0', null, false);
         $this->db->where('(qty_table+qty_input+qty_output) is null', null, false);
         $query    = $this->db->get();
         $existing = $query->result_array();
@@ -106,11 +107,24 @@ class Model_master_plan_qty extends CI_Model
 
     public function delete_exist($data)
     {
+        $this->db->select('itx_t_master_plan_qty.id id');
+        $this->db->from('itx_t_master_plan_qty');
+        $this->db->where('(status_close_output+status_close_input) = 0', null, false);
         $this->db->where('itx_t_master_plan_qty.department_id', $data['department_id']);
         $this->db->where('itx_t_master_plan_qty.mc_id', $data['mc_id']);
         $this->db->where('itx_t_master_plan_qty.part_no', $data['part_no']);
         $this->db->where('date', date('Y-m-d'));
-        $this->db->delete('itx_t_master_plan_qty');
+        $query = $this->db->get();
+        $hasil = $query->result_array();
+
+        if (count($hasil) == 0) {
+            $this->db->where('itx_t_master_plan_qty.department_id', $data['department_id']);
+            $this->db->where('itx_t_master_plan_qty.mc_id', $data['mc_id']);
+            $this->db->where('itx_t_master_plan_qty.part_no', $data['part_no']);
+            $this->db->where('date', date('Y-m-d'));
+            $this->db->delete('itx_t_master_plan_qty');
+        }
+
 
         // $this->db->where('department_id', $dep);
         // $this->db->where('date', date('Y-m-d'));
