@@ -719,3 +719,15 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 	/*border-radius: 50%;*/
 	z-index: 999;
 }
+
+.pm-input{
+	margin:0;
+	width: 4em;
+	border:none;
+	background: none;
+	text-align: center;
+}
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td{
+	border-top: 1px solid black;
+}
