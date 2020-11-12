@@ -147,6 +147,58 @@ class Department extends CI_Controller {
 
         }
 	}
+	
+	public function production_day_data_tot()
+	{
+        $data = $this->model_master_plan_qty->get_production_day_by_dept_id_tot();
+        $no = 1;
+
+
+       foreach ($data as $key) {
+        	# code...
+	        echo "
+
+				<tr>
+					<td class='ft' colspan='2'>TOTAL</td>
+					<td class='ft'>
+						<div>Plan</div><br>
+						<div class=''>Table</div><br>
+						<div class=''>Input</div><br>
+						<div class=''>Output</div><br>
+						<div class=''>+/-</div><br>
+						<div class=''>%</div>
+					</td>
+					";
+
+					for ($i=1; $i <= 31 ; $i++) {
+						echo "
+					<td class='' style='border-right: 1px solid #d2d2d2; padding:0px 3px 0px 3px !important'>
+						<div>".$this->colBlack($key['planDay'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_table_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_input_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_output_Day'.$i])."</div><br>
+						<div class=''>".$this->colBlack($key['result_output_Day'.$i]-$key['planDay'.$i] )."</div><br>
+						<div class=''>".( empty($key['planDay'.$i]) ? '' : number_format($key['result_output_Day'.$i]/$key['planDay'.$i]*100, 1) )."</div><br>
+					</td>";
+					}
+
+					echo "
+					<td class='ft'>
+						<div>".$this->numberFor($key['planQtyTot']*1)."</div><br>
+						<div>".$this->numberFor($key['tableQtyTot']*1)."</div><br>
+						<div>".$this->numberFor($key['inputQtyTot']*1)."</div><br>
+						<div>".$this->numberFor($key['outputQtyTot']*1)."</div><br>
+						<div>".$this->numberFor(($key['outputQtyTot']*1) - ($key['planQtyTot']*1))."</div><br>
+						<div>".( empty($key['planQtyTot']) ? '' : number_format($key['outputQtyTot']/$key['planQtyTot']*100, 1) )."</div><br>
+					</td>
+				</tr>
+
+
+	        ";
+
+
+        }
+	}
 
 
 
@@ -204,11 +256,11 @@ class Department extends CI_Controller {
 
 	function production_download($department, $date) {
 		// $data['data']       = $this->model_master_plan->get_by_dept_id($department, $date);
-		$data['data']          = $this->model_master_plan_qty->get_production_day_by_dept_id_url($department, $date);
+		$data['data']          = $this->model_master_plan_qty->get_production_day_by_dept_id($department, $date);
 		$data['date']          = $date;
 		$data['department']    = $this->model_department->get_department_by_id($department);
-		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
-		$data['data_losstime'] = $this->model_losstime_category->get_all();
+
+
 		$this->load->view('pages/production_day/download', $data);
 	}
 

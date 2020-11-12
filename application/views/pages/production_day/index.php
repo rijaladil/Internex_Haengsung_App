@@ -21,7 +21,7 @@
 <div class="form">
 	<div class="left">Production Status (Day)</div>
 	<div class="right">
-		<button class="btn-green" onclick="downloadExcel_xxx()" form="cek">Excel</button>
+		<button class="btn-green" onclick="downloadExcel()" form="cek">Excel</button>
 		<button class="btn-blue" onclick="getData()">Search</button>
 		<input type="text" id="datepickersum" name="text_date" value="<?php echo date('Y-m');?>"  autocomplete="off"/>
 	</div>
@@ -51,6 +51,11 @@
 			<td colspan="39" >No Data</td>
 		</tr>
 	</tbody>
+	<tbody id="idTableDataTot">	
+		<tr>
+			<td colspan="39" ></td>
+		</tr>
+	</tbody>
 	</table>
 </div>
 
@@ -74,8 +79,27 @@
 
 	        }
 	    });
+
+	    tgl = document.getElementById("datepickersum").value;
+		department = <?php echo $department; ?>;
+
+		// console.log(tgl);
+	    $.ajax({
+	        url: "<?php echo base_url(); ?>department/production_day_data_tot/",
+	        type: 'POST',
+	        data: {
+	            'tgl': tgl,
+	            'department': department,
+	        },
+	        cache: false,
+	        success: function(msg){
+	            $("#idTableDataTot").html(msg);
+
+	        }
+	    });
 	}
 
+	
 
     function downloadExcel(){
 		dep   = <?php echo $department; ?>;
