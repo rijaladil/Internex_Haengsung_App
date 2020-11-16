@@ -464,7 +464,9 @@ class Model_master_plan_qty extends CI_Model
     {
         $this->db->select("
 
-            SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', qty.qty, 0) ) AS planDay1
+            dept.name as dept,
+            machine.mc_no_alias as machine
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', qty.qty, 0) ) AS planDay1
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', qty.qty, 0) ) AS planDay2
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', qty.qty, 0) ) AS planDay3
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', qty.qty, 0) ) AS planDay4
@@ -496,25 +498,278 @@ class Model_master_plan_qty extends CI_Model
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', qty.qty, 0) ) AS planDay30
             ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', qty.qty, 0) ) AS planDay31
 
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_table, 0) ) AS result_table_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_table, 0) ) AS result_table_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_table, 0) ) AS result_table_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_table, 0) ) AS result_table_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_table, 0) ) AS result_table_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_table, 0) ) AS result_table_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_table, 0) ) AS result_table_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_table, 0) ) AS result_table_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_table, 0) ) AS result_table_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_table, 0) ) AS result_table_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_table, 0) ) AS result_table_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_table, 0) ) AS result_table_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_table, 0) ) AS result_table_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_table, 0) ) AS result_table_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_table, 0) ) AS result_table_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_table, 0) ) AS result_table_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_table, 0) ) AS result_table_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_table, 0) ) AS result_table_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_table, 0) ) AS result_table_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_table, 0) ) AS result_table_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_table, 0) ) AS result_table_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_table, 0) ) AS result_table_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_table, 0) ) AS result_table_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_table, 0) ) AS result_table_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_table, 0) ) AS result_table_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_table, 0) ) AS result_table_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_table, 0) ) AS result_table_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_table, 0) ) AS result_table_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_table, 0) ) AS result_table_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_table, 0) ) AS result_table_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_table, 0) ) AS result_table_Day31
 
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_input, 0) ) AS result_input_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_input, 0) ) AS result_input_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_input, 0) ) AS result_input_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_input, 0) ) AS result_input_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_input, 0) ) AS result_input_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_input, 0) ) AS result_input_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_input, 0) ) AS result_input_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_input, 0) ) AS result_input_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_input, 0) ) AS result_input_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_input, 0) ) AS result_input_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_input, 0) ) AS result_input_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_input, 0) ) AS result_input_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_input, 0) ) AS result_input_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_input, 0) ) AS result_input_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_input, 0) ) AS result_input_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_input, 0) ) AS result_input_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_input, 0) ) AS result_input_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_input, 0) ) AS result_input_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_input, 0) ) AS result_input_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_input, 0) ) AS result_input_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_input, 0) ) AS result_input_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_input, 0) ) AS result_input_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_input, 0) ) AS result_input_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_input, 0) ) AS result_input_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_input, 0) ) AS result_input_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_input, 0) ) AS result_input_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_input, 0) ) AS result_input_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_input, 0) ) AS result_input_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_input, 0) ) AS result_input_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_input, 0) ) AS result_input_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_input, 0) ) AS result_input_Day31
 
-
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_output, 0) ) AS result_output_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_output, 0) ) AS result_output_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_output, 0) ) AS result_output_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_output, 0) ) AS result_output_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_output, 0) ) AS result_output_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_output, 0) ) AS result_output_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_output, 0) ) AS result_output_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_output, 0) ) AS result_output_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_output, 0) ) AS result_output_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_output, 0) ) AS result_output_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_output, 0) ) AS result_output_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_output, 0) ) AS result_output_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_output, 0) ) AS result_output_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_output, 0) ) AS result_output_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_output, 0) ) AS result_output_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_output, 0) ) AS result_output_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_output, 0) ) AS result_output_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_output, 0) ) AS result_output_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_output, 0) ) AS result_output_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_output, 0) ) AS result_output_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_output, 0) ) AS result_output_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_output, 0) ) AS result_output_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_output, 0) ) AS result_output_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_output, 0) ) AS result_output_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_output, 0) ) AS result_output_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_output, 0) ) AS result_output_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_output, 0) ) AS result_output_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_output, 0) ) AS result_output_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_output, 0) ) AS result_output_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_output, 0) ) AS result_output_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_output, 0) ) AS result_output_Day31
 
             ,SUM(qty.qty) AS planQtyTot
-            ,SUM(result.qty_output) AS actualQtyTot
-
-
-
+            ,SUM(result.qty_table) AS tableQtyTot
+            ,SUM(result.qty_input) AS inputQtyTot
+            ,SUM(result.qty_output) AS outputQtyTot
             ");
         $this->db->from('itx_t_master_plan_qty qty');
+        $this->db->join('itx_m_department dept', 'dept.id = qty.department_id', 'left');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = qty.id', 'left');
+        $this->db->join('itx_m_machine machine', 'machine.id = qty.mc_id', 'left');
         if ($date <> '') {
             $this->db->where("date_format(qty.date, '%Y-%m') =", $date);
         }else{
             $this->db->where("date_format(qty.date, '%Y-%m') =", date('Y-m'));
         }
+        $this->db->where('dept.id', $department);
+        $this->db->group_by('machine.id');
+        // $this->db->order_by('plan.production_part_no');
         $query = $this->db->get();
         return $query->result_array();
     }
+
+
+ public function get_production_day_by_dept_id_tot_url($department, $date)
+    {
+        $this->db->select("
+
+            dept.name as dept,
+            machine.mc_no_alias as machine
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', qty.qty, 0) ) AS planDay1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', qty.qty, 0) ) AS planDay2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', qty.qty, 0) ) AS planDay3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', qty.qty, 0) ) AS planDay4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', qty.qty, 0) ) AS planDay5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', qty.qty, 0) ) AS planDay6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', qty.qty, 0) ) AS planDay7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', qty.qty, 0) ) AS planDay8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', qty.qty, 0) ) AS planDay9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', qty.qty, 0) ) AS planDay10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', qty.qty, 0) ) AS planDay11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', qty.qty, 0) ) AS planDay12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', qty.qty, 0) ) AS planDay13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', qty.qty, 0) ) AS planDay14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', qty.qty, 0) ) AS planDay15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', qty.qty, 0) ) AS planDay16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', qty.qty, 0) ) AS planDay17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', qty.qty, 0) ) AS planDay18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', qty.qty, 0) ) AS planDay19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', qty.qty, 0) ) AS planDay20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', qty.qty, 0) ) AS planDay21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', qty.qty, 0) ) AS planDay22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', qty.qty, 0) ) AS planDay23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', qty.qty, 0) ) AS planDay24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', qty.qty, 0) ) AS planDay25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', qty.qty, 0) ) AS planDay26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', qty.qty, 0) ) AS planDay27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', qty.qty, 0) ) AS planDay28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', qty.qty, 0) ) AS planDay29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', qty.qty, 0) ) AS planDay30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', qty.qty, 0) ) AS planDay31
+
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_table, 0) ) AS result_table_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_table, 0) ) AS result_table_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_table, 0) ) AS result_table_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_table, 0) ) AS result_table_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_table, 0) ) AS result_table_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_table, 0) ) AS result_table_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_table, 0) ) AS result_table_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_table, 0) ) AS result_table_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_table, 0) ) AS result_table_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_table, 0) ) AS result_table_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_table, 0) ) AS result_table_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_table, 0) ) AS result_table_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_table, 0) ) AS result_table_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_table, 0) ) AS result_table_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_table, 0) ) AS result_table_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_table, 0) ) AS result_table_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_table, 0) ) AS result_table_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_table, 0) ) AS result_table_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_table, 0) ) AS result_table_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_table, 0) ) AS result_table_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_table, 0) ) AS result_table_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_table, 0) ) AS result_table_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_table, 0) ) AS result_table_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_table, 0) ) AS result_table_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_table, 0) ) AS result_table_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_table, 0) ) AS result_table_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_table, 0) ) AS result_table_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_table, 0) ) AS result_table_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_table, 0) ) AS result_table_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_table, 0) ) AS result_table_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_table, 0) ) AS result_table_Day31
+
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_input, 0) ) AS result_input_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_input, 0) ) AS result_input_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_input, 0) ) AS result_input_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_input, 0) ) AS result_input_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_input, 0) ) AS result_input_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_input, 0) ) AS result_input_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_input, 0) ) AS result_input_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_input, 0) ) AS result_input_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_input, 0) ) AS result_input_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_input, 0) ) AS result_input_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_input, 0) ) AS result_input_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_input, 0) ) AS result_input_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_input, 0) ) AS result_input_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_input, 0) ) AS result_input_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_input, 0) ) AS result_input_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_input, 0) ) AS result_input_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_input, 0) ) AS result_input_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_input, 0) ) AS result_input_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_input, 0) ) AS result_input_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_input, 0) ) AS result_input_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_input, 0) ) AS result_input_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_input, 0) ) AS result_input_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_input, 0) ) AS result_input_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_input, 0) ) AS result_input_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_input, 0) ) AS result_input_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_input, 0) ) AS result_input_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_input, 0) ) AS result_input_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_input, 0) ) AS result_input_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_input, 0) ) AS result_input_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_input, 0) ) AS result_input_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_input, 0) ) AS result_input_Day31
+
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '01', result.qty_output, 0) ) AS result_output_Day1
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '02', result.qty_output, 0) ) AS result_output_Day2
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '03', result.qty_output, 0) ) AS result_output_Day3
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '04', result.qty_output, 0) ) AS result_output_Day4
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '05', result.qty_output, 0) ) AS result_output_Day5
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '06', result.qty_output, 0) ) AS result_output_Day6
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '07', result.qty_output, 0) ) AS result_output_Day7
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '08', result.qty_output, 0) ) AS result_output_Day8
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '09', result.qty_output, 0) ) AS result_output_Day9
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '10', result.qty_output, 0) ) AS result_output_Day10
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '11', result.qty_output, 0) ) AS result_output_Day11
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '12', result.qty_output, 0) ) AS result_output_Day12
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '13', result.qty_output, 0) ) AS result_output_Day13
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '14', result.qty_output, 0) ) AS result_output_Day14
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '15', result.qty_output, 0) ) AS result_output_Day15
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '16', result.qty_output, 0) ) AS result_output_Day16
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '17', result.qty_output, 0) ) AS result_output_Day17
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '18', result.qty_output, 0) ) AS result_output_Day18
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '19', result.qty_output, 0) ) AS result_output_Day19
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '20', result.qty_output, 0) ) AS result_output_Day20
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '21', result.qty_output, 0) ) AS result_output_Day21
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '22', result.qty_output, 0) ) AS result_output_Day22
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '23', result.qty_output, 0) ) AS result_output_Day23
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '24', result.qty_output, 0) ) AS result_output_Day24
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '25', result.qty_output, 0) ) AS result_output_Day25
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '26', result.qty_output, 0) ) AS result_output_Day26
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '27', result.qty_output, 0) ) AS result_output_Day27
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '28', result.qty_output, 0) ) AS result_output_Day28
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '29', result.qty_output, 0) ) AS result_output_Day29
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '30', result.qty_output, 0) ) AS result_output_Day30
+            ,SUM( IF (DATE_FORMAT(qty.date, '%d') = '31', result.qty_output, 0) ) AS result_output_Day31
+
+            ,SUM(qty.qty) AS planQtyTot
+            ,SUM(result.qty_table) AS tableQtyTot
+            ,SUM(result.qty_input) AS inputQtyTot
+            ,SUM(result.qty_output) AS outputQtyTot
+            ");
+        $this->db->from('itx_t_master_plan_qty qty');
+        $this->db->join('itx_m_department dept', 'dept.id = qty.department_id', 'left');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = qty.id', 'left');
+        $this->db->join('itx_m_machine machine', 'machine.id = qty.mc_id', 'left');
+        if ($date <> '') {
+            $this->db->where("date_format(qty.date, '%Y-%m') =", $date);
+        }else{
+            $this->db->where("date_format(qty.date, '%Y-%m') =", date('Y-m'));
+        }
+        $this->db->where('dept.id', $department);
+        // $this->db->order_by('plan.production_part_no');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
     public function setMcOnSpk()
     {

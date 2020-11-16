@@ -244,23 +244,21 @@ class Department extends CI_Controller {
 
 
 	function actual_download($department, $start, $end) {
-		$data['data']          = $this->model_master_plan->get_by_dept_id($department, $start, $end);
+		$data['dataA']         = $this->model_master_plan->get_by_dept_id_A($department, $start, $end);
+		$data['dataB']         = $this->model_master_plan->get_by_dept_id_B($department, $start, $end);
+		$data['dataC']         = $this->model_master_plan->get_by_dept_id_C($department, $start, $end);
+		$data['datatot']       = $this->model_master_plan->get_by_dept_id_tot($department, $start, $end);
 		$data['start_date']    = $start;
 		$data['end_date']      = $end;
 		$data['department']    = $this->model_department->get_department_by_id($department);
-		$data['data_problem']  = $this->model_machine_problem->get_all_by_dept_id($department);
-		$data['data_losstime'] = $this->model_losstime_category->get_all();
-		$data['data_operator'] = $this->model_operator->get_data();
 		$this->load->view('pages/production_model/download', $data);
 	}
 
 	function production_download($department, $date) {
-		// $data['data']       = $this->model_master_plan->get_by_dept_id($department, $date);
-		$data['data']          = $this->model_master_plan_qty->get_production_day_by_dept_id($department, $date);
+		$data['data']          = $this->model_master_plan_qty->get_production_day_by_dept_id_url($department, $date);
+		$data['datatot']       = $this->model_master_plan_qty->get_production_day_by_dept_id_tot_url($department, $date);
 		$data['date']          = $date;
 		$data['department']    = $this->model_department->get_department_by_id($department);
-
-
 		$this->load->view('pages/production_day/download', $data);
 	}
 

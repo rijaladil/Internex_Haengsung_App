@@ -39,7 +39,7 @@ $(document).ready(function() {
 
 // actual-production
 // $(document).ready(function() {
-//     $('#actual-production').DataTable({
+//     $('#actual-production1').DataTable({
 //     	"scrollY"		: "230px",
 //         "scrollCollapse": true,
 //         "searching"		: false,
