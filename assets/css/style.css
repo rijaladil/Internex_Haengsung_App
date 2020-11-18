@@ -731,3 +731,7 @@ table.dataTable.order-column tbody tr>.sorting_1, table.dataTable.order-column t
 table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td{
 	border-top: 1px solid black;
 }
+
+table.dataTable tbody tr {
+    background-color: #ffffff;
+    border-top: 1px solid black;

@@ -19,7 +19,7 @@
 	<div class="right">
 		<form id="normal" method="post" action="<?php echo base_url(); ?>department/production_model/<?php echo $dept; ?>">
 			<!-- <a href="#" class="btn-green">Excel</a> -->
-			<button class="btn-green" onclick="downloadExcel_xxx()" form="cek">Excel</button>
+			<button class="btn-green" onclick="downloadExcel()" form="cek">Excel</button>
 			<!-- <button class="btn-green2" onclick="saveMc()" form="cek">Save</button> -->
 			<button class="btn-blue" type="submit" form="normal">Search</button>
 			<input type="text" readonly="" name="text_dateEnd" id="datepicker2" value="<?php echo ($setEnd == '') ? date('Y-m-d') : $setEnd;?>" />
@@ -32,7 +32,7 @@
 	<form id="formSetMachine" method="post" action="<?php echo base_url(); ?>department/production_model/<?php echo $dept; ?>">
 		<input type="hidden" name="text_dateStart" id="idStart" />
 		<input type="hidden" name="text_dateEnd" id="idEnd" />
-		<table id="actual-production" class="display" width="100%" border="1">
+		<table id="actual-production1" class="display" width="100%" border="1">
 		<thead>
 		  <tr>
 		    <th rowspan="2" width="5%">No</th>
@@ -73,30 +73,30 @@
 				<?php } ?>
 
 		</tbody>
-
+		<table width="100%">
 			<?php $i = 1; foreach ($dataAtot as $key) { ?>
-				<tr style="background: #0070c0; font-weight: bold; color: white;">
-					<td class="text-center"></td>
-					<td class="text-center">TOTAL</td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"><?php echo number_format($key['tot_plan_qty']); ?></td>
-					<td class="text-center"><?php echo number_format($key['tot_table_qty']); ?></td>
-					<td class="text-center"><?php echo number_format($key['tot_input_qty']); ?></td>
-					<td class="text-center"><?php echo number_format($key['tot_output_qty']); ?></td>
-					<td class="text-center"><?php echo number_format($key['tot_result']); ?></td>
-					<td class="text-center"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
+				<tr style="background: #0070c0; font-weight: bold; color: white; text-align: center;">
+					<td class="text-center" width="5%"></td>
+					<td class="text-center" width="5%">TOTAL</td>
+					<td class="text-center" width="15%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="10%"></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_plan_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_table_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_input_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
+					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
 					<td class="text-center"></td>
 				</tr>
 				<?php } ?>
-
+		</table>
 
 		</table>
 
 		<!-- B -->
 		<div style="margin:2em;"></div>
-		<table id="actual-production" class="display" width="100%" border="1">
+		<table id="actual-production2" class="display" width="100%" border="1">
 
 		<thead hidden>
 		  <tr>
@@ -142,8 +142,9 @@
 				<?php } ?>
 
 		</tbody>
-				<?php $i = 1; foreach ($dataBtot as $key) { ?>
-				<tr style="background: #0070c0; font-weight: bold; color: white;">
+		<table width="100%">
+			<?php $i = 1; foreach ($dataBtot as $key) { ?>
+				<tr style="background: #0070c0; font-weight: bold; color: white; text-align: center;">
 					<td class="text-center" width="5%"></td>
 					<td class="text-center" width="5%">TOTAL</td>
 					<td class="text-center" width="15%"></td>
@@ -155,14 +156,15 @@
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
-					<td class="text-center" width="5%"></td>
+					<td class="text-center"></td>
 				</tr>
 				<?php } ?>
+		</table>
 		</table>
 
 		<!-- C -->
 		<div style="margin:2em;"></div>
-		<table id="actual-production" class="display" width="100%" border="1">
+		<table id="actual-production3" class="display" width="100%" border="1">
 		<thead hidden>
 		  <tr>
 		    <th rowspan="2" width="5%">No</th>
@@ -204,8 +206,9 @@
 				<?php } ?>
 
 		</tbody>
-				<?php $i = 1; foreach ($dataCtot as $key) { ?>
-				<tr style="background: #0070c0; font-weight: bold; color: white;">
+			<table width="100%">
+			<?php $i = 1; foreach ($dataCtot as $key) { ?>
+				<tr style="background: #0070c0; font-weight: bold; color: white; text-align: center;">
 					<td class="text-center" width="5%"></td>
 					<td class="text-center" width="5%">TOTAL</td>
 					<td class="text-center" width="15%"></td>
@@ -217,9 +220,10 @@
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_output_qty']); ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_result']); ?></td>
 					<td class="text-center" width="8.33%"><?php echo number_format($key['tot_persen'],2,",","."); ?></td>
-					<td class="text-center" width="5%"></td>
+					<td class="text-center"></td>
 				</tr>
 				<?php } ?>
+		</table>
 		</table>
 		<div style="margin:2em;"></div>
 		<table width="100%" border="">
@@ -268,7 +272,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-	    $('#actual-production').DataTable({
+	    $('#actual-production1').DataTable({
 	    	"scrollY"		: "230px",
 	        "scrollCollapse": true,
 	        "searching"		: false,
@@ -281,6 +285,33 @@
 		});
 	} );
 
+	$(document).ready(function() {
+	    $('#actual-production2').DataTable({
+	    	"scrollY"		: "230px",
+	        "scrollCollapse": true,
+	        "searching"		: false,
+	        "paging"		: false,
+	        "info"			: false
+	    });
+
+		$("[type='number']").keypress(function (evt) {
+		    evt.preventDefault();
+		});
+	} );
+
+		$(document).ready(function() {
+	    $('#actual-production3').DataTable({
+	    	"scrollY"		: "230px",
+	        "scrollCollapse": true,
+	        "searching"		: false,
+	        "paging"		: false,
+	        "info"			: false
+	    });
+
+		$("[type='number']").keypress(function (evt) {
+		    evt.preventDefault();
+		});
+	} );
 	function updateRank(form, id) {
 		var nilai = form.value;
 		$.ajax({
@@ -363,61 +394,6 @@
 		});
 	}
 
-	function selectRow(id) {
-
-  //       $('.bg-selected').removeClass('bg-selected');
-  //       $('#dataRow'+id).addClass('bg-selected');
-  //       isi = document.getElementById("idQtyTot"+id).innerHTML;
-  //       isinya = isi.toString();
-		// document.getElementById("idValTot1").innerHTML = isinya;
-
-	 //    $.ajax({
-	 //        url: "<?php echo base_url(); ?>json/getNgByIdQty/"+id,
-	 //        dataType: 'json',
-	 //        type: 'post',
-	 //        cache:false,
-	 //        success: function(data){
-  //       		ng = document.getElementsByClassName('idNg');
-  //       		for (var i = 0; i < ng.length; i++) {
-  //       			document.getElementsByClassName('idNg')[i].innerHTML = '';
-  //       		}
-
-	 //        	if (data.length > 0) {
-	 //        		for (var i = 0; i < data.length; i++) {
-	 //        			document.getElementById("idNg1"+data[i]['machine_problem_id']).innerHTML = data[i]['qty_ng'];
-	 //        		}
-	 //        	}else{
-	 //        	}
-	 //        }
-	 //    });
-
-	 //    $.ajax({
-	 //        url: "<?php echo base_url(); ?>json/getLossByIdQty/"+id,
-	 //        dataType: 'json',
-	 //        type: 'post',
-	 //        cache:false,
-	 //        success: function(data){
-  //       		ng = document.getElementsByClassName('idLoss');
-  //   			document.getElementById("idLoss1Tot").innerHTML = '';
-  //       		for (var i = 0; i < ng.length; i++) {
-  //       			document.getElementsByClassName('idLoss')[i].innerHTML = '';
-  //       		}
-
-	 //        	if (data.length > 0) {
-	 //        		totLoss = 0;
-	 //        		for (var i = 0; i < data.length; i++) {
-	 //        			totLoss = parseInt(data[i]['losstime']) + totLoss;
-	 //        			document.getElementById("idLoss1"+data[i]['losstime_cat_id']).innerHTML = convertSecondstoTime(data[i]['losstime']);
-	 //        			var hasilLossTot = (totLoss);
-		// 				if (isNaN(hasilLossTot)) hasilLossTot = 0;
-	 //        			document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(hasilLossTot);
-	 //        			// document.getElementById("idLoss1Tot").innerHTML = convertSecondstoTime(totLoss);
-	 //        		}
-	 //        	}else{
-	 //        	}
-	 //        }
-	 //    });
-	}
 
     function convertSecondstoTime(given_seconds) {
 
@@ -512,8 +488,8 @@
 			x.style.display = "block";
 
 			// $("#myTable").DataTable({scrollY: 100});
-			$("#actual-production").DataTable({retrieve: true}).destroy();
-			$("#actual-production").DataTable({
+			$("#actual-production1").DataTable({retrieve: true}).destroy();
+			$("#actual-production1").DataTable({
 		    	"scrollY"		: "230px",
 		        "scrollCollapse": true,
 		        "searching"		: false,
@@ -523,8 +499,8 @@
 
 		} else {
 			x.style.display = "none";
-			$("#actual-production").DataTable({retrieve: true}).destroy();
-			$("#actual-production").DataTable({
+			$("#actual-production1").DataTable({retrieve: true}).destroy();
+			$("#actual-production1").DataTable({
 		    	"scrollY"		: "65vh",
 		        "scrollCollapse": true,
 		        "searching"		: false,
