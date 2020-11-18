@@ -25,9 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME'])."/";
+// $config['base_url'] = "http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME'])."/";
 
-// $config['base_url'] = 'http://localhost/internex/daebaek/git/';
+$config['base_url'] = 'http://localhost/internex/haengsung/hns/';
 // $config['base_url'] = 'http://192.168.3.115/Internex_Daebaek_App/';
 
 /*
