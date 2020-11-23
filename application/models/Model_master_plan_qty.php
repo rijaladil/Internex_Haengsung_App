@@ -34,7 +34,8 @@ class Model_master_plan_qty extends CI_Model
         $this->db->where('mc_id', $line);
         $this->db->where('part_no', $partnumber);
         $this->db->where('date', date('Y-m-d'));
-        $this->db->where('(qty_table+qty_input+qty_output) is not null', null, false);
+        $this->db->where('(status_close_output+status_close_input) > 0', null, false);
+        // $this->db->where('(qty_table+qty_input+qty_output) is not null', null, false);
         $query = $this->db->get();
         $data = $query->num_rows();
         if ($data > 0) {
@@ -95,7 +96,7 @@ class Model_master_plan_qty extends CI_Model
         $this->db->where('department_id', $dep);
         $this->db->where('date', date('Y-m-d'));
         $this->db->where('(status_close_output+status_close_input) = 0', null, false);
-        $this->db->where('(qty_table+qty_input+qty_output) is null', null, false);
+        // $this->db->where('(qty_table+qty_input+qty_output) is null', null, false);
         $query    = $this->db->get();
         $existing = $query->result_array();
 
@@ -109,7 +110,9 @@ class Model_master_plan_qty extends CI_Model
     {
         $this->db->select('itx_t_master_plan_qty.id id');
         $this->db->from('itx_t_master_plan_qty');
+        $this->db->join('itx_t_result result', 'result.masterplan_qty_id = itx_t_master_plan_qty.id');
         $this->db->where('(status_close_output+status_close_input) = 0', null, false);
+        // $this->db->where('(qty_table+qty_input+qty_output) is null', null, false);
         $this->db->where('itx_t_master_plan_qty.department_id', $data['department_id']);
         $this->db->where('itx_t_master_plan_qty.mc_id', $data['mc_id']);
         $this->db->where('itx_t_master_plan_qty.part_no', $data['part_no']);
@@ -121,6 +124,7 @@ class Model_master_plan_qty extends CI_Model
             $this->db->where('itx_t_master_plan_qty.department_id', $data['department_id']);
             $this->db->where('itx_t_master_plan_qty.mc_id', $data['mc_id']);
             $this->db->where('itx_t_master_plan_qty.part_no', $data['part_no']);
+            $this->db->where('(status_close_output+status_close_input) = 0', null, false);
             $this->db->where('date', date('Y-m-d'));
             $this->db->delete('itx_t_master_plan_qty');
         }
@@ -471,7 +475,7 @@ class Model_master_plan_qty extends CI_Model
         return $query->result_array();
     }
 
-   
+
 
 
     public function get_production_day_by_dept_id_url($department, $date)

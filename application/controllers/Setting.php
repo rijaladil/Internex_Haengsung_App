@@ -428,10 +428,10 @@ class Setting extends CI_Controller {
 		}
 	}
 
-    public function del($id)
-    {
-        $this->model_master_plan_qty->del($id);
-    }
+    // public function del($id)
+    // {
+    //     $this->model_master_plan_qty->del($id);
+    // }
 
     public function import()
     {
@@ -515,7 +515,7 @@ class Setting extends CI_Controller {
                                             'qty'           => $value,
                                             // 'rank'          => ($check_array[$machine->id])+$last_rank,
                                             'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited:'.$admin_id
+                                            'editUser'      => 'edited_is_running:'.$admin_id
                                         );
                                         $this->model_master_plan_qty->update_runing($data);
                                     }else{
@@ -526,7 +526,7 @@ class Setting extends CI_Controller {
                                             'qty'           => $value,
                                             'rank'          => ($check_array[$machine->id])+$last_rank,
                                             'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited:'.$admin_id
+                                            'editUser'      => 'edited_is_not_running:'.$admin_id
                                         );
                                         $this->model_master_plan_qty->update($data);
                                     }
