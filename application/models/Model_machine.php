@@ -5,7 +5,7 @@ class Model_machine extends CI_Model
 
     public function get_by_dept_id($id='')
     {
-        
+
         $this->db->from('itx_m_machine');
         if ($id <> '') {
             # code...
@@ -19,7 +19,7 @@ class Model_machine extends CI_Model
     public function detail($id)
     {
         $this->db->from('itx_m_machine');
-        $this->db->where('mc_no_alias2', $id);
+        $this->db->where('name', $id);
         $query = $this->db->get();
         return $query->row();
     }

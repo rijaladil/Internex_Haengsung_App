@@ -436,6 +436,7 @@ class Setting extends CI_Controller {
     public function import()
     {
         error_reporting(E_ALL ^ E_WARNING );
+        $datetime = date('Y-m-d H:i:s');
         if(isset($_FILES["file"]["name"]))
         {
             $path   = $_FILES["file"]["tmp_name"];
@@ -470,85 +471,87 @@ class Setting extends CI_Controller {
 
                 if ($type == 'ASS') {
 
-                    $this->model_master_plan_qty->delete(1);
+                    // true;
 
-                    for($row = 3; $row <= $highestRow; $row++){
-                        $department      = 1;
-                        $line            = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                        $machine         = $this->model_machine->detail($line);
-                        $partnumber      = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
-                        $value           = $worksheet->getCellByColumnAndRow($kolom, $row)->getValue();
+                    // $this->model_master_plan_qty->delete(1);
+
+                    // for($row = 3; $row <= $highestRow; $row++){
+                    //     $department      = 1;
+                    //     $line            = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                    //     $machine         = $this->model_machine->detail($line);
+                    //     $partnumber      = $worksheet->getCellByColumnAndRow(1, $row)->getCalculatedValue();
+                    //     $value           = $worksheet->getCellByColumnAndRow($kolom, $row)->getValue();
 
 
-                        if ($machine != '' && $partnumber != '') {
+                    //     if ($machine != '' && $partnumber != '') {
 
-                            if ($value > 0) {
-                                $check_last_rank = $this->model_master_plan_qty->check_last_rank($department, $machine->id);
-                                $last_rank       = (!is_null($check_last_rank) ? $check_last_rank->rank : 0);
-                                $existing        = $this->model_master_plan_qty->check_existing($department, $machine->id, $partnumber);
+                    //         if ($value > 0) {
+                    //             $check_last_rank = $this->model_master_plan_qty->check_last_rank($department, $machine->id);
+                    //             $last_rank       = (!is_null($check_last_rank) ? $check_last_rank->rank : 0);
+                    //             $existing        = $this->model_master_plan_qty->check_existing($department, $machine->id, $partnumber);
 
-                                array_push($order, $machine->id);
-                                $check_array = array_count_values($order);
+                    //             array_push($order, $machine->id);
+                    //             $check_array = array_count_values($order);
 
-                                if ( $existing == 0) {
+                    //             if ( $existing == 0) {
 
-                                    $data = array(
-                                        'department_id'       => $department,
-                                        'mc_id'               => $machine->id,
-                                        'part_no'             => $partnumber,
-                                        'counter'             => 1,
-                                        'date'                => date('Y-m-d'),
-                                        'qty'                 => $value,
-                                        'rank'                => ($check_array[$machine->id])+$last_rank,
-                                        'status_close_input'  => 0,
-                                        'status_close_output' => 0,
-                                        'createDate'          => date('Y-m-d H:i:s'),
-                                        'createUser'          => 'upload:'.$admin_id
-                                    );
-                                    $this->model_master_plan_qty->import($data);
-                                }else{
-                                    if ( $this->model_master_plan_qty->is_run($department, $machine->id, $partnumber) ) {
-                                        $data = array(
-                                            'department_id' => $department,
-                                            'mc_id'         => $machine->id,
-                                            'part_no'       => $partnumber,
-                                            'qty'           => $value,
-                                            // 'rank'          => ($check_array[$machine->id])+$last_rank,
-                                            'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited_is_running:'.$admin_id
-                                        );
-                                        $this->model_master_plan_qty->update_runing($data);
-                                    }else{
-                                        $data = array(
-                                            'department_id' => $department,
-                                            'mc_id'         => $machine->id,
-                                            'part_no'       => $partnumber,
-                                            'qty'           => $value,
-                                            'rank'          => ($check_array[$machine->id])+$last_rank,
-                                            'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited_is_not_running:'.$admin_id
-                                        );
-                                        $this->model_master_plan_qty->update($data);
-                                    }
-                                }
+                    //                 $data = array(
+                    //                     'department_id'       => $department,
+                    //                     'mc_id'               => $machine->id,
+                    //                     'part_no'             => $partnumber,
+                    //                     'counter'             => 1,
+                    //                     'date'                => date('Y-m-d'),
+                    //                     'qty'                 => $value,
+                    //                     'rank'                => ($check_array[$machine->id])+$last_rank,
+                    //                     'status_close_input'  => 0,
+                    //                     'status_close_output' => 0,
+                    //                     'createDate'          => date('Y-m-d H:i:s'),
+                    //                     'createUser'          => 'upload:'.$admin_id
+                    //                 );
+                    //                 $this->model_master_plan_qty->import($data);
+                    //             }else{
+                    //                 if ( $this->model_master_plan_qty->is_run($department, $machine->id, $partnumber) ) {
+                    //                     $data = array(
+                    //                         'department_id' => $department,
+                    //                         'mc_id'         => $machine->id,
+                    //                         'part_no'       => $partnumber,
+                    //                         'qty'           => $value,
+                    //                         // 'rank'          => ($check_array[$machine->id])+$last_rank,
+                    //                         'editDate'      => date('Y-m-d H:i:s'),
+                    //                         'editUser'      => 'edited_is_running:'.$admin_id
+                    //                     );
+                    //                     $this->model_master_plan_qty->update_runing($data);
+                    //                 }else{
+                    //                     $data = array(
+                    //                         'department_id' => $department,
+                    //                         'mc_id'         => $machine->id,
+                    //                         'part_no'       => $partnumber,
+                    //                         'qty'           => $value,
+                    //                         'rank'          => ($check_array[$machine->id])+$last_rank,
+                    //                         'editDate'      => date('Y-m-d H:i:s'),
+                    //                         'editUser'      => 'edited_is_not_running:'.$admin_id
+                    //                     );
+                    //                     $this->model_master_plan_qty->update($data);
+                    //                 }
+                    //             }
 
-                            }else{
-                                    $data = array(
-                                        'department_id' => $department,
-                                        'mc_id'         => $machine->id,
-                                        'part_no'       => $partnumber,
-                                        'qty'           => $value,
-                                        'editDate'      => date('Y-m-d H:i:s'),
-                                        'editUser'      => 'edited:'.$admin_id
-                                    );
-                                    $this->model_master_plan_qty->delete_exist($data);
-                            }
+                    //         }else{
+                    //                 $data = array(
+                    //                     'department_id' => $department,
+                    //                     'mc_id'         => $machine->id,
+                    //                     'part_no'       => $partnumber,
+                    //                     'qty'           => $value,
+                    //                     'editDate'      => date('Y-m-d H:i:s'),
+                    //                     'editUser'      => 'edited:'.$admin_id
+                    //                 );
+                    //                 $this->model_master_plan_qty->delete_exist($data);
+                    //         }
 
-                        }
-                    }
+                    //     }
+                    // }
 
                 }else{
-                    $this->model_master_plan_qty->delete(2);
+                    $this->model_master_plan_qty->delete(2, $datetime);
                     for($row = 3; $row <= $highestRow; $row++){
                         $department = 2;
                         $line       = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
@@ -577,10 +580,12 @@ class Setting extends CI_Controller {
                                         'rank'                => ($check_array[$machine->id])+$last_rank,
                                         'status_close_input'  => 0,
                                         'status_close_output' => 0,
-                                        'createDate'          => date('Y-m-d H:i:s'),
-                                        'createUser'          => 'upload:'.$admin_id
+                                        'createDate'          => $datetime,
+                                        'createUser'          => 'upload:insert:'.$admin_id
                                     );
                                     $this->model_master_plan_qty->import($data);
+                                    $data_test = array('description' => 'log_upload:upload:insert:'.$admin_id);
+                                    $this->db->insert('t_test', $data_test);
                                 }else{
                                     if ( $this->model_master_plan_qty->is_run($department, $machine->id, $partnumber) ) {
                                         $data = array(
@@ -589,21 +594,25 @@ class Setting extends CI_Controller {
                                             'part_no'       => $partnumber,
                                             'qty'           => $value,
                                             // 'rank'          => ($check_array[$machine->id])+$last_rank,
-                                            'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited:'.$admin_id
+                                            'editDate'      => $datetime,
+                                            'editUser'      => 'edited:is_run:'.$admin_id
                                         );
                                         $this->model_master_plan_qty->update_runing($data);
-                                    }else{
+                                        $data_test = array('description' => 'log_upload:edited:is_run:'.$admin_id);
+                                        $this->db->insert('t_test', $data_test);
+                                        }else{
                                         $data = array(
                                             'department_id' => $department,
                                             'mc_id'         => $machine->id,
                                             'part_no'       => $partnumber,
                                             'qty'           => $value,
                                             'rank'          => ($check_array[$machine->id])+$last_rank,
-                                            'editDate'      => date('Y-m-d H:i:s'),
-                                            'editUser'      => 'edited:'.$admin_id
+                                            'editDate'      => $datetime,
+                                            'editUser'      => 'edited:not_run:'.$admin_id
                                         );
                                         $this->model_master_plan_qty->update($data);
+                                        $data_test = array('description' => 'log_upload:edited:not_run:'.$admin_id);
+                                        $this->db->insert('t_test', $data_test);
                                     }
                                 }
                             }else{
@@ -612,7 +621,7 @@ class Setting extends CI_Controller {
                                         'mc_id'         => $machine->id,
                                         'part_no'       => $partnumber,
                                         'qty'           => $value,
-                                        'editDate'      => date('Y-m-d H:i:s'),
+                                        'editDate'      => $datetime,
                                         'editUser'      => 'edited:'.$admin_id
                                     );
                                     $this->model_master_plan_qty->delete_exist($data);
